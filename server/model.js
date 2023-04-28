@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const Schema = new mongoose.Schema({
-    date : String,
+    // date : String,
     topic : String,
     desc : String,
     mistakes : String,

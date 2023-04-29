@@ -7,6 +7,7 @@ import {
 import GetAllPosts from './posts/GetAllPosts'
 import CreatePost from './posts/CreatePost'
 import Header from './Header'
+import UpdatePost from './posts/UpdatePost'
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
       <Routes>
       <Route path='/' element = {<GetAllPosts/>} />
       <Route path='/create' element = {<CreatePost/>} />
+      <Route path='/update' element = {<UpdatePost/>} />
       </Routes>
     </Router>
   )

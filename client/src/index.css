@@ -64,16 +64,16 @@ button:focus-visible {
 .input-container{
    display: flex;
    flex-direction: column;
-   align-items: center;
+   /* align-items: center; */
    padding: 4rem;
    gap: 2rem;
 }
 
-.input-container input{
+.input-container input,textarea{
   padding: .8rem;
+  resize: none;
   border-radius: 1rem;
   border: none;
-  width: 30%;
   font-size: 1.1rem;
 }
 
@@ -101,6 +101,7 @@ header{
   border-radius: 1.5rem;
   padding: 1rem;
   display: flex;
+  position: relative;
   flex-direction: column;
   background-color: rgb(55, 55, 55);
 }
@@ -108,4 +109,13 @@ header{
 .post-card h2{
   text-align: left;
   font-size: 2rem;
+}
+
+.edit-icon{
+  position: absolute;
+  right: 1rem;
+}
+.delete-icon{
+  position: absolute;
+  right: 3rem;
 }

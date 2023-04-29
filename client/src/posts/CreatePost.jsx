@@ -21,12 +21,14 @@ const CreatePost = () => {
   }
   
   return (
-    <React.Fragment>   
+    <React.Fragment>  
+      <main className="input-container">
       <input type="text" placeholder='Topic' value={topic} onChange={(e)=>setTopic(e.target.value)}/>
       <input type="text" placeholder='Description' value={desc} onChange={(e)=>setDesc(e.target.value)}  />
       <input type="text" placeholder='Mistakes' value={mistakes} onChange={(e)=>setMistakes(e.target.value)}  /> 
       <input type="text" placeholder='Solution/Summary' value={summary} onChange={(e)=>setSummary(e.target.value)}  />
       <button onClick={submitHandler}>Submit</button>
+      </main> 
     </React.Fragment>
   )
 }

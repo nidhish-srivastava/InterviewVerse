@@ -12,14 +12,27 @@ const GetAllPosts = () => {
       getData()
     },[])
   return (
-    <div>
+    <div className='post-container'>
         {postArray.map((e,i)=>{
             return(
-                <div key={i}>
+                <div key={i} className='post-card'>
                     <h2>{e.topic}</h2>
-                    <p>{e.desc}</p>
-                    <p>{e.mistakes}</p>
-                    <p>{e.summary}</p>
+                    <p>
+                    <label>Desc : </label>
+                    <br />
+                      {e.desc}</p>
+                    <p>
+                      <label htmlFor="mistakes">
+                        Mistakes : 
+                      </label>
+                      <br />
+                      {e.mistakes}</p>
+                    <p>
+                      <label htmlFor="summary">
+                        Summary : 
+                      </label>
+                      <br />
+                      {e.summary}</p>
                 </div>
             )
         })} 

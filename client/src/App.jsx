@@ -3,15 +3,16 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link
 } from 'react-router-dom'
 import GetAllPosts from './posts/GetAllPosts'
 import CreatePost from './posts/CreatePost'
+import Header from './Header'
 
 const App = () => {
   return (
     <Router>
-      <Link to={`/create`}>Create Post</Link>
+      <Header/>
+    <h2 className='logo'>Interview Tracker</h2>
       <Routes>
       <Route path='/' element = {<GetAllPosts/>} />
       <Route path='/create' element = {<CreatePost/>} />

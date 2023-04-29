@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -27,16 +28,25 @@ body {
   margin: 0;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+
+
+.logo{
+  position: absolute;
+  left: 40%;
+  top: 3%;
+  text-align: center;
+  font-family: 'Paytone One', sans-serif;
+    font-size: 2.4rem;
+    background: linear-gradient(to right, #f12711, #f5af19);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;  
 }
 
 button {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
-  font-size: 1em;
+  font-size: 1.2rem;
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
@@ -49,4 +59,53 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.input-container{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding: 4rem;
+   gap: 2rem;
+}
+
+.input-container input{
+  padding: .8rem;
+  border-radius: 1rem;
+  border: none;
+  width: 30%;
+  font-size: 1.1rem;
+}
+
+.nav-bar{
+  display: flex;
+  font-size: 1.5rem;
+  gap: 2rem;
+}
+
+header{
+  padding: 1.5rem 4rem;
+}
+
+.post-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 4rem;
+  /* background-color: red; */
+  align-items: start;  /*Agr ek ki zyaada hai height,ek ki nhi,so...*/
+  gap: 2rem;
+}
+
+.post-card{
+  font-family: 'Roboto',sans-serif;
+  border-radius: 1.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(55, 55, 55);
+}
+
+.post-card h2{
+  text-align: left;
+  font-size: 2rem;
 }

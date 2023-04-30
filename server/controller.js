@@ -31,6 +31,10 @@ export const deletePost = async(req,res)=>{
 }
 
 export const updatePost = async(req,res)=>{
+    /* WRONG APPROACH - FindById se post ki property leli,
+    Fir hr property ko req.body ki property se change kiya,
+    fir save method use kiya
+    */
     //* We might use the updateOne method(since we wanna update the document containing a specific id)
     const {id} = req.params
     const {updateObject} = req.body

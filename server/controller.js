@@ -31,18 +31,6 @@ export const deletePost = async(req,res)=>{
 }
 
 export const updatePost = async(req,res)=>{
-    // This code sometimes work,sometimes doesnt 
-    //const {id} = req.params
-    // const {topic,desc,mistakes,summary} = req.body
-    //     const post = await PostModel.findById(id)   //* We can also use findByIdandUpdate(but this works if we are updating a single stuff,here we are updating a lot of stuff)
-    //     post.topic = topic
-    //     post.desc = desc,
-    //     post.mistakes = mistakes,
-    //     post.summary = summary
-
-    //     await post.save()
-    //     console.log(post);
-
     //* We might use the updateOne method(since we wanna update the document containing a specific id)
     const {id} = req.params
     const {updateObject} = req.body

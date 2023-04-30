@@ -7,7 +7,6 @@ export const getAll = async(req,res)=>{
     } catch (error) {
         res.status(500).json({msg:"Error is coming",error})
     }
-   
 }
 
 export const create  = async(req,res) =>{
@@ -32,7 +31,8 @@ export const deletePost = async(req,res)=>{
 }
 
 export const updatePost = async(req,res)=>{
-    // const {id} = req.params
+    // This code sometimes work,sometimes doesnt 
+    //const {id} = req.params
     // const {topic,desc,mistakes,summary} = req.body
     //     const post = await PostModel.findById(id)   //* We can also use findByIdandUpdate(but this works if we are updating a single stuff,here we are updating a lot of stuff)
     //     post.topic = topic
@@ -42,8 +42,15 @@ export const updatePost = async(req,res)=>{
 
     //     await post.save()
     //     console.log(post);
+
+    //* We might use the updateOne method(since we wanna update the document containing a specific id)
+    const {id} = req.params
+    const {updateObject} = req.body
+    const response = await PostModel.updateOne({_id : id} , updateObject)
+    res.status(200).json({msg : "Updated Successfully",response})
 }
 
+// This route is used,when we update the post,we need the post data already present
 export const getSingle = async(req,res)=>{
     const {id} = req.params
     try {

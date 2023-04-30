@@ -1,9 +1,11 @@
 import React,{useState} from 'react'
 import axios from 'axios'
 import { useTrackerContext } from '../context'
+import { useNavigate } from 'react-router-dom'
 
 const UpdatePost = () => {
   // I will pass the default values by fetching the data from backend of the post,then populating it
+  const navigate = useNavigate()
   const {t,d,m,s} = useTrackerContext()
   const [topic,setTopic] = useState(t)
   const [desc,setDesc] = useState(d)
@@ -11,22 +13,24 @@ const UpdatePost = () => {
   const [summary,setSummary] = useState(s)
   const {idContext} = useTrackerContext()
 
-  let updatePost = async(_id)=>{
-    // try {
-    //   const response = await axios.put(`http://localhost:4000/${_id}`,{
-    //     topic : topic,
-    //     desc : desc,
-    //     mistakes : mistakes,
-    //     summary : summary
-    //   })
-    //   console.log("Post updated",response);
-      
-    // } catch (error) {
-    //   console.log(error);
-    // }
-    // finally{
-    //   setState(e=>!e)
-    // }
+  const updateObject = {
+    topic : topic,
+    desc : desc,
+    mistakes : mistakes,
+    summary : summary
+  }
+
+  const updatePost = async(_id)=>{
+    try {
+      const response = await axios.put(`http://localhost:4000/${_id}`,{
+       updateObject
+      })
+      console.log("Post updated",response);
+      navigate('/')
+    } catch (error) {
+      console.log(error);
+    }
+   
   }
 
    

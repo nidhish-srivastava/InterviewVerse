@@ -47,9 +47,14 @@ const GetAllPosts = () => {
   return (
     <div className='post-container'>
         {postArray.map((e,i)=>{
+          const date = new Date(e.updatedAt)
+          console.log(date);
             return(
                 <div key={i} className='post-card'>
                   {/* <Link to={`/update`}> */}
+                  <label htmlFor="date">
+                    {date.toDateString()}
+                  </label>
                   <span className="edit-icon" onClick={()=>getPostInfo(e._id)}>
                   <i className="fa-solid fa-pen-to-square"></i>
                   </span>

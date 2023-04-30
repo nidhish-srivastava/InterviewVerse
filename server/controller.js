@@ -32,19 +32,24 @@ export const deletePost = async(req,res)=>{
 }
 
 export const updatePost = async(req,res)=>{
+    // const {id} = req.params
+    // const {topic,desc,mistakes,summary} = req.body
+    //     const post = await PostModel.findById(id)   //* We can also use findByIdandUpdate(but this works if we are updating a single stuff,here we are updating a lot of stuff)
+    //     post.topic = topic
+    //     post.desc = desc,
+    //     post.mistakes = mistakes,
+    //     post.summary = summary
+
+    //     await post.save()
+    //     console.log(post);
+}
+
+export const getSingle = async(req,res)=>{
     const {id} = req.params
-    const {topic,desc,mistakes,summary} = req.body
     try {
         const post = await PostModel.findById(id)
-        // console.log(post);
-        post.topic = topic
-        post.desc = desc,
-        post.mistakes = mistakes,
-        post.summary = summary
-
-        await post.save()
-        console.log(post);
+        res.status(200).json({msg:"Single Post",post})
     } catch (error) {
-        res.status(500).json({msg : error})
+        res.status(500).json({msg:"Error"})
     }
 }

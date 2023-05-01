@@ -27,7 +27,7 @@ const CreatePost = () => {
       <textarea spellCheck="false"  rows="6" cols="69" placeholder='Description' value={desc} onChange={(e)=>setDesc(e.target.value)}  />
       <textarea spellCheck="false"  rows="6" cols="69"  placeholder='Mistakes' value={mistakes} onChange={(e)=>setMistakes(e.target.value)}  /> 
       <input placeholder='Solution/Summary' spellCheck="false"  rows="6" cols="69" value={summary} onChange={(e)=>setSummary(e.target.value)}  />
-      <button onClick={submitHandler}>Submit</button>
+      <button className='btn' onClick={submitHandler}>Submit</button>
       </main> 
     </React.Fragment>
   )

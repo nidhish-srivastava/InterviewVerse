@@ -42,7 +42,7 @@ body {
     -webkit-text-fill-color: transparent;  
 }
 
-button {
+.btn {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -53,11 +53,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
+.btn:hover {
   border-color: #646cff;
 }
-button:focus,
-button:focus-visible {
+.btn:focus,
+.btn:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
@@ -99,7 +99,7 @@ header{
 .post-card{
   font-family: 'Roboto',sans-serif;
   border-radius: 1.5rem;
-  padding: 1rem;
+  padding: 1rem 2rem;
   display: flex;
   position: relative;
   flex-direction: column;
@@ -119,3 +119,12 @@ header{
   position: absolute;
   right: 3rem;
 }
+
+.ask-gpt-btn{
+  padding: .51rem;
+  margin-left: 1rem;
+  margin-bottom: .70rem;
+  border-radius: .51rem;
+  border: none;
+  font-size: 1.02rem;
+} 

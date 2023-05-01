@@ -2,14 +2,16 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import { useTrackerContext } from '../context'
+import OpenAiTesting from './openAiTesting'
 
 const GetAllPosts = () => {
      const navigate = useNavigate()
     const [postArray,setPostArray] = useState([])
     const {setIdContext,state,setState,setT,setD,setM,setS} = useTrackerContext()
+    const [showBtnstate,setShowBtnState] = useState(true)
     
     console.log(state)
-    const getData = async() =>{
+    const getAllData = async() =>{
         const response = await axios.get(`http://localhost:4000`)
         console.log("All Posts",response.data);
         setPostArray(response.data.getAllPost)
@@ -29,7 +31,7 @@ const GetAllPosts = () => {
     const getPostInfo = async (_id)=>{
       const response= await axios.get(`http://localhost:4000/${_id}`)
       // I need this id in the update post,so will set the context thta i have created
-      setIdContext(_id)
+      setIdContext(_id)  //* this id will be used while updating the post
       console.log("Single Post Info",response.data);
         setT(response.data.post.topic)
         setD(response.data.post.desc)
@@ -40,7 +42,7 @@ const GetAllPosts = () => {
  
 
     useEffect(()=>{
-      getData()
+      getAllData()
     },[state])
 
   
@@ -51,14 +53,12 @@ const GetAllPosts = () => {
           console.log(date);
             return(
                 <div key={i} className='post-card'>
-                  {/* <Link to={`/update`}> */}
                   <label htmlFor="date">
                     {date.toDateString()}
                   </label>
                   <span className="edit-icon" onClick={()=>getPostInfo(e._id)}>
                   <i className="fa-solid fa-pen-to-square"></i>
                   </span>
-                  {/* </Link> */}
                   <span className="delete-icon" onClick={()=>deletePost(e._id)}>
                   <i className="fa-solid fa-trash"></i>
                   </span>
@@ -76,9 +76,11 @@ const GetAllPosts = () => {
                     <p>
                       <label htmlFor="summary">
                         Summary : 
+                      <OpenAiTesting mistakes = {e.mistakes} topic = {e.topic} showBtnstate = {showBtnstate} setShowBtnState = {setShowBtnState}/>
                       </label>
                       <br />
-                      {e.summary}</p>
+                      { !showBtnstate && e.summary}
+                      </p>
                 </div>
             )
         })} 

@@ -3,3 +3,5 @@
 * The solution to this problem is this Interview Tracker
 
 * Used MERN stack and involves typical CRUD functionality but solves the problem effectively
+
+* COOL FEATURE : You can ask GPT for solutions to your mistakes that you have mentioned ( model : text-davinci-003 )

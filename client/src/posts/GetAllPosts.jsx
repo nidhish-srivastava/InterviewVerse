@@ -77,6 +77,7 @@ const GetAllPosts = () => {
                       <label htmlFor="summary">
                         Summary : 
                       <OpenAiTesting mistakes = {e.mistakes} topic = {e.topic} showBtnstate = {showBtnstate} setShowBtnState = {setShowBtnState}/>
+                      {/* {e.summary} */}
                       </label>
                       <br />
                       { !showBtnstate && e.summary}

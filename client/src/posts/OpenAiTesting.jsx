@@ -17,7 +17,7 @@ const OpenAiTesting = ({mistakes,topic,showBtnstate,setShowBtnState}) => {
           mistakes +
           '',
         temperature: 0.5,
-        max_tokens: 100,
+        max_tokens: 80,
         top_p: 1.0,
         frequency_penalty: 0.8,
         presence_penalty: 0.0,
@@ -29,7 +29,8 @@ const OpenAiTesting = ({mistakes,topic,showBtnstate,setShowBtnState}) => {
       options
     );
     const json = await response.json();
-    console.log(json.choices[0].text.trim());
+    console.log(json);
+    // console.log(json.choices[0].text.trim());
     setKeywords(json.choices[0].text.trim())
     setShowBtnState(false)
   } catch (error) {

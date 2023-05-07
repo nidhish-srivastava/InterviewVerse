@@ -10,7 +10,6 @@ const CreatePost = () => {
   const [summary,setSummary] = useState("")
   const {baseUrl} = useTrackerContext()
 
-
   const submitHandler = async () =>{
     try {
       const response = await axios.post(`${baseUrl}/create`,{

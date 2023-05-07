@@ -12,10 +12,10 @@ const CreatePost = () => {
 
   const submitHandler = async () =>{
     try {
-      const response = await axios.post(`${baseUrl}/create`,{
+      await axios.post(`${baseUrl}/create`,{
         summary,topic,desc,mistakes
       })
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.log(error);
     }

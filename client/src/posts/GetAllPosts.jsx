@@ -13,7 +13,7 @@ const GetAllPosts = () => {
     console.log(state)
     const getAllData = async() =>{
         const response = await axios.get(`${baseUrl}`)
-        console.log("All Posts",response.data);
+        // console.log("All Posts",response.data);
         setPostArray(response.data.getAllPost)
     }
 
@@ -24,7 +24,7 @@ const GetAllPosts = () => {
         }
        })
        setState((e)=>!e)
-       console.log("Post deleted");
+      //  console.log("Post deleted");
     }
 
     //* Problem that i was getting was of id,coz of the project structure
@@ -32,7 +32,7 @@ const GetAllPosts = () => {
       const response= await axios.get(`${baseUrl}/${_id}`)
       // I need this id in the update post,so will set the context thta i have created
       setIdContext(_id)  //* this id will be used while updating the post
-      console.log("Single Post Info",response.data);
+      // console.log("Single Post Info",response.data);
         setT(response.data.post.topic)
         setD(response.data.post.desc)
         setM(response.data.post.mistakes)

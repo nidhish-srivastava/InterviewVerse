@@ -25,7 +25,7 @@ const UpdatePost = () => {
       const response = await axios.put(`${baseUrl}/${_id}`,{
        updateObject
       })
-      console.log("Post updated",response);
+      // console.log("Post updated",response);
       navigate('/')
     } catch (error) {
       console.log(error);

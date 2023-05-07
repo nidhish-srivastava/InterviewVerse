@@ -11,7 +11,7 @@ const UpdatePost = () => {
   const [desc,setDesc] = useState(d)
   const [mistakes,setMistakes] = useState(m)
   const [summary,setSummary] = useState(s)
-  const {idContext} = useTrackerContext()
+  const {idContext,baseUrl} = useTrackerContext()
 
   const updateObject = {
     topic : topic,
@@ -22,7 +22,7 @@ const UpdatePost = () => {
 
   const updatePost = async(_id)=>{
     try {
-      const response = await axios.put(`http://localhost:4000/${_id}`,{
+      const response = await axios.put(`${baseUrl}/${_id}`,{
        updateObject
       })
       console.log("Post updated",response);

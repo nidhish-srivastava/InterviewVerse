@@ -1,5 +1,6 @@
 import React, {  useState } from 'react'
 import axios from 'axios'
+import { useTrackerContext } from '../context'
 
 
 const CreatePost = () => {
@@ -7,11 +8,12 @@ const CreatePost = () => {
   const [desc,setDesc] = useState("")
   const [mistakes,setMistakes] = useState("")
   const [summary,setSummary] = useState("")
+  const {baseUrl} = useTrackerContext()
 
 
   const submitHandler = async () =>{
     try {
-      const response = await axios.post(`http://localhost:4000/create`,{
+      const response = await axios.post(`${baseUrl}/create`,{
         summary,topic,desc,mistakes
       })
       console.log(response.data);

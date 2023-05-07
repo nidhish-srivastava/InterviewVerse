@@ -1,14 +1,14 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import {Link, useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import { useTrackerContext } from '../context'
-import OpenAiTesting from './openAiTesting'
+// import OpenAiTesting from './openAiTesting'
 
 const GetAllPosts = () => {
      const navigate = useNavigate()
     const [postArray,setPostArray] = useState([])
     const {setIdContext,state,setState,setT,setD,setM,setS} = useTrackerContext()
-    const [showBtnstate,setShowBtnState] = useState(true)
+    // const [showBtnstate,setShowBtnState] = useState(true)
     
     console.log(state)
     const getAllData = async() =>{
@@ -80,7 +80,7 @@ const GetAllPosts = () => {
                       {e.summary}
                       </label>
                       <br />
-                      { !showBtnstate && e.summary}
+                      {/* { !showBtnstate && e.summary} */}
                       </p>
                 </div>
             )

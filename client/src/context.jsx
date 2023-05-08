@@ -13,8 +13,6 @@ export const TrackerContextProvider = ({children}) =>{
     const [d,setD]=  useState("")
     const [m,setM] = useState("")
     const [s,setS] = useState("")
-  const baseUrl = "https://inter-view-tracker-mern.vercel.app"
-
 
     const final = {
         idContext,setIdContext,

@@ -7,19 +7,19 @@ import { useTrackerContext } from "../context";
 const GetAllPosts = () => {
   const navigate = useNavigate();
   const [postArray, setPostArray] = useState([]);
-  const { setIdContext, state, setState, setT, setD, setM, setS, baseUrl } =
+  const { setIdContext, state, setState, setT, setD, setM, setS } =
     useTrackerContext();
   // const [showBtnstate,setShowBtnState] = useState(true)
 
   console.log(state);
   const getAllData = async () => {
-    const response = await axios.get(`${baseUrl}`);
+    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}`);
     // console.log("All Posts",response.data);
     setPostArray(response.data.getAllPost);
   };
 
   const deletePost = async (_id) => {
-    await axios.delete(`${baseUrl}/delete`, {
+    await axios.delete(`${import.meta.env.VITE_BASE_URL}/delete`, {
       data: {
         _id: _id,
       },
@@ -30,7 +30,7 @@ const GetAllPosts = () => {
 
   //* Problem that i was getting was of id,coz of the project structure
   const getPostInfo = async (_id) => {
-    const response = await axios.get(`${baseUrl}/${_id}`);
+    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/${_id}`);
     // I need this id in the update post,so will set the context thta i have created
     setIdContext(_id); //* this id will be used while updating the post
     // console.log("Single Post Info",response.data);

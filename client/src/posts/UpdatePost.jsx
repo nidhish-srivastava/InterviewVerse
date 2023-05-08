@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useTrackerContext } from "../context";
+// import { useTrackerContext } from "../context";
 import { useNavigate } from "react-router-dom";
 
 const UpdatePost = () => {
@@ -11,7 +11,7 @@ const UpdatePost = () => {
   const [desc, setDesc] = useState(d);
   const [mistakes, setMistakes] = useState(m);
   const [summary, setSummary] = useState(s);
-  const { idContext, baseUrl } = useTrackerContext();
+  const { idContext } = useTrackerContext();
 
   const updateObject = {
     topic: topic,
@@ -22,7 +22,7 @@ const UpdatePost = () => {
 
   const updatePost = async (_id) => {
     try {
-      await axios.put(`${baseUrl}/${_id}`, {
+      await axios.put(`${import.meta.env.VITE_BASE_URL}/${_id}`, {
         updateObject,
       });
       navigate("/");

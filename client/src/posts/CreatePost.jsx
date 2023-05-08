@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useTrackerContext } from "../context";
 import { useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
@@ -8,12 +7,11 @@ const CreatePost = () => {
   const [desc, setDesc] = useState("");
   const [mistakes, setMistakes] = useState("");
   const [summary, setSummary] = useState("");
-  const { baseUrl } = useTrackerContext();
   const navigate = useNavigate();
 
   const submitHandler = async () => {
     try {
-      await axios.post(`${baseUrl}/create`, {
+      await axios.post(`${import.meta.env.VITE_BASE_URL}/create`, {
         summary,
         topic,
         desc,

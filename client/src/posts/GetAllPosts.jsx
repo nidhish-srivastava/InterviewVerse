@@ -14,7 +14,7 @@ const GetAllPosts = () => {
   console.log(state);
   const getAllData = async () => {
     const response = await axios.get(`${baseUrl}`);
-    // console.log("All Posts",response.data);
+    console.log("All Posts",response.data);
     setPostArray(response.data.getAllPost);
   };
 
@@ -52,14 +52,14 @@ const GetAllPosts = () => {
         console.log(date);
         return (
           <div key={i} className="post-card">
-            <label htmlFor="date">{date.toDateString()}</label>
+            <label htmlFor="date">{date.toDateString()}
+            </label>
             <span className="edit-icon" onClick={() => getPostInfo(e._id)}>
               <i className="fa-solid fa-pen-to-square"></i>
             </span>
             <span className="delete-icon" onClick={() => deletePost(e._id)}>
               <i className="fa-solid fa-trash"></i>
             </span>
-            <h2>{e.username}</h2>
             <h2>{e.topic}</h2>
             <p>
               <label>Desc : </label>
@@ -80,6 +80,9 @@ const GetAllPosts = () => {
               <br />
               {/* { !showBtnstate && e.summary} */}
             </p>
+            <div className="username" style={{textAlign : "right"}} >
+            - {e.username}
+            </div>
           </div>
         );
       })}

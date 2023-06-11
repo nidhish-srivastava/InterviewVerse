@@ -5,9 +5,9 @@ const Header = () => {
   return (
     <header>
     <nav className='nav-bar'>
-      <Link to={`/`}>Home</Link>
+      <Link to={`/`}>My Interviews</Link>
       <Link to={`/create`}>Create Post</Link>
-      <Link to={`my-post`}>My Interviews</Link>
+      {/* <Link to={`my-post`}>My Interviews</Link> */}
     </nav>
     </header>
   )

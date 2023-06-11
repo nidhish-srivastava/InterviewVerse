@@ -59,6 +59,7 @@ const GetAllPosts = () => {
             <span className="delete-icon" onClick={() => deletePost(e._id)}>
               <i className="fa-solid fa-trash"></i>
             </span>
+            <h2>{e.username}</h2>
             <h2>{e.topic}</h2>
             <p>
               <label>Desc : </label>

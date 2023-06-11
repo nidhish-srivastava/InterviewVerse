@@ -8,6 +8,7 @@ const CreatePost = () => {
   const [desc, setDesc] = useState("");
   const [mistakes, setMistakes] = useState("");
   const [summary, setSummary] = useState("");
+  const [username,setUsername] = useState("")
   const { baseUrl } = useTrackerContext();
   const navigate = useNavigate();
 
@@ -18,6 +19,7 @@ const CreatePost = () => {
         topic,
         desc,
         mistakes,
+        username
       });
       // console.log(response.data);
       navigate("/");
@@ -29,6 +31,8 @@ const CreatePost = () => {
   return (
     <React.Fragment>
       <main className="input-container">
+        <input type="text"
+        placeholder="username" value={username} onChange={(e)=>setUsername(e.target.value)} />
         <input
           type="text"
           placeholder="Topic"
@@ -53,9 +57,6 @@ const CreatePost = () => {
         />
         <input
           placeholder="Solution/Summary"
-          spellCheck="false"
-          rows="6"
-          cols="69"
           value={summary}
           onChange={(e) => setSummary(e.target.value)}
         />

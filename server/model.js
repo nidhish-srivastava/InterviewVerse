@@ -5,7 +5,8 @@ const Schema = new mongoose.Schema({
     topic : String,
     desc : String,
     mistakes : String,
-    summary : String
+    summary : String,
+    username : String
 },
 {
     timestamps : true

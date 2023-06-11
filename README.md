@@ -5,3 +5,5 @@
 * Used MERN stack and involves typical CRUD functionality but solves the problem effectively.
 
 * THIS FEATURE CURRENTLY NOT WORKING -:( You can ask GPT for solutions to your mistakes that you have mentioned ( model : text-davinci-003 )
+
+* One can read someone else experience as well and track all his experiences as well

@@ -12,7 +12,7 @@ const GetAllPosts = () => {
     const [enterState,setEnterState] = useState(false)
 
   const getAllData = async () => {
-    const response = await axios.get(`?topic=${searchTerm}`);
+    const response = await axios.get(`https://inter-view-tracker-mern.vercel.app?topic=${searchTerm}`);
     // console.log("All Posts",response.data);
     setPostArray(response.data.getAllPost);
   };
@@ -50,8 +50,10 @@ const GetAllPosts = () => {
 
   return (
     <React.Fragment>
-     {/* <input type="search" placeholder="Search topic" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} onKeyDown={()=>getAllData()} Every time i press the key,it will trigger the search/> */}
-     <input type="search" placeholder="Search topic" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} onKeyDown={enterKeyHandler} />
+      <input type="search" placeholder="Search topic" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} onKeyDown={()=>getAllData()}/> 
+     {/*
+     Every time i press the key,it will trigger the search/> */}
+     {/* <input type="search" placeholder="Search topic" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} onKeyDown={enterKeyHandler} /> */}
      <span className="search-icon">
      <i className="fa-solid fa-magnifying-glass"></i>
      </span>

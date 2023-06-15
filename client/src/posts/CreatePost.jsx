@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useTrackerContext } from "../context";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,7 @@ const CreatePost = () => {
   const [username,setUsername] = useState("")
   const { baseUrl } = useTrackerContext();
   const navigate = useNavigate();
+  const [state,setState] = useState(false)
 
   const submitHandler = async () => {
     try {
@@ -22,11 +23,17 @@ const CreatePost = () => {
         username
       });
       // console.log(response.data);
+      setState((e)=>!e)
       navigate("/");
     } catch (error) {
       console.log(error);
     }
   };
+
+  // We will set the username using localstorage
+  useEffect(()=>{
+      localStorage.setItem("user",JSON.stringify(username))
+  },[state])
 
   return (
     <React.Fragment>

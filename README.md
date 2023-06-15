@@ -4,8 +4,10 @@
 
 * Used MERN stack and involves typical CRUD functionality but solves the problem effectively.
 
-* THIS FEATURE CURRENTLY NOT WORKING -:( You can ask GPT for solutions to your mistakes that you have mentioned ( model : text-davinci-003 )
+* Search Topic as well from all the topics and read their experience 
 
-* One can read someone else experience(THIS FEATURE WORK IN PROGRESS) as well and track all his experiences as well
+<!-- * THIS FEATURE CURRENTLY NOT WORKING -:( You can ask GPT for solutions to your mistakes that you have mentioned ( model : text-davinci-003 ) -->
 
-* (THIS FEATURE TO ADD IN FUTURE) -> Search interview experiences based on your interest by entering the topic name in the searchbar for filtering
+<!-- * One can read someone else experience(THIS FEATURE WORK IN PROGRESS) as well and track all his experiences as well -->
+
+<!-- * (THIS FEATURE TO ADD IN FUTURE) -> Search interview experiences based on your interest by entering the topic name in the searchbar for filtering -->

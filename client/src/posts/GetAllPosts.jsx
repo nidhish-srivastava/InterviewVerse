@@ -62,7 +62,7 @@ const GetAllPosts = () => {
      <i className="fa-solid fa-magnifying-glass"></i>
      </span>
     <div className="post-container">
-      {postArray.map((e, i) => {
+      {postArray?.map((e, i) => {
         const date = new Date(e.updatedAt);
         console.log(date);
         return (

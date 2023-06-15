@@ -4,16 +4,15 @@ import { useTrackerContext } from "../context";
 import { useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
-  const [topic, setTopic] = useState("");
   const [desc, setDesc] = useState("");
   const [mistakes, setMistakes] = useState("");
   const [summary, setSummary] = useState("");
   const [username,setUsername] = useState("")
-  const { baseUrl } = useTrackerContext();
+  const { baseUrl,topic,setTopic } = useTrackerContext();
   const navigate = useNavigate();
-  const [state,setState] = useState(false)
 
   const submitHandler = async () => {
+    setTopic("")
     try {
       await axios.post(`${baseUrl}/create`, {
         summary,
@@ -23,18 +22,13 @@ const CreatePost = () => {
         username
       });
       // console.log(response.data);
-      setState((e)=>!e)
       navigate("/");
     } catch (error) {
       console.log(error);
     }
   };
 
-  // We will set the username using localstorage
-  useEffect(()=>{
-      localStorage.setItem("user",JSON.stringify(username))
-  },[state])
-
+  
   return (
     <React.Fragment>
       <main className="input-container">

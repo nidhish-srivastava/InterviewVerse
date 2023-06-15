@@ -2,19 +2,18 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTrackerContext } from "../context";
-// import OpenAiTesting from './openAiTesting'
 
 const GetAllPosts = () => {
   const navigate = useNavigate();
   const [postArray, setPostArray] = useState([]);
   const { setIdContext, state, setState, setT, setD, setM, setS, baseUrl } =
     useTrackerContext();
-  // const [showBtnstate,setShowBtnState] = useState(true)
+    const [searchTerm,setSearchTerm] = useState("")
+    const [enterState,setEnterState] = useState(false)
 
-  console.log(state);
   const getAllData = async () => {
-    const response = await axios.get(`${baseUrl}`);
-    console.log("All Posts",response.data);
+    const response = await axios.get(`${baseUrl}?topic=${searchTerm}`);
+    // console.log("All Posts",response.data);
     setPostArray(response.data.getAllPost);
   };
 
@@ -41,11 +40,21 @@ const GetAllPosts = () => {
     navigate("/update"); //* THIS LOGIC IS GAME CHANGER,once the item is set,then only we will navigate,otherwise wont
   };
 
+  const enterKeyHandler = (e) =>{
+    e.key === "Enter" ? setEnterState(true) : setEnterState(false) 
+  }
+
   useEffect(() => {
     getAllData();
-  }, [state]);
+  }, [state,enterState]);
 
   return (
+    <React.Fragment>
+     {/* <input type="search" placeholder="Search topic" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} onKeyDown={()=>getAllData()} Every time i press the key,it will trigger the search/> */}
+     <input type="search" placeholder="Search topic" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} onKeyDown={enterKeyHandler} />
+     <span className="search-icon">
+     <i className="fa-solid fa-magnifying-glass"></i>
+     </span>
     <div className="post-container">
       {postArray.map((e, i) => {
         const date = new Date(e.updatedAt);
@@ -74,11 +83,9 @@ const GetAllPosts = () => {
             <p>
               <label htmlFor="summary">
                 Summary :
-                {/* <OpenAiTesting mistakes = {e.mistakes} topic = {e.topic} showBtnstate = {showBtnstate} setShowBtnState = {setShowBtnState}/> */}
                 {e.summary}
               </label>
               <br />
-              {/* { !showBtnstate && e.summary} */}
             </p>
             <div className="username" style={{textAlign : "right"}} >
             - {e.username}
@@ -87,6 +94,7 @@ const GetAllPosts = () => {
         );
       })}
     </div>
+  </React.Fragment>
   );
 };
 

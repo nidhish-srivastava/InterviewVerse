@@ -13,6 +13,7 @@ app.use(Route)
 const start = async()=>{
     mongoose.set("strictQuery",true)
     await mongoose.connect(process.env.MONGODB_URI)
+    await Model.deleteMany() 
     console.log("Connected to DB");
     app.listen(4000,()=>{
         console.log("Server running at port 4000");

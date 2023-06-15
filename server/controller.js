@@ -1,8 +1,14 @@
 import PostModel from './model.js'
 
 export const getAll = async(req,res)=>{
+    const {topic} = req.query
+    // console.log(topic);
+    const queryObject = {}
+    if(topic){
+        queryObject.topic = {$regex:topic,$options:"i"} 
+    }
     try {
-        const getAllPost = await PostModel.find()
+        const getAllPost = await PostModel.find(queryObject)
         res.status(200).json({msg : "All posts read",getAllPost})
     } catch (error) {
         res.status(500).json({msg:"Error is coming",error})

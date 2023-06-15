@@ -4,6 +4,7 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 import Route from './route.js'
 import cors from 'cors'
+import Model from './model.js'
 
 const app = express()
 app.use(express.json())

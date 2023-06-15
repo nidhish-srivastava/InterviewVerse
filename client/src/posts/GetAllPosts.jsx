@@ -12,7 +12,7 @@ const GetAllPosts = () => {
     const [enterState,setEnterState] = useState(false)
 
   const getAllData = async () => {
-    const response = await axios.get(`${baseUrl}?topic=${searchTerm}`);
+    const response = await axios.get(`?topic=${searchTerm}`);
     // console.log("All Posts",response.data);
     setPostArray(response.data.getAllPost);
   };

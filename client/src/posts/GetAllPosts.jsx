@@ -45,15 +45,16 @@ const GetAllPosts = () => {
   }
 
   useEffect(() => {
-    if(searchTerm.trim().length>1){
-      getAllData();
-    }
-  }, [state,enterState]);
+      let timer = setTimeout(()=>{
+        getAllData();
+      },500)
+    return()=>clearTimeout(timer)
+  }, [state,enterState,searchTerm]);
 
   return (
     <React.Fragment>
       <div className="search-bar">
-      <input type="search"  placeholder="Search topic" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} onKeyDown={ getAllData()}/> 
+      <input type="search"  placeholder="Search topic" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)}/> 
      {/*
      Every time i press the key,it will trigger the search/> */}
      {/* <input type="search" placeholder="Search topic" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} onKeyDown={enterKeyHandler} /> */}

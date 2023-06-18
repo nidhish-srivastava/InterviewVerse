@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Paytone+One&display=swap");
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -28,20 +28,39 @@ body {
   margin: 0;
 }
 
-
-
-.logo{
-  position: absolute;
-  left: 40%;
-  top: 3%;
-  text-align: center;
-  font-family: 'Paytone One', sans-serif;
-    font-size: 2.4rem;
-    background: linear-gradient(to right, #f12711, #f5af19);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;  
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+li {
+  margin: 0;
 }
 
+/* NAvbar CSS */
+header {
+  padding: 1rem 7px;
+}
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  text-align: center;
+  font-family: "Paytone One", sans-serif;
+  font-size: 1.4rem;
+  background: linear-gradient(to right, #f12711, #f5af19);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.right a {
+  margin-left: 1rem;
+  font-size: 1.15rem;
+}
+/* Button CSS */
 .btn {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -61,71 +80,135 @@ body {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-.input-container{
-   display: flex;
-   flex-direction: column;
-   /* align-items: center; */
-   padding: 4rem;
-   gap: 2rem;
+/* Create POST CSS */
+.input-container {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  padding: 4rem;
+  gap: 2rem;
 }
 
-.input-container input,textarea{
-  padding: .8rem;
+.input-container input,
+textarea {
+  padding: 0.8rem;
   resize: none;
   border-radius: 1rem;
   border: none;
   font-size: 1.1rem;
 }
 
-.nav-bar{
+.search-bar{
+  text-align: center;
+}
+
+.search-bar input{
+  font-size: 1.1rem;
+}
+
+
+/* GET ALL POST CSS */
+.post-container {
+  margin-top: 1rem;
+  /* display: grid; */
+  /* grid-template-columns: repeat(auto-fit, minmax(min(12rem, 100%), 1fr)); */
+  padding: 2rem 1rem;
+  gap: 2rem;
   display: flex;
-  font-size: 1.5rem;
-  gap: 2rem;
+  flex-direction: column;
 }
 
-header{
-  padding: 1.5rem 4rem;
-}
-
-.post-container{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  padding: 4rem;
-  /* background-color: red; */
-  align-items: start;  /*Agr ek ki zyaada hai height,ek ki nhi,so...*/
-  gap: 2rem;
-}
-
-.post-card{
-  font-family: 'Roboto',sans-serif;
+.post-card {
+  font-family: "Roboto", sans-serif;
   border-radius: 1.5rem;
   padding: 1rem 2rem;
   display: flex;
   position: relative;
+  gap: 1rem;
   flex-direction: column;
   background-color: rgb(55, 55, 55);
+  word-wrap: break-word;
 }
 
-.post-card h2{
+.post-card h2 {
   text-align: left;
   font-size: 2rem;
 }
 
-.edit-icon{
+.edit-icon {
   position: absolute;
   right: 1rem;
 }
-.delete-icon{
+.delete-icon {
   position: absolute;
   right: 3rem;
 }
 
-.ask-gpt-btn{
-  padding: .51rem;
+.ask-gpt-btn {
+  padding: 0.51rem;
   margin-left: 1rem;
-  margin-bottom: .70rem;
-  border-radius: .51rem;
+  margin-bottom: 0.7rem;
+  border-radius: 0.51rem;
   border: none;
   font-size: 1.02rem;
   cursor: pointer;
-} 
+}
+
+
+
+@media (min-width : 768px) {
+  .nav-bar{
+    padding: 1rem 2rem;
+  }
+  .logo{
+    font-size: 1.6rem;
+  }
+
+  .right a{
+    font-size: 1.3rem;
+    margin-left: 1.4rem;
+  }
+
+
+  .search-bar input{
+    font-size: 1.2rem;
+    padding: 5px 10px;
+  }
+  .post-container{
+    margin-top: 0;
+    padding: 3rem;
+  }
+  .post-card{
+    gap: 1rem;
+  }
+}
+
+@media (min-width : 1024px) {
+  .post-container{
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .post-card{
+    width: 40%;
+    margin: 0 auto;
+  }
+
+  .logo{
+    font-size: 1.8rem;
+  }
+
+  .right a{
+    font-size: 1.6rem;
+    margin-left: 1.4rem;
+  }
+}
+
+@media (min-width : 1440px) {
+  .post-container{
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 auto;
+  }
+}

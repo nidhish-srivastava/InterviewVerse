@@ -45,18 +45,22 @@ const GetAllPosts = () => {
   }
 
   useEffect(() => {
-    getAllData();
+    if(searchTerm.trim().length>1){
+      getAllData();
+    }
   }, [state,enterState]);
 
   return (
     <React.Fragment>
-      <input type="search" placeholder="Search topic" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} onKeyDown={()=>getAllData()}/> 
+      <div className="search-bar">
+      <input type="search"  placeholder="Search topic" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} onKeyDown={ getAllData()}/> 
      {/*
      Every time i press the key,it will trigger the search/> */}
      {/* <input type="search" placeholder="Search topic" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} onKeyDown={enterKeyHandler} /> */}
      <span className="search-icon">
      <i className="fa-solid fa-magnifying-glass"></i>
      </span>
+     </div>
     <div className="post-container">
       {postArray.map((e, i) => {
         const date = new Date(e.updatedAt);
@@ -73,21 +77,25 @@ const GetAllPosts = () => {
             </span>
             <h2>{e.topic}</h2>
             <p>
+              <b>
               <label>Desc : </label>
-              <br />
+              </b>
               {e.desc}
             </p>
             <p>
-              <label htmlFor="mistakes">Mistakes :</label>
-              <br />
-              {e.mistakes}
+              <b>
+              <label htmlFor="mistakes">Mistakes : </label>
+              </b>
+                {e.mistakes}
             </p>
             <p>
+              <b>
               <label htmlFor="summary">
                 Summary :
                 {e.summary}
               </label>
-              <br />
+              </b>
+              {/* <br /> */}
             </p>
             <div className="username" style={{textAlign : "right"}} >
             - {e.username}

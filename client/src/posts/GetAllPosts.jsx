@@ -47,7 +47,7 @@ const GetAllPosts = () => {
   useEffect(() => {
       let timer = setTimeout(()=>{
         getAllData();
-      },500)
+      },700)
     return()=>clearTimeout(timer)
   }, [state,enterState,searchTerm]);
 

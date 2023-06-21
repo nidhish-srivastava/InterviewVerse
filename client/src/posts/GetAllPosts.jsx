@@ -12,7 +12,8 @@ const GetAllPosts = () => {
     const [enterState,setEnterState] = useState(false)
 
   const getAllData = async () => {
-    const response = await axios.get(`https://inter-view-tracker-mern.vercel.app?topic=${searchTerm}`);
+    // const response = await axios.get(`https://inter-view-tracker-mern.vercel.app?topic=${searchTerm}`);
+    const response = await axios.get(`${baseUrl}?topic=${searchTerm}`);
     // console.log("All Posts",response.data);
     setPostArray(response.data.getAllPost);
   };

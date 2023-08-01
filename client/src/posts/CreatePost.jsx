@@ -32,13 +32,18 @@ const CreatePost = () => {
   };
 
   const enterKeyHandler = (e) =>{
-       if(e.key === "Enter"){
+       if(e.key === "Enter" && currentTag){  // including non empty case as well
          setTag([...tag,currentTag])
          setCurrentTag("")
         }
   }
 
   console.log(tag);
+
+  const deleteTag = (tagText) =>{
+    const filtered = tag.filter(e=>e!=tagText)
+    setTag(filtered)
+  }
 
 
   
@@ -63,7 +68,11 @@ const CreatePost = () => {
         />
         <input type="text" placeholder="Enter tags" value={currentTag}  onKeyDown={enterKeyHandler} onChange={e=>setCurrentTag(e.target.value)} />
         <span>
-         <label htmlFor="">Tags </label> {tag.map((e,i)=>(<button key={i} style={{marginLeft : "1rem"}}  >{e}</button>))}
+         <label htmlFor="">Tags </label> {tag.map((e,i)=>(<button key={i} className="tag-btn" style={{padding : "1rem",fontSize : "1rem",marginLeft : "1rem"}}>
+          <span className="cross" onClick={()=>deleteTag(e)} >
+          <i class="fa-solid fa-x"></i>
+          </span>
+          {e}</button>))}
         </span>
         <textarea
           spellCheck="false"

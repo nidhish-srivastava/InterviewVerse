@@ -154,6 +154,15 @@ textarea {
   cursor: pointer;
 }
 
+.tag-btn{
+  position: relative;
+}
+.cross{
+  position: absolute;
+  right: 0;
+  top: 3px;
+  font-size: 11px;
+}
 
 
 @media (min-width : 768px) {

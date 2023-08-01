@@ -10,6 +10,7 @@ const GetAllPosts = () => {
     useTrackerContext();
     const [searchTerm,setSearchTerm] = useState("")
     const [enterState,setEnterState] = useState(false)
+    const [tags,setTags] = useState([])
 
   const getAllData = async () => {
     const response = await axios.get(`https://inter-view-tracker-mern.vercel.app?topic=${searchTerm}`);
@@ -101,6 +102,11 @@ const GetAllPosts = () => {
             <div className="username" style={{textAlign : "right"}} >
             - {e.username}
             </div>
+            <span>
+              {e.tag.map(e=>(
+                <button style={{marginRight : "1rem"}} >{e}</button>
+              ))}
+            </span>
           </div>
         );
       })}

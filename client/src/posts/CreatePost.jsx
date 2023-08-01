@@ -8,6 +8,8 @@ const CreatePost = () => {
   const [mistakes, setMistakes] = useState("");
   const [summary, setSummary] = useState("");
   const [username,setUsername] = useState("")
+  const [tag,setTag] = useState([])
+  const [currentTag,setCurrentTag] = useState("")
   const { baseUrl,topic,setTopic } = useTrackerContext();
   const navigate = useNavigate();
 
@@ -19,7 +21,8 @@ const CreatePost = () => {
         topic,
         desc,
         mistakes,
-        username
+        username,
+        tag
       });
       // console.log(response.data);
       navigate("/");
@@ -27,6 +30,16 @@ const CreatePost = () => {
       console.log(error);
     }
   };
+
+  const enterKeyHandler = (e) =>{
+       if(e.key === "Enter"){
+         setTag([...tag,currentTag])
+         setCurrentTag("")
+        }
+  }
+
+  console.log(tag);
+
 
   
   return (
@@ -48,6 +61,10 @@ const CreatePost = () => {
           value={desc}
           onChange={(e) => setDesc(e.target.value)}
         />
+        <input type="text" placeholder="Enter tags" value={currentTag}  onKeyDown={enterKeyHandler} onChange={e=>setCurrentTag(e.target.value)} />
+        <span>
+         <label htmlFor="">Tags </label> {tag.map((e,i)=>(<button key={i} style={{marginLeft : "1rem"}}  >{e}</button>))}
+        </span>
         <textarea
           spellCheck="false"
           rows="6"

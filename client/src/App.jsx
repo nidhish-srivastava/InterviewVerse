@@ -9,7 +9,6 @@ import CreatePost from './posts/CreatePost'
 import Header from './Header'
 import UpdatePost from './posts/UpdatePost'
 import MyPosts from './posts/MyPosts'
-
 const App = () => {
   return (
     <Router>

@@ -2,11 +2,12 @@ import mongoose from "mongoose";
 
 const Schema = new mongoose.Schema({
     // date : String,
+    summary : String,
     topic : String,
     desc : String,
     mistakes : String,
-    summary : String,
-    username : String
+    username : String,
+    tag : [String]
 },
 {
     timestamps : true

@@ -14,8 +14,7 @@ export const getProfile =  async (req : Request, res : Response) => {
         res.status(403).json({ msg: "User doesnt exist" })
         return
     }
-
-    res.json({username : admin.username,_id : admin._id})
+    res.json(admin)
 }
 
 export const signup =async(req:Request,res : Response)=>{
@@ -31,9 +30,10 @@ export const signup =async(req:Request,res : Response)=>{
     res.json({msg : "User created Successfully",token})
 }
 
-export const login =async(req:Request,res : Response)=>{
-    const {username,password} = req.body
-    const admin = await Auth.findOne({username})
+export const  login =async(req:Request,res : Response)=>{
+    const {inputs : {username,password}} = req.body
+    const admin = await Auth.findOne({username : username})
+    
     if (admin) {
         bcrypt.compare(password, admin?.password, function (err, info) {
             if (err)  res.status(401).json("password doesnt match")

@@ -1,7 +1,7 @@
 
 const Single = () => {
   return (
-    <div>Single</div>
+    <div></div>
   )
 }
 

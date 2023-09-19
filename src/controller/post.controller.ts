@@ -18,11 +18,17 @@ export const getAll = async (req: Request, res: Response) => {
 };
 
 export const create = async (req: Request, res: Response) => {
-  const newPost = new Post(req.body);
-  console.log(req.body);
+  const {desc,tags,details,topic} = req.body
+  // console.log(desc,tags,details,topic);
+  console.log(tags);
+  
+  
+  const newPost = new Post({desc : desc,tags : tags,details : details,topic : topic});
+  console.log(newPost);
+  
   try {
     await newPost.save(); 
-    res.status(200).json({ msg: "Post created", newPost });
+    res.status(201).send("Post created")
   } catch (error) {
     res.status(500).json({ msg: "Error is coming", error });
   }

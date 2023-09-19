@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { useNavigate,Link } from 'react-router-dom'
 import axios from 'axios'
+import { useTrackerContext } from '../context/context'
 
 const Login = () => {
+  const {setLoggedInUser} = useTrackerContext()
   const [inputs,setInputs] = useState({
     username : "",
     password : ""
@@ -14,14 +16,18 @@ const Login = () => {
   const handleSubmit = async(e : React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
     try {
-      await axios.post("http://localhost:4000/auth/login",{inputs})
+      const response = await axios.post("http://localhost:3000/auth/login",{inputs})
+      localStorage.setItem("token",response.data.token)
+      setLoggedInUser({username : response.data.username})
+      alert('Logged In Successfully')
       navigate("/")
     } catch (error) {
-
     }
   }
   return (
     <div>
+      <Link to={`/`}>Home</Link>
+
       <form onSubmit={handleSubmit}>
         <input type="text" placeholder='username' name='username' onChange={handleChange} />
         <input type="password" placeholder='password' name='password' onChange={handleChange} />

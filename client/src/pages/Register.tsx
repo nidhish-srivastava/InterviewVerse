@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useTrackerContext } from "../context/context";
 
 const Register = () => {
+  const {setLoggedInUser} = useTrackerContext()
   const [inputs, setInputs] = useState({
     username: "",
-    email: "",
     password: "",
   });
+  const [confirmPassword,setConfirmPassword] = useState("")
 
   const navigate = useNavigate();
 
@@ -17,15 +19,24 @@ const Register = () => {
 
   const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      await axios.post("/auth/register", inputs);
-      navigate("/login");
-    } catch (err) {
+    if(confirmPassword==inputs.password){
+      try {
+        const response = await axios.post("http://localhost:3000/auth/signup", inputs);
+      localStorage.setItem("token",response.data.token)
+        setLoggedInUser({username : response.data.username})
+        alert('Registration Successfull')
+        navigate("/");
+      } catch (err) {
+      }
+    }
+    else{
+      alert("Password not matching")
     }
   };
 
   return (
     <div className="auth">
+      <Link to={`/`}>Home</Link>
       <h1>Register</h1>
       <form onSubmit={handleSubmit}>
         <input
@@ -37,17 +48,16 @@ const Register = () => {
         />
         <input
           required
-          type="email"
-          placeholder="email"
-          name="email"
+          type="password"
+          placeholder="password"
+          name="password"
           onChange={handleChange}
         />
         <input
           required
           type="password"
-          placeholder="password"
-          name="password"
-          onChange={handleChange}
+          placeholder="re-enter password"
+          onChange={e=>setConfirmPassword(e.target.value)}
         />
         <button>Register</button>
         <span>

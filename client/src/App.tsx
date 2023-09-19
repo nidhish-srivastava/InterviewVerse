@@ -7,9 +7,9 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Home from './pages/Home'
 import Single from './pages/Single'
-import Write from './pages/Write'
 import Register from './pages/Register'
 import Login from './pages/Login'
+import Create from './pages/Create'
           
 const Layout = () =>{
   return(
@@ -20,6 +20,8 @@ const Layout = () =>{
     </>
   )
 }
+
+// I have created two types of Layouts
 
 const router = createBrowserRouter([
   {
@@ -35,13 +37,13 @@ const router = createBrowserRouter([
         element: <Single />,
       },
       {
-        path: "/write",
-        element: <Write />,
+        path: "/create",
+        element: <Create />,
       },
     ],
   },
   {
-    path: "/register",
+    path: "/register",      //* This means that at register and Login page,we wont be seeing navbar and footer
     element: <Register />,
   },
   {
@@ -49,6 +51,35 @@ const router = createBrowserRouter([
     element: <Login />,
   },
 ]);
+
+
+const router2 = createBrowserRouter([
+  {
+    path : "/",
+    element : <Layout/>,
+    children : [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/post/:id",
+        element: <Single />,
+      },
+      {
+        path: "/create",
+        element: <Create />,
+      },
+      {
+        path : "/login",
+        element : <Login/>
+      },{
+        path : "register",
+        element : <Register/>
+      }
+    ]
+  }
+])
 
 function App() {
   return (

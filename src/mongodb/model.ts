@@ -1,11 +1,13 @@
-import { Schema, model } from 'mongoose';
+import mongoose, { Schema, model } from 'mongoose';
 
 
 interface iPost{
-    summary : string
+    details : string
     desc : string
-    mistakes : string
-    tags : string[],
+    tags : {
+        name : string
+        id : string
+    }[],
     topic : string
 }
 
@@ -15,10 +17,14 @@ interface iAuth{
 }
 
 const postSchema = new Schema<iPost>({
-    summary : {type : String,required : true},
+    details  : {type : String,required : true},
     desc : {type : String,required : true},
-    mistakes : {type : String,required : true},
-    tags : {type : [String],required : true},
+    tags : [
+        {
+            name : {type : String,required : true},
+            id : {type : String,required : true}
+        }
+    ],
     topic : {type : String,required : true}
 },{
     timestamps :true

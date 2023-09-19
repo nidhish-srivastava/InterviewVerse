@@ -2,9 +2,8 @@ import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 
 type postTypes = {
-  summary: string;
+  explaination: string;
   desc: string;
-  mistakes: string;
   tags: string[];
   topic: string;
 };

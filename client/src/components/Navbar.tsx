@@ -3,7 +3,7 @@ import { useTrackerContext } from "../context/context"
 import { Link } from "react-router-dom"
 
 const Navbar = () => {
-  const {loggedInUser,setLoggedInUser} = useTrackerContext()
+  const {loggedInUser,setLoggedInUser,setIsAuthenticated} = useTrackerContext()
   const getProfile = async() =>{
     const response = await fetch(`http://localhost:3000/auth/me`,{
       method : "GET",
@@ -11,9 +11,12 @@ const Navbar = () => {
         Authorization : "Bearer " + localStorage.getItem("token")
       }
     })
-    const data = await response.json()
-    // console.log(data);
-    setLoggedInUser(data)
+    // console.log(response.status);
+    if(response.status!=403){
+      const data = await response.json()
+      setLoggedInUser({username : data.username,id : data._id})
+      setIsAuthenticated(true)
+    }
   }
   useEffect(()=>{
     getProfile()
@@ -23,7 +26,9 @@ const Navbar = () => {
       <Link to={`create`}>Create</Link>
       {loggedInUser?.username?.length ?? 0 > 1 ? (
               <div>
-                <button>Profile</button>
+                <Link to={`/${loggedInUser?.username}`}>
+                <button>My Posts</button>
+                </Link>
                 <button onClick={()=>{
                   localStorage.setItem("token","")
                   window.location.href = "/"

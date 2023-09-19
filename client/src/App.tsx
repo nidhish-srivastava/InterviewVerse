@@ -10,6 +10,8 @@ import Single from './pages/Single'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Create from './pages/Create'
+import { useTrackerContext } from './context/context'
+import Profile from './pages/Profile'
           
 const Layout = () =>{
   return(
@@ -31,6 +33,9 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      }, {
+        path : "/:id",
+        element : <Profile/>
       },
       {
         path: "/post/:id",
@@ -82,6 +87,7 @@ const router2 = createBrowserRouter([
 ])
 
 function App() {
+  const {isAuthenticated} = useTrackerContext()
   return (
     <div>
       <RouterProvider router={router} />

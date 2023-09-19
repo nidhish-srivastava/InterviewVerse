@@ -17,18 +17,39 @@ export const getAll = async (req: Request, res: Response) => {
   }
 };
 
-export const create = async (req: Request, res: Response) => {
-  const {desc,tags,details,topic} = req.body
-  // console.log(desc,tags,details,topic);
-  console.log(tags);
-  
-  
-  const newPost = new Post({desc : desc,tags : tags,details : details,topic : topic});
-  console.log(newPost);
-  
+export const getLoggedInUserPosts = async(req : Request,res : Response) =>{
   try {
-    await newPost.save(); 
-    res.status(201).send("Post created")
+    const {id} = req.params
+    // console.log(id);
+    // const response = await Post.findOne({authRef : id})
+    const response = await Post.findOne({authRef : id}).populate({
+     path : 'authRef',
+     model : 'Auth',
+     select : 'username'
+    }).exec()
+    res.status(200).json(response)
+  } catch (error) {
+        
+  }
+}
+
+export const create = async (req: Request, res: Response) => {
+  const { desc, tags, details, topic,authRef } = req.body;
+  
+  // console.log(desc,tags,details,topic);
+  // console.log(tags);
+  const newPost = new Post({
+    desc: desc,
+    tags: tags,
+    details: details,
+    topic: topic,
+    authRef : authRef
+  })
+
+  try {
+    await newPost.save();
+    console.log("asdasd");
+    res.status(201).send("Post created");
   } catch (error) {
     res.status(500).json({ msg: "Error is coming", error });
   }
@@ -60,4 +81,3 @@ export const getSingle = async (req: Request, res: Response) => {
     res.status(500).json({ msg: "Error" });
   }
 };
-

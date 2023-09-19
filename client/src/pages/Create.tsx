@@ -2,13 +2,14 @@ import { useForm } from "react-hook-form";
 import {  useState } from "react";
 import { nanoid } from 'nanoid'
 import { useNavigate } from "react-router-dom";
+import { useTrackerContext } from "../context/context";
 
 type tagType = {
   name : string
   id : string
 }
 
-type FormData = {
+export type FormData = {
   details ?: string
    desc ?: string
    tags ?: tagType[]
@@ -17,6 +18,7 @@ type FormData = {
   
   const Create = () => {
     const navigate = useNavigate()
+    const {loggedInUser} = useTrackerContext()
     const [globalTags,setGlobalTags] = useState<tagType[]>([])
   const { register, handleSubmit } = useForm();
   const [tags,setTags] = useState<tagType[]>([])
@@ -48,7 +50,8 @@ type FormData = {
       desc : data.desc,
       tags : tags,
       topic : data.topic,
-      details : data.details
+      details : data.details,
+      authRef : loggedInUser?.id
     }
     try {
      const response = await fetch(`http://localhost:3000/post`,{
@@ -59,8 +62,7 @@ type FormData = {
          },
         body : JSON.stringify(formData)
       })
-      console.log(response);
-      
+
       if(response.status!==201){
         alert("You havent logged in")
         navigate("/login")

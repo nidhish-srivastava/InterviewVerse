@@ -24,6 +24,7 @@ const Navbar = () => {
   return (
     <div>
       <Link to={`create`}>Create</Link>
+      <Link to={`/`}>Home</Link>
       {loggedInUser?.username?.length ?? 0 > 1 ? (
               <div>
                 <Link to={`/${loggedInUser?.username}`}>

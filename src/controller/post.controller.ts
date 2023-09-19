@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
 import { Post } from "../mongodb/model";
 
+interface ReqQuery {
+  topic?: string; // Assuming 'topic' is a string in req.query
+}
 export const getAll = async (req: Request, res: Response) => {
-  const { topic } = req.query;
-  const queryObject = {
-    topic,
-  };
+  const { topic } = req.query as ReqQuery;
+  const queryObject: Record<string, any> = {};
+  
   if (topic) {
     queryObject.topic = { $regex: topic, $options: "i" };
   }

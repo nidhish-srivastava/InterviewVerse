@@ -1,20 +1,22 @@
 import { Fragment, useEffect, useState } from "react";
-import axios from "axios";
-
+import { FormData } from "./Create";
 
 const Home = () => {
   const [posts, setPosts] = useState<FormData[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const fetchData = async () => {
     try {
-      const res = await axios.get(
+      const res = await fetch(
         `http://localhost:3000/post?topic=${searchTerm}`
       );
-      // console.log(res.data);
-      setPosts(res.data.getAllPost);
+      if(res.status==200){
+        const data = await res.json()
+        setPosts(data.getAllPost);
+      }
     } catch (error) {}
   };
   useEffect(() => {
+    console.log(posts);
     const timer = setTimeout(() => {
       fetchData();
     }, 700);
@@ -35,17 +37,17 @@ const Home = () => {
         </span>
       </div>
       <div>
-        {/* {posts.map((e,i) => (
+        {posts.map((e,i) => (
           <div key={i}>
-            <h2>{e}</h2>
+            <h2>{e.topic}</h2>
             <h3>{e.desc}</h3>
             <span>
-              {e.tags.map(e=>(
-                <button>{e}</button>
+              {e.tags?.map(e=>(
+                <button>{e.name}</button>
               ))}
             </span>
           </div>
-        ))} */}
+        ))}
       </div>
     </Fragment>
   );

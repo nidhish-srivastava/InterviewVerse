@@ -21,7 +21,7 @@ interface iAuth {
 
 const postSchema = new Schema<iPost>(
   {
-    authRef: { type: Schema.Types.ObjectId, ref: "Auth", required: true },
+    authRef: { type: Schema.Types.ObjectId, ref: "Auth" },
     details: { type: String, required: true },
     desc: { type: String, required: true },
     tags: [

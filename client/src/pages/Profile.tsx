@@ -24,6 +24,12 @@ const Profile = () => {
       <h2>
       {userPosts?.topic}
       </h2>
+      <span className="edit-icon">
+      <i className="fa-regular fa-pen-to-square"></i>
+      </span>
+      <span className="delete-icon">
+      <i className="fa-solid fa-trash"></i>
+      </span>
       <div>
       {userPosts?.desc}
       </div>

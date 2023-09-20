@@ -69,8 +69,10 @@ export const deletePost = async (req: Request, res: Response) => {
 
 export const updatePost = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { updateObject } = req.body;
-  const response = await Post.updateOne({ _id: id }, updateObject);
+  // console.log(id);
+  const {desc,tags,details,topic} = req.body
+  const response = await Post.updateOne({ authRef : id }, {desc : desc,tags : tags,details : details,topic : topic});
+  // console.log(response);
   res.status(200).json({ msg: "Updated Successfully", response });
 };
 

@@ -31,6 +31,7 @@ const MySingle = () => {
       {singlePostObj?.tags?.map((e) => (
         <button>{e.name}</button>
       ))}
+      <br />
       <Link to="update">
         <button>Update</button>
       </Link>

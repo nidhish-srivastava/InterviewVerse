@@ -3,7 +3,7 @@ import { useState,useEffect,Fragment } from "react";
 import { FormData } from "./Create";
 import { Link } from "react-router-dom";
 
-const Profile = () => {
+const MyPosts = () => {
   const { loggedInUser } = useTrackerContext();
   const [userPosts, setUserPosts] = useState<FormData[]>([]);
 
@@ -27,7 +27,7 @@ const Profile = () => {
     <Fragment>
       {userPosts.map(e=>(
         <Link to={`${e._id}`}>
-        <div style={{padding : "2rem",border : "2px solid white",width : "fit-content",margin : "2rem"}}>
+          <div style={{padding : "2rem",border : "2px solid white",width : "fit-content",margin : "2rem"}}>
           <h2>{e.topic}</h2>
           <div>{e.desc}</div>
           {/* <h4>
@@ -63,4 +63,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default MyPosts;

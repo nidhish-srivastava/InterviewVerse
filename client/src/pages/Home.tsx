@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { FormData } from "./Create";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [posts, setPosts] = useState<FormData[]>([]);
@@ -39,7 +40,8 @@ const Home = () => {
       </div>
       <div>
         {posts.map((e,i) => (
-          <div key={i}>
+          <Link to={`/${e.authRef?.username}/${e._id}`}>
+          <div key={i}  style={{border : "1px solid white"}}>
             <h2>Topic:{e.topic}</h2>
             <h3>Desc:{e.desc}</h3>
             <p>Details{e.details}</p>
@@ -50,6 +52,7 @@ const Home = () => {
                 ))}
             </span>
           </div>
+                </Link>
         ))}
       </div>
     </Fragment>

@@ -1,6 +1,5 @@
-When i login,i shud either redirect to Create if i dont have any tracks,if i have then i shud be directed to home page
+Dificult coz i state passing will be difficult --> When i login,i shud either redirect to Create if i dont have any tracks,if i have then i shud be directed to home page
 
-Add edit and delete functionalities in my posts section of my posts
 
 In the home,add fetchSingle Post feature
 

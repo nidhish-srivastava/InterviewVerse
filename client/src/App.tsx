@@ -11,9 +11,11 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import Create from './pages/Create'
 import { useTrackerContext } from './context/context'
-import Profile from './pages/Profile'
-import MySingle from './pages/MySinglePost'
+import MyPosts from './pages/MyPosts'
+import MySinglePost from './pages/MySinglePost'
 import Update from './pages/Update'
+import SinglePost from './pages/SinglePost'
+import SingleProfile from './pages/SingleProfile'
           
 const Layout = () =>{
   return(
@@ -36,15 +38,23 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       }, {
-        path : "/:id",
-        element : <Profile/>
+        path : "/my-posts/:id",
+        element : <MyPosts/>
+      },
+      {
+        path : "/my-posts/:id/:id",
+        element : <MySinglePost/>
       },
       {
         path: "/:id/:id",
-        element: <MySingle/>,
+        element: <SinglePost/>,
       },{
-        path : "/:id/:id/update",
+        path : "/my-posts/:id/:id/update",
         element : <Update/>
+      },
+      {
+        path : "/:username",
+        element : <SingleProfile/>
       },
       {
         path: "/create",

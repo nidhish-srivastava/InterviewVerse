@@ -6,19 +6,27 @@ interface ReqQuery {
 }
 export const getAll = async (req: Request, res: Response) => {
   const { topic } = req.query as ReqQuery;
-  const queryObject: Record<string, any> = {};
+  const queryObject: Record<string, any> = {}; //* wierd ts stuf :))
   
   if (topic) {
     queryObject.topic = { $regex: topic, $options: "i" };
   }
   try {
     // const getAllPost = await Post.find(queryObject);
-    const getAllPost = await Post.find(queryObject).populate('authRef','username').select('details desc tags topic')
+    const getAllPost = await Post.find(queryObject).populate('authRef','username')
     res.status(200).json({ msg: "All posts read", getAllPost });
   } catch (error) {
     res.status(500).json({ msg: "Error is coming", error });
   }
 };
+
+export const searchUserPosts = async(req:Request,res:Response)=>{
+  try {
+    
+  } catch (error) {
+    
+  }
+}
 
 export const getLoggedInUserPosts = async(req : Request,res : Response) =>{
   try {
@@ -79,7 +87,7 @@ export const updatePost = async (req: Request, res: Response) => {
 export const getSingle = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
-    const post = await Post.findById(id);
+    const post = await Post.findById(id).populate('authRef','username');
     res.status(200).json({ msg: "Single Post", post });
   } catch (error) {
     res.status(500).json({ msg: "Error" });

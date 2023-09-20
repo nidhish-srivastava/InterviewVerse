@@ -2,18 +2,22 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useTrackerContext } from "../context/context";
 
-const MySingle = () => {
+export const singlePostPromise = async(id:string | undefined):Promise<any> =>{
+  const response = await fetch(`http://localhost:3000/post/single/${id}`);
+  if (response.status == 200) {
+    return await response.json();
+  }
+}
+
+const MySinglePost = () => {
   const { id } = useParams();
   const { singlePostObj, setSinglePostObj } = useTrackerContext();
   const [modal, setModal] = useState(false);
 
   //* We can memoize this function using useCallback
   const fetchSinglePost = async () => {
-    const response = await fetch(`http://localhost:3000/post/single/${id}`);
-    if (response.status == 200) {
-      const data = await response.json();
+    const data = await singlePostPromise(id)
       setSinglePostObj(data.post);
-    }
   };
 
   useEffect(() => {
@@ -41,7 +45,7 @@ const MySingle = () => {
   );
 };
 
-export default MySingle;
+export default MySinglePost;
 
 type DeleteModalType = {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;

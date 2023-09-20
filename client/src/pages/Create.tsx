@@ -4,7 +4,7 @@ import { nanoid } from "nanoid";
 import { useNavigate } from "react-router-dom";
 import { useTrackerContext } from "../context/context";
 
-type tagType = {
+export type tagType = {
   name: string;
   id: string;
 };
@@ -14,6 +14,11 @@ export type FormData = {
   desc?: string;
   tags?: tagType[];
   topic?: string;
+  authRef?: {
+    _id : string
+    username : string
+  }
+  _id ?: string
 };
 
 const Create = () => {
@@ -62,6 +67,9 @@ const Create = () => {
         body: JSON.stringify(formData),
       });
 
+      if(response.status==201){
+        navigate(`/${loggedInUser?.username}`)
+      }
       if (response.status !== 201) {
         alert("You havent logged in");
         navigate("/login");

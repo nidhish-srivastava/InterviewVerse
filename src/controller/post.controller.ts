@@ -12,7 +12,8 @@ export const getAll = async (req: Request, res: Response) => {
     queryObject.topic = { $regex: topic, $options: "i" };
   }
   try {
-    const getAllPost = await Post.find(queryObject);
+    // const getAllPost = await Post.find(queryObject);
+    const getAllPost = await Post.find(queryObject).populate('authRef','username').select('details desc tags topic')
     res.status(200).json({ msg: "All posts read", getAllPost });
   } catch (error) {
     res.status(500).json({ msg: "Error is coming", error });
@@ -24,7 +25,7 @@ export const getLoggedInUserPosts = async(req : Request,res : Response) =>{
     const {id} = req.params
     // console.log(id);
     // const response = await Post.findOne({authRef : id})
-    const response = await Post.findOne({authRef : id}).populate({
+    const response = await Post.find({authRef : id}).populate({
      path : 'authRef',
      model : 'Auth',
      select : 'username'
@@ -50,7 +51,6 @@ export const create = async (req: Request, res: Response) => {
 
   try {
     await newPost.save();
-    console.log("asdasd");
     res.status(201).send("Post created");
   } catch (error) {
     res.status(500).json({ msg: "Error is coming", error });
@@ -58,7 +58,7 @@ export const create = async (req: Request, res: Response) => {
 };
 
 export const deletePost = async (req: Request, res: Response) => {
-  const { _id } = req.body;
+  const { _id } = req.params;
   try {
     await Post.findByIdAndDelete(_id);
     res.status(200).json({ msg: "Post deleted" });

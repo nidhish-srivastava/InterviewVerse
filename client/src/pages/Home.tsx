@@ -11,6 +11,7 @@ const Home = () => {
       );
       if(res.status==200){
         const data = await res.json()
+        console.log(data);
         setPosts(data.getAllPost);
       }
     } catch (error) {}
@@ -39,12 +40,14 @@ const Home = () => {
       <div>
         {posts.map((e,i) => (
           <div key={i}>
-            <h2>{e.topic}</h2>
-            <h3>{e.desc}</h3>
+            <h2>Topic:{e.topic}</h2>
+            <h3>Desc:{e.desc}</h3>
+            <p>Details{e.details}</p>
+                <h4>-{e.authRef?.username}</h4>
             <span>
               {e.tags?.map(e=>(
                 <button>{e.name}</button>
-              ))}
+                ))}
             </span>
           </div>
         ))}

@@ -6,19 +6,21 @@ import {
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Home from './pages/Home'
-import Single from './pages/Single'
+import Single from './pages/MySinglePost'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Create from './pages/Create'
 import { useTrackerContext } from './context/context'
 import Profile from './pages/Profile'
+import MySingle from './pages/MySinglePost'
+import Update from './pages/Update'
           
 const Layout = () =>{
   return(
     <>
     <Navbar/>
     <Outlet/>
-    <Footer/>
+    {/* <Footer/> */}
     </>
   )
 }
@@ -38,8 +40,11 @@ const router = createBrowserRouter([
         element : <Profile/>
       },
       {
-        path: "/post/:id",
-        element: <Single />,
+        path: "/:id/:id",
+        element: <MySingle/>,
+      },{
+        path : "/:id/:id/update",
+        element : <Update/>
       },
       {
         path: "/create",

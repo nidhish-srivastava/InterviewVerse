@@ -20,7 +20,8 @@ const Login = () => {
       localStorage.setItem("token",response.data.token)
       setLoggedInUser({username : response.data.username})
       alert('Logged In Successfully')
-      navigate("/")
+      // navigate("/")
+      window.location.href = "/"
     } catch (error) {
     }
   }

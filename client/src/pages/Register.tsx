@@ -25,7 +25,8 @@ const Register = () => {
       localStorage.setItem("token",response.data.token)
         setLoggedInUser({username : response.data.username})
         alert('Registration Successfull')
-        navigate("/");
+        // navigate("/");
+      window.location.href = "/"
       } catch (err) {
       }
     }

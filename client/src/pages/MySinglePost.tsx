@@ -2,6 +2,7 @@ import { useEffect, useState, Fragment } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useTrackerContext } from "../context/context";
 import FullSinglePost from "../components/FullSinglePost";
+import Button from "../components/Button";
 
 export const singlePostPromise = async (
   id: string | undefined
@@ -30,10 +31,14 @@ const MySinglePost = () => {
   return (
     <Fragment>
     {singlePostObj && <FullSinglePost show = {false} singlePostObj = {singlePostObj} />}
+    <div className="edit-div">
       <Link to="update">
-        <button>Update</button>
+        <Button label="Update" className="update-btn" />
       </Link>
-      <button onClick={() => setModal(true)}>Delete</button>
+      {/* <button onClick={() => setModal(true)}>Delete</button> */}
+      <Button className="delete-btn" label="Delete" onClick={() => setModal(true)}/>
+    </div>
+        {/* Delete</Button> */}
       {modal ? <DeleteModal setModal={setModal} /> : null}
     </Fragment>
   );

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { nanoid } from "nanoid";
 import { useNavigate } from "react-router-dom";
 import { useTrackerContext } from "../context/context";
+import Button from "../components/Button";
 
 export type tagType = {
   name: string;
@@ -36,13 +37,13 @@ const Create = () => {
         name: tag,
         id: nanoid(),
       };
-      console.log(tagObj);
+      // console.log(tagObj);
       setTags((e) => [...e, tagObj]);
       setTag("");
     }
   };
 
-  console.log("render");
+  // console.log("render");
 
   const deleteTag = (id: string) => {
     const deleteTag = tags.filter((e) => e.id !== id);
@@ -77,7 +78,7 @@ const Create = () => {
     } catch (error) {}
   };
   return (
-    <form onSubmit={handleSubmit(submitHandler)}>
+    <form onSubmit={handleSubmit(submitHandler)} className="form-container">
       <label htmlFor="topic">Enter Topic</label>
       <input
         id="topic"
@@ -86,25 +87,24 @@ const Create = () => {
         placeholder="Enter topic"
       />
       <label htmlFor="desc">Desc</label>
-      <input {...register("desc")} id="desc" type="text"></input>
-      <br />
-      <br />
+      <input {...register("desc")} id="desc" type="text" placeholder="Enter description"></input>
       <label htmlFor="tags">Enter Tags</label>
-      <br />
       <input
         type="text"
         value={tag}
         onChange={(e) => setTag(e.target.value)}
-        placeholder="ENter tags"
+        placeholder="Enter tags"
         id="tags"
         onKeyDown={enterKeyHandler}
       />
-      <div style={{ padding: "2rem", border: "2px solid white" }}>
+      <div style={{display : "flex",gap : '1rem'}}>
         {tags?.map((e) => (
           <button>
             {e.name}{" "}
             <span onClick={() => deleteTag(e.id)}>
-              <b>X</b>
+            &nbsp;&nbsp;<b>
+            <i className="fa-solid fa-xmark"></i>
+            </b>
             </span>
           </button>
         ))}
@@ -117,7 +117,7 @@ const Create = () => {
         {...register("details")}
         placeholder="Enter in detail"
       />
-      <button>Create</button>
+      <Button label="Create"/>
     </form>
   );
 };

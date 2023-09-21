@@ -1,8 +1,8 @@
-import { useParams } from 'react-router-dom';
-import {useState,useEffect} from 'react'
+import { Link, useParams } from 'react-router-dom';
+import {useState,useEffect,Fragment} from 'react'
 import { FormData } from './Create';
 import { singlePostPromise } from './MySinglePost';
-import { Link } from 'react-router-dom';
+import FullSinglePost from '../components/FullSinglePost';
 
 const SinglePost = () => {
   const { id } = useParams();
@@ -18,23 +18,12 @@ const SinglePost = () => {
     fetchSingleUserPost()
   },[])
   return (
-    <div>
-        <br />
-        <Link to = {`/${singlePost?.authRef?.username}`}>
+    <Fragment>
+      <Link to={`/${singlePost?.authRef?.username}`}>
       <button>Visit profile</button>
-        </Link>
-<br />
-        Username : {singlePost?.authRef?.username}
-        Topic {singlePost?.topic}
-      <br />
-      {singlePost?.desc}
-      <br />
-      {singlePost?.details}
-      <br />
-      {singlePost?.tags?.map((e) => (
-        <button>{e.name}</button>
-      ))}
-    </div>
+      </Link>
+      {<FullSinglePost show = {false} singlePostObj={singlePost} />}
+    </Fragment>
   )
 }
 

@@ -344,3 +344,166 @@ li {
   }
 }
 
+// Full Single Post 
+
+// .my-single-post {
+//   padding: 16px;
+//   background-color: #ffffff;
+//   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+//   border-radius: 8px;
+//   margin: 16px;
+
+//   h3 {
+//     font-size: 24px;
+//     margin-bottom: 8px;
+//   }
+
+//   p {
+//     font-size: 16px;
+//     margin-bottom: 12px;
+//   }
+
+//   div {
+//     display: flex;
+//     flex-wrap: wrap;
+
+//     button {
+//       background-color: #007bff;
+//       color: #fff;
+//       border: none;
+//       border-radius: 4px;
+//       padding: 6px 12px;
+//       margin-right: 8px;
+//       margin-bottom: 8px;
+//       cursor: pointer;
+//       font-size: 14px;
+//     }
+//   }
+
+//   @media (min-width: 768px) {
+//     // Add styles for tablets and larger screens
+//     max-width: 768px;
+//     margin: 0 auto;
+
+//     h3 {
+//       font-size: 28px;
+//     }
+
+//     p {
+//       font-size: 18px;
+//     }
+
+//     div {
+//       button {
+//         font-size: 16px;
+//       }
+//     }
+
+//     // Show the author's username when 'show' is true
+//     h4 {
+//       display: block;
+//       font-size: 20px;
+//       margin-top: 16px;
+//     }
+//   }
+
+  
+
+// }
+
+
+$font-size-h3-mobile: 22px;
+$font-size-p-mobile: 14px;
+$font-size-button-mobile: 14px;
+
+$font-size-h3-tablet: 26px;
+$font-size-p-tablet: 16px;
+$font-size-button-tablet: 16px;
+
+$font-size-h3-desktop: 28px;
+$font-size-p-desktop: 18px;
+$font-size-button-desktop: 18px;
+
+.my-single-post {
+  padding: 20px;
+  background-color: #f5f5f5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  margin: 2rem auto;
+  flex-direction: column;
+  align-items: center;
+
+  h3 {
+    font-size: $font-size-h3-mobile;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: $font-size-p-mobile;
+    margin-bottom: 15px;
+  }
+
+  div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 10px;
+
+    button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      margin-right: 10px;
+      cursor: pointer;
+      font-size: $font-size-button-mobile;
+    }
+
+    button:last-child {
+      margin-right: 0;
+    }
+  }
+
+  @media (min-width: 768px) {
+    max-width: 768px;
+
+    h3 {
+      font-size: $font-size-h3-tablet;
+    }
+
+    p {
+      font-size: $font-size-p-tablet;
+    }
+
+    div {
+      button {
+        font-size: $font-size-button-tablet;
+      }
+    }
+
+    h4 {
+      display: block;
+      font-size: 20px;
+      margin-top: 20px;
+    }
+
+    @media (min-width: 1024px) {
+      h3 {
+        font-size: $font-size-h3-desktop;
+      }
+
+      p {
+        font-size: $font-size-p-desktop;
+      }
+
+      div {
+        button {
+          font-size: $font-size-button-desktop;
+        }
+      }
+    }
+  }
+}

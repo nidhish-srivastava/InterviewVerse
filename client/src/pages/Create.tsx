@@ -3,7 +3,6 @@ import { useState } from "react";
 import { nanoid } from "nanoid";
 import { useNavigate } from "react-router-dom";
 import { useTrackerContext } from "../context/context";
-import InputTag from "../components/InputTag";
 
 export type tagType = {
   name: string;

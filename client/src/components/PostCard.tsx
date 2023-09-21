@@ -3,7 +3,7 @@ import Button from "./Button"
 
 type PostCardProps = {
   post : FormData,
-  show : true | false
+  show ?: true | false
 }
 
 const PostCard = ({post,show} : PostCardProps) => {

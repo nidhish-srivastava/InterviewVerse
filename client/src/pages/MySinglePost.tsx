@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useTrackerContext } from "../context/context";
+import FullSinglePost from "../components/FullSinglePost";
 
-export const singlePostPromise = async(id:string | undefined):Promise<any> =>{
+export const singlePostPromise = async (
+  id: string | undefined
+): Promise<any> => {
   const response = await fetch(`http://localhost:3000/post/single/${id}`);
   if (response.status == 200) {
     return await response.json();
   }
-}
+};
 
 const MySinglePost = () => {
   const { id } = useParams();
@@ -16,8 +19,8 @@ const MySinglePost = () => {
 
   //* We can memoize this function using useCallback
   const fetchSinglePost = async () => {
-    const data = await singlePostPromise(id)
-      setSinglePostObj(data.post);
+    const data = await singlePostPromise(id);
+    setSinglePostObj(data.post);
   };
 
   useEffect(() => {
@@ -25,23 +28,14 @@ const MySinglePost = () => {
   }, []);
 
   return (
-    <div>
-      {singlePostObj?.topic}
-      <br />
-      {singlePostObj?.desc}
-      <br />
-      {singlePostObj?.details}
-      <br />
-      {singlePostObj?.tags?.map((e) => (
-        <button>{e.name}</button>
-      ))}
-      <br />
+    <Fragment>
+    {singlePostObj && <FullSinglePost show = {false} singlePostObj = {singlePostObj} />}
       <Link to="update">
         <button>Update</button>
       </Link>
       <button onClick={() => setModal(true)}>Delete</button>
       {modal ? <DeleteModal setModal={setModal} /> : null}
-    </div>
+    </Fragment>
   );
 };
 
@@ -57,9 +51,9 @@ function DeleteModal({ setModal }: DeleteModalType) {
   const deleteHandler = async () => {
     await fetch(`http://localhost:3000/post/${id}`, {
       method: "DELETE",
-      headers : {
-        Authorization : "Bearer " + localStorage.getItem("token")
-      }
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
     });
     window.location.href = `/${loggedInUser?.username}`;
   };

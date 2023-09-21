@@ -5,7 +5,6 @@ import { authenticateJwt } from "../middleware/auth";
 
 const router: Router = express.Router();
 
-
 router.get('/',getAll)
 router.post('/',authenticateJwt ,create)
 router.get('/:id',getLoggedInUserPosts)

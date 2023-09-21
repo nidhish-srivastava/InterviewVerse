@@ -69,7 +69,7 @@ const Create = () => {
       });
 
       if(response.status==201){
-        navigate(`/${loggedInUser?.username}`)
+        navigate(`/my-posts/${loggedInUser?.username}`)
       }
       if (response.status !== 201) {
         alert("You havent logged in");
@@ -117,7 +117,7 @@ const Create = () => {
         {...register("details")}
         placeholder="Enter in detail"
       />
-      <Button label="Create"/>
+      <Button btnType="submit" label="Create"/>
     </form>
   );
 };

@@ -6,3 +6,4 @@ When we visit their interview track,we can also explore their Profile
 
 Now their profile section shud contain list of all their tracks
 
+storing the formData in locastorage when user creates since if he hasnt logged in then he is redirected and data is localStorage

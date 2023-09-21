@@ -1,5 +1,5 @@
 import { useEffect, useState, Fragment } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useTrackerContext } from "../context/context";
 import FullSinglePost from "../components/FullSinglePost";
 import Button from "../components/Button";
@@ -52,6 +52,7 @@ type DeleteModalType = {
 
 function DeleteModal({ setModal }: DeleteModalType) {
   const { loggedInUser } = useTrackerContext();
+  const navigate = useNavigate()
   const { id } = useParams();
   const deleteHandler = async () => {
     await fetch(`http://localhost:3000/post/${id}`, {
@@ -60,7 +61,8 @@ function DeleteModal({ setModal }: DeleteModalType) {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     });
-    window.location.href = `/${loggedInUser?.username}`;
+    // window.location.href = `/my-posts/${loggedInUser?.username}`; //* Causing a reload will not load the myposts
+    navigate(`/my-posts/${loggedInUser?.username}`)
   };
   return (
     <div>

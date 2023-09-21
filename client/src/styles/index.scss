@@ -1,27 +1,16 @@
-@import url("https://fonts.googleapis.com/css2?family=Paytone+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&family=Raleway&display=swap');
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  font-family: 'Montserrat', sans-serif;
+// font-family: 'Poppins', sans-serif;
+// font-family: 'Raleway', sans-serif;
 }
 
 a {
   font-weight: 500;
   color: inherit;
   text-decoration: inherit;
-  &:hover{
-    color: #535bf2;
-  }
 }
 
 body {
@@ -37,3 +26,212 @@ p,
 li {
   margin: 0;
 }
+
+
+.post-container{
+  width: 80%;
+  margin: 0 auto;
+  padding: 2rem;
+  margin-top: 1rem;
+}
+
+
+/* HomePageContainer.scss */
+
+.post-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media (min-width: 800px) {
+  .post-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid */
+    grid-gap: 16px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .post-container {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Adjusted grid for larger screens */
+  }
+}
+
+
+/* Header.scss */
+
+.header {
+  background-color: #007bff; /* Header background color */
+  color: #fff; /* Text color */
+  padding: 10px 24px; /* Spacing around content */
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px; /* Spacing between navigation items */
+
+    a,
+    .logout-btn {
+      color: inherit; /* Inherit text color from the parent (.header) */
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 12px; /* Spacing around navigation items */
+      border-radius: 5px; /* Rounded corners for buttons and links */
+      transition: background-color 0.3s ease;
+      font-size: 1.2rem;
+      margin-right: 2rem;
+
+      &:hover {
+        background-color: #0056b3; /* Hover background color */
+      }
+    }
+
+    .logout-btn {
+      background-color: #dc3545; /* Logout button background color */
+      color: #fff; /* Logout button text color */
+      cursor: pointer;
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 800px) {
+    /* Mobile-first responsive adjustments */
+    flex-direction: column;
+    text-align: center;
+
+    .nav {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .logout-btn {
+      margin-top: 12px;
+    }
+  }
+}
+
+
+
+
+/* PostCard.scss */
+
+.post-card {
+  border: 1px solid #e0e0e0;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin-bottom: 16px;
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .post-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-title,
+  .post-description,
+  .post-details,
+  .post-author {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+
+  .post-author {
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+
+    .post-tag {
+      background-color: #007bff;
+      color: #fff;
+      font-size: 0.8rem;
+      padding: 0.25rem 0.5rem;
+      margin-right: 0.5rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  @media (min-width: 800px) {
+    .post-content {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .post-title,
+    .post-description,
+    .post-details,
+    .post-author,
+    .post-tag {
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .post-tag {
+      font-size: 1rem;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .post-tag {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+
+// custom btn
+/* Button.scss */
+
+.button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-family: "Montserrat", sans-serif;
+  cursor: pointer;
+  font-size: 1rem; /* Default font size for mobile */
+  transition: background-color 0.3s ease;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  outline: none;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+
+  &.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+  @media (min-width: 800px) {
+    /* Adjust font size and padding for larger screens */
+    font-size: 1.2rem;
+    padding: 14px 28px;
+  }
+
+  @media (min-width: 1280px) {
+    /* Further adjustments for wider screens if needed */
+  }
+}
+

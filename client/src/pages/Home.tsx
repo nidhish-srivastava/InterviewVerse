@@ -1,22 +1,22 @@
 import { Fragment, useEffect, useState } from "react";
 import { FormData } from "./Create";
 import { Link } from "react-router-dom";
+import PostCard from "../components/PostCard";
 
 const Home = () => {
   const [posts, setPosts] = useState<FormData[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const fetchData = async () => {
     try {
-      const res = await fetch(
-        `http://localhost:3000/post?topic=${searchTerm}`
-      );
-      if(res.status==200){
-        const data = await res.json()
+      const res = await fetch(`http://localhost:3000/post?topic=${searchTerm}`);
+      if (res.status == 200) {
+        const data = await res.json();
         console.log(data);
         setPosts(data.getAllPost);
       }
     } catch (error) {}
   };
+
   useEffect(() => {
     console.log(posts);
     const timer = setTimeout(() => {
@@ -38,23 +38,13 @@ const Home = () => {
           <i className="fa-solid fa-magnifying-glass"></i>
         </span>
       </div>
-      <div>
-        {posts.map((e,i) => (
+      <main className="post-container">
+        {posts.map((e, i) => (
           <Link to={`/${e.authRef?.username}/${e._id}`}>
-          <div key={i}  style={{border : "1px solid white"}}>
-            <h2>Topic:{e.topic}</h2>
-            <h3>Desc:{e.desc}</h3>
-            <p>Details{e.details}</p>
-                <h4>-{e.authRef?.username}</h4>
-            <span>
-              {e.tags?.map(e=>(
-                <button>{e.name}</button>
-                ))}
-            </span>
-          </div>
-                </Link>
+         <PostCard show = {true} post={e} key={i} />
+          </Link>
         ))}
-      </div>
+      </main>
     </Fragment>
   );
 };

@@ -1,6 +1,7 @@
 import { useEffect} from "react"
 import { useTrackerContext } from "../context/context"
 import { Link } from "react-router-dom"
+import Button from "./Button"
 
 const Navbar = () => {
   const {loggedInUser,setLoggedInUser,setIsAuthenticated} = useTrackerContext()
@@ -22,30 +23,34 @@ const Navbar = () => {
     getProfile()
   },[])
   return (
-    <div>
-      <Link to={`create`}>Create</Link>
-      <Link to={`/`}>Home</Link>
+    <header className="header">
+    <nav className="nav">
+      <div>
+      <Link to="create">Create</Link>
+      <Link to="/">Home</Link>
+      </div>
+      <div>
       {loggedInUser?.username?.length ?? 0 > 1 ? (
-              <div>
-                <Link to={`/my-posts/${loggedInUser?.username}`}>
-                <button>My Posts</button>
-                </Link>
-                <button onClick={()=>{
-                  localStorage.setItem("token","")
-                  window.location.href = "/"
-                }}>Logout</button>
-              </div>
-      ):(
-        <div>
-          <Link to={`/register`}>
-          <button>SignUp</button>
-          </Link>
-          <Link to={`/login`}>
-          <button>Login</button>
-          </Link>
-        </div>
+        <Link to={`/my-posts/${loggedInUser?.username}`}>My Posts</Link>
+      ) : (
+        <Link to="/register">SignUp</Link>
       )}
-    </div>
+      {loggedInUser?.username?.length ?? 0 > 1 ? (
+        <Button
+          onClick={() => {
+            localStorage.setItem("token", "");
+            window.location.href = "/";
+          }}
+          label="Logout"
+          className="logout-btn"
+        />
+      ) : (
+        <Link to="/login">Login</Link>
+      )}
+        </div>
+    </nav>
+  </header>
+  
   )
 }
 

@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import { FormData } from "./Create";
 import { Link } from "react-router-dom";
 import PostCard from "../components/PostCard";
+import InputTag from "../components/InputTag";
 
 const Home = () => {
   const [posts, setPosts] = useState<FormData[]>([]);
@@ -28,11 +29,12 @@ const Home = () => {
   return (
     <Fragment>
       <div className="search-bar">
-        <input
-          type="search"
-          placeholder="Search topic"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+        <InputTag
+        className="search-bar-input"
+         type="search"
+         placeholder="Search based on Topic"
+         value={searchTerm}
+         onChange={e=>setSearchTerm(e.target.value)}
         />
         <span className="search-icon">
           <i className="fa-solid fa-magnifying-glass"></i>

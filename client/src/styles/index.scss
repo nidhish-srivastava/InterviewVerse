@@ -37,7 +37,6 @@ li {
 
 
 /* HomePageContainer.scss */
-
 .post-container {
   display: flex;
   flex-direction: column;
@@ -58,13 +57,14 @@ li {
   }
 }
 
-
 /* Header.scss */
+
+
 
 .header {
   background-color: #007bff; /* Header background color */
   color: #fff; /* Text color */
-  padding: 10px 24px; /* Spacing around content */
+  padding: 0 24px; /* Spacing around content */
 
   .nav {
     display: flex;
@@ -72,17 +72,15 @@ li {
     justify-content: space-between;
     gap: 16px; /* Spacing between navigation items */
 
-    a,
-    .logout-btn {
+    a,.logout-btn {
       color: inherit; /* Inherit text color from the parent (.header) */
       text-decoration: none;
       font-weight: bold;
-      padding: 8px 12px; /* Spacing around navigation items */
+      padding: 10px 10px; /* Spacing around navigation items */
       border-radius: 5px; /* Rounded corners for buttons and links */
       transition: background-color 0.3s ease;
       font-size: 1.2rem;
       margin-right: 2rem;
-
       &:hover {
         background-color: #0056b3; /* Hover background color */
       }
@@ -113,10 +111,118 @@ li {
 }
 
 
+// Search Bar CSS
+
+
+.search-bar{
+  // background-color: red;
+  width: 50%;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .search-bar-input{
+    margin-top: 1rem;
+  }
+}
+
+
+// Login and Sign up form CSS
+// LoginForm.scss
+
+.form-group {
+  margin: 3rem auto;
+  max-width: 360px; // Adjust the maximum width as needed
+  padding: 4rem 1rem 3rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  // Media query for tablets
+  @media screen and (min-width: 768px) {
+    max-width: 380px; // Increase max-width for tablets
+  }
+
+  // Media query for desktops
+  @media screen and (min-width: 1024px) {
+    max-width: 500px; // Increase max-width for desktops
+  }
+
+  span {
+    display: block;
+    margin-top: 10px;
+    color: #333; // Text color
+
+    a {
+      color: #007BFF; // Link color
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+
+
+
+// InputTag.scss
+.input-container {
+  margin-bottom: 1rem;
+
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+    font-size: 1.1rem;
+    color: #333; // Text color
+  }
+
+  .input {
+    // width: 90%;
+    padding: 10px;
+    font-family: "Poppins",sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    font-size: 1rem; // Default font size
+    // color: #555; // Text color
+
+    &::placeholder {
+      color: #999; // Placeholder text color
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #007BFF; // Border color on focus
+    }
+  }
+
+  // Media query for tablets
+  @media screen and (min-width: 768px) {
+    .input {
+      width: 90%; // Reduce width for tablets to prevent overflow
+      padding: 12px; // Increase padding for tablets
+    }
+  }
+
+  // Media query for desktops
+  @media screen and (min-width: 1024px) {
+    .input {
+      width: 300px; // Reduce width for desktops to prevent overflow
+      padding: 14px; // Increase padding for desktops
+    }
+  }
+}
+
+
 
 
 /* PostCard.scss */
-
 .post-card {
   border: 1px solid #e0e0e0;
   background-color: #ffffff;
@@ -231,6 +337,9 @@ li {
   }
 
   @media (min-width: 1280px) {
+    padding: .8rem 1rem;
+    margin: 1rem;
+    font-size: 1.1rem;
     /* Further adjustments for wider screens if needed */
   }
 }

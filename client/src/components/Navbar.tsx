@@ -26,16 +26,13 @@ const Navbar = () => {
     <header className="header">
     <nav className="nav">
       <div>
-      <Link to="create">Create</Link>
       <Link to="/">Home</Link>
+      <Link to="create">Create</Link>
       </div>
       <div>
       {loggedInUser?.username?.length ?? 0 > 1 ? (
-        <Link to={`/my-posts/${loggedInUser?.username}`}>My Posts</Link>
-      ) : (
-        <Link to="/register">SignUp</Link>
-      )}
-      {loggedInUser?.username?.length ?? 0 > 1 ? (
+        <div>
+          <Link to={`/my-posts/${loggedInUser?.username}`}>My Posts</Link>
         <Button
           onClick={() => {
             localStorage.setItem("token", "");
@@ -44,8 +41,12 @@ const Navbar = () => {
           label="Logout"
           className="logout-btn"
         />
+          </div>
       ) : (
+        <div style={{padding : "1rem"}}>
+        <Link to="/register">SignUp</Link>
         <Link to="/login">Login</Link>
+        </div>
       )}
         </div>
     </nav>

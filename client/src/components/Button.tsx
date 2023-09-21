@@ -1,11 +1,11 @@
 import { MouseEventHandler } from "react";
 
 type ButtonProps = {
-    label ?: string
-    isDisabled ?: boolean
-    btnType ?: "button" | "submit"  //* if we give string,we get error
-    className ?: string
-    onClick ?: MouseEventHandler<HTMLButtonElement>
+    label : string
+    isDisabled : boolean
+    btnType : "button" | "submit"  //* if we give string,we get error
+    className : string
+    onClick : MouseEventHandler<HTMLButtonElement>
 }
 
 const Button = ({
@@ -14,7 +14,7 @@ const Button = ({
   isDisabled,
   btnType,
   className,
-} : ButtonProps) => {
+} : Partial<ButtonProps>) => {
   const buttonClasses = `button ${className || ''}`;
 
   return (

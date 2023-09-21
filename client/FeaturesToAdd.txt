@@ -1,7 +1,6 @@
 Dificult coz i state passing will be difficult --> When i login,i shud either redirect to Create if i dont have any tracks,if i have then i shud be directed to home page
 
 
-In the home,add fetchSingle Post feature
 
 When we visit their interview track,we can also explore their Profile
 

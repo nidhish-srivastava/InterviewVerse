@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
-import { useNavigate,Link } from 'react-router-dom'
+import React, { useState,Fragment } from 'react'
+import {Link } from 'react-router-dom'
 import axios from 'axios'
 import { useTrackerContext } from '../context/context'
+import InputTag from '../components/InputTag'
+import Button from '../components/Button'
 
 const Login = () => {
   const {setLoggedInUser} = useTrackerContext()
@@ -9,7 +11,9 @@ const Login = () => {
     username : "",
     password : ""
   })
-  const navigate = useNavigate()
+  console.log(inputs);
+  
+  // const navigate = useNavigate()
   const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -26,18 +30,19 @@ const Login = () => {
     }
   }
   return (
-    <div>
-      <Link to={`/`}>Home</Link>
-
-      <form onSubmit={handleSubmit}>
-        <input type="text" placeholder='username' name='username' onChange={handleChange} />
-        <input type="password" placeholder='password' name='password' onChange={handleChange} />
-        <button>Login</button>
+    <Fragment>
+      <Link to={`/`}>
+        <Button label='Home'/>
+        </Link>
+      <form onSubmit={handleSubmit} className='form-group'>
+        <InputTag type="text" placeholder='Enter username' value={inputs.username} onChange={handleChange} label='Username' id='username' name = "username"/>
+        <InputTag type='password' placeholder='Enter password' value={inputs.password} onChange={handleChange} label='Password' id='password' name = "password" />
+        <Button  btnType='submit' label='Login'/>
         <span>
         Don't you have an account? <Link to="/register">Register</Link>
         </span>
       </form>
-    </div>
+    </Fragment>
   )
 }
 

@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useTrackerContext } from "../context/context";
+import InputTag from "../components/InputTag";
+import Button from "../components/Button";
 
 const Register = () => {
   const {setLoggedInUser} = useTrackerContext()
@@ -25,7 +27,7 @@ const Register = () => {
       localStorage.setItem("token",response.data.token)
         setLoggedInUser({username : response.data.username})
         alert('Registration Successfull')
-        // navigate("/");
+        navigate("/");
       window.location.href = "/"
       } catch (err) {
       }
@@ -36,36 +38,18 @@ const Register = () => {
   };
 
   return (
-    <div className="auth">
+    <Fragment>
       <Link to={`/`}>Home</Link>
-      <h1>Register</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          required
-          type="text"
-          placeholder="username"
-          name="username"
-          onChange={handleChange}
-        />
-        <input
-          required
-          type="password"
-          placeholder="password"
-          name="password"
-          onChange={handleChange}
-        />
-        <input
-          required
-          type="password"
-          placeholder="re-enter password"
-          onChange={e=>setConfirmPassword(e.target.value)}
-        />
-        <button>Register</button>
+      <form onSubmit={handleSubmit} className="form-group">
+      <InputTag type="text" placeholder='Enter username' value={inputs.username} onChange={handleChange} label='Username' id='username' name = "username"/>
+      <InputTag type='password' placeholder='Enter password' value={inputs.password} onChange={handleChange} label='Password' id='password' name = "password" />
+      <InputTag label="Confirm Password" name="confirm-password" id="confirm-password" type="password" value={confirmPassword} placeholder="re-enter password" onChange={e=>setConfirmPassword(e.target.value)}/>
+        <Button btnType='submit' label='Register'/>
         <span>
           Do you have an account? <Link to="/login">Login</Link>
         </span>
       </form>
-    </div>
+    </Fragment>
   );
 };
 

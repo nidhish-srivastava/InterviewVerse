@@ -27,7 +27,7 @@ const Create = () => {
   const navigate = useNavigate();
   const { loggedInUser } = useTrackerContext();
   // const [globalTags, setGlobalTags] = useState<tagType[]>([]);
-  const { register, handleSubmit,setValue,watch,reset } = useForm();
+  const { register, handleSubmit,setValue,watch } = useForm();
   useFormPersist("form-name", { watch, setValue });
   const [tags, setTags] = useState<tagType[]>([]);
   const [tag, setTag] = useState("");

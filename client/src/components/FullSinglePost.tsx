@@ -9,7 +9,8 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
   return (
     <main className="my-single-post">
       <h3>{singlePostObj?.topic}</h3>
-      <p>{singlePostObj?.desc}</p>
+      <p style={{textAlign : "left"}}>{singlePostObj?.desc}</p>
+      <br />
       <p>{singlePostObj?.details}</p>
       <div>
         {singlePostObj?.tags?.map((e) => (

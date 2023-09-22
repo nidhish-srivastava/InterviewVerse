@@ -59,7 +59,7 @@ export const create = async (req: Request, res: Response) => {
 
   try {
     const res2 = await newPost.save();
-    console.log(res2);
+    // console.log(res2);
     res.status(201).send("Post created");
   } catch (error) {
     res.status(500).json({ msg: "Error is coming", error });

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FormData, tagType } from "./Create";
 import { useNavigate } from "react-router-dom";
+import Button from "../components/Button";
 
 const Update = () => {
   const { singlePostObj, loggedInUser } = useTrackerContext();
@@ -52,11 +53,11 @@ const Update = () => {
     );
     if (response.status == 200) {
       alert("Updated Successully");
-      navigate(`/${loggedInUser?.username}`);
+      navigate(`/my-posts/${loggedInUser?.username}`);
     }
   };
 
-  // useEffect(() => { No need to use useEffect
+  // useEffect(() => { No need to use useEffect(we already have data in useContext hook)
   //   if (singlePostObj?.tags) {
   //     // const initialTagNames = singlePostObj.tags.map((tag) => tag.name);
   //     // console.log(initialTagNames);
@@ -65,9 +66,11 @@ const Update = () => {
   // }, [singlePostObj]);
 
   return (
-    <form onSubmit={handleSubmit(submitHandler)}>
+    <form className="form-container" onSubmit={handleSubmit(submitHandler)}>
       <label htmlFor="Topic">Topic</label>
-      <input type="text" {...register("topic")} id="Topic" />
+      <input type="text" {...register("topic")} id="topic" />
+      <label htmlFor="desc">Description</label>
+      <input type="text" {...register("desc")} id="desc" />
       <label htmlFor="Details">Details</label>
       <textarea
         id="Details"
@@ -75,22 +78,21 @@ const Update = () => {
         rows={10}
         {...register("details")}
       ></textarea>
-      <label htmlFor="desc">Description</label>
-      <input type="text" {...register("desc")} id="desc" />
       <div>
         <label htmlFor="tags">Tags</label>
+        <br />
         {tagNames.map((tagName, index) => (
-          <div key={index}>
+          <span key={index}>
             <input
+            style={{width : "fit-content"}}
               type="text"
               value={tagName.name}
               onChange={(event) => editTagHandler(event, tagName.id)} // Step 3: Pass the index as the second argument
             />
-            <br />
-          </div>
+          </span>
         ))}
       </div>
-      <button>Update</button>
+      <Button btnType="submit" label="Update"/>
     </form>
   );
 };

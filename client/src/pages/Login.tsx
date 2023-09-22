@@ -25,6 +25,7 @@ const Login = () => {
       setLoggedInUser({username : response.data.username})
       alert('Logged In Successfully')
       // navigate("/")
+
       window.location.href = "/"
     } catch (error) {
     }

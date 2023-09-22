@@ -1,5 +1,6 @@
 import { createContext,useContext,useState } from "react";
 import { FormData } from "../pages/Create";
+// import { useLocalStorage } from "../utils/hook/useLocalStorage";
 
 type TrackerContextProviderProps = {
     children : React.ReactNode
@@ -27,6 +28,7 @@ export const TrackerContextProvider = ({children} : TrackerContextProviderProps)
   const [loggedInUser,setLoggedInUser] = useState<userCre | null>(null)
   const [isAuthenticated,setIsAuthenticated] = useState<boolean | null>(false)
   const [singlePostObj,setSinglePostObj] = useState<FormData | null>(null)
+//   const [singlePostObj,setSinglePostObj] = useLocalStorage<FormData | null>("TRACKS",null)
   
     return(
         <TrackerContext.Provider value={{

@@ -4,6 +4,7 @@ import { nanoid } from "nanoid";
 import { useNavigate } from "react-router-dom";
 import { useTrackerContext } from "../context/context";
 import Button from "../components/Button";
+import useFormPersist from "react-hook-form-persist";
 
 export type tagType = {
   name: string;
@@ -26,7 +27,8 @@ const Create = () => {
   const navigate = useNavigate();
   const { loggedInUser } = useTrackerContext();
   // const [globalTags, setGlobalTags] = useState<tagType[]>([]);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit,setValue,watch } = useForm();
+  useFormPersist("form-name", { watch, setValue });
   const [tags, setTags] = useState<tagType[]>([]);
   const [tag, setTag] = useState("");
 
@@ -72,7 +74,7 @@ const Create = () => {
         navigate(`/my-posts/${loggedInUser?.username}`)
       }
       if (response.status !== 201) {
-        alert("You havent logged in");
+        alert("First login then continue writing");
         navigate("/login");
       }
     } catch (error) {}

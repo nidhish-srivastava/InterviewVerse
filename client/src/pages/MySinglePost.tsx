@@ -65,13 +65,15 @@ function DeleteModal({ setModal }: DeleteModalType) {
     navigate(`/my-posts/${loggedInUser?.username}`)
   };
   return (
-    <div>
+    <div className="deleteModal">
+      <div className="modalContent">
       <h2>
         This is a desctructive action,R u sure u wanna delete your interview
         track
       </h2>
-      <button onClick={() => setModal(false)}>Cancel</button>
-      <button onClick={deleteHandler}>Delete</button>
+      <Button label="Cancel" onClick={() => setModal(false)}/>
+      <Button label="Delete" onClick={deleteHandler}/>
+      </div>
     </div>
   );
 }

@@ -27,7 +27,7 @@ const Create = () => {
   const navigate = useNavigate();
   const { loggedInUser } = useTrackerContext();
   // const [globalTags, setGlobalTags] = useState<tagType[]>([]);
-  const { register, handleSubmit,setValue,watch } = useForm();
+  const { register, handleSubmit,setValue,watch,reset } = useForm();
   useFormPersist("form-name", { watch, setValue });
   const [tags, setTags] = useState<tagType[]>([]);
   const [tag, setTag] = useState("");
@@ -71,9 +71,11 @@ const Create = () => {
       });
 
       if(response.status==201){
+        sessionStorage.clear()  //* this feature added cuz if we create a new form,then old data is already present
         navigate(`/my-posts/${loggedInUser?.username}`)
       }
       if (response.status !== 201) {
+        
         alert("First login then continue writing");
         navigate("/login");
       }

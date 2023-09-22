@@ -26,6 +26,7 @@ const MyPosts = () => {
   },[])
   return (
     <main className="post-container">
+      {userPosts.length == 0 && <h2>No Interview Tracks</h2>}
       {userPosts.map((e,i)=>(
         <Link to={`${e._id}`}>
           <PostCard post={e} key={i} show = {false}/>

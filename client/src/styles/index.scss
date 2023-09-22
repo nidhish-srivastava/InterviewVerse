@@ -694,3 +694,86 @@ button {
 }
 
 }
+
+
+// Delete modal
+
+
+/* DeleteModal.module.scss */
+
+.deleteModal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+
+  .modalContent {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    button {
+      margin: 8px;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:first-child {
+        background-color: #ddd;
+      }
+
+      &:last-child {
+        background-color: #f44336;
+        color: white;
+
+        &:hover {
+          background-color: darken(#f44336, 10%);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .deleteModal .modalContent {
+    max-width: 600px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .deleteModal .modalContent {
+    max-width: 800px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .deleteModal .modalContent {
+    max-width: 1000px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .deleteModal .modalContent {
+    max-width: 1200px;
+  }
+}
+
+
+
+
+
+

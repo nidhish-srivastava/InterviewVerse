@@ -1,16 +1,19 @@
 import { useTrackerContext } from "../context/context";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FormData, tagType } from "./Create";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
-
+import { singlePostPromise } from "./MySinglePost";
 const Update = () => {
-  const { singlePostObj, loggedInUser } = useTrackerContext();
+  const {id} = useParams()
+  const {  loggedInUser,singlePostObj } = useTrackerContext();
+  // const [singlePostOb,setSinglePostObj] = useState<FormData>()
   const [tagNames, setTagNames] = useState<tagType[]>(
     singlePostObj?.tags || []
   );
   const navigate = useNavigate();
+  
 
   const { handleSubmit, register } = useForm({
     defaultValues: {
@@ -57,13 +60,15 @@ const Update = () => {
     }
   };
 
-  // useEffect(() => { No need to use useEffect(we already have data in useContext hook)
-  //   if (singlePostObj?.tags) {
-  //     // const initialTagNames = singlePostObj.tags.map((tag) => tag.name);
-  //     // console.log(initialTagNames);
-  //     setTagNames(singlePostObj.tags);
-  //   }
-  // }, [singlePostObj]);
+  // useEffect(() => {
+  //   const fetchSinglePost = async () => {
+  //     const data = await singlePostPromise(id);
+  //     setSinglePostObj(data.post);
+  //   };
+  //   fetchSinglePost()
+  // }, [])
+  
+
 
   return (
     <form className="form-container" onSubmit={handleSubmit(submitHandler)}>

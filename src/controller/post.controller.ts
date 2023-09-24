@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Post } from "../mongodb/model";
+import { Auth, Post } from "../mongodb/model";
 
 interface ReqQuery {
   topic?: string; // Assuming 'topic' is a string in req.query
@@ -21,8 +21,14 @@ export const getAll = async (req: Request, res: Response) => {
 };
 
 export const searchUserPosts = async(req:Request,res:Response)=>{
+  const {username} = req.params
   try {
-    
+    const response = await Auth.findOne({username : username})
+    // console.log(response?.authRef.toString());
+    let authRefId = response?._id.toString()
+    const response2 = await Post.find({authRef : authRefId}).populate('authRef','username')
+    // console.log(response2);
+    res.status(200).json(response2)
   } catch (error) {
     
   }
@@ -31,7 +37,6 @@ export const searchUserPosts = async(req:Request,res:Response)=>{
 export const getLoggedInUserPosts = async(req : Request,res : Response) =>{
   try {
     const {id} = req.params
-    // console.log(id);
     // const response = await Post.findOne({authRef : id})
     const response = await Post.find({authRef : id}).populate({
      path : 'authRef',
@@ -58,8 +63,7 @@ export const create = async (req: Request, res: Response) => {
   })
 
   try {
-    const res2 = await newPost.save();
-    // console.log(res2);
+     await newPost.save();
     res.status(201).send("Post created");
   } catch (error) {
     res.status(500).json({ msg: "Error is coming", error });

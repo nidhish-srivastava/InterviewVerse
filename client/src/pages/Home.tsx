@@ -12,7 +12,6 @@ const Home = () => {
       const res = await fetch(`http://localhost:3000/post?topic=${searchTerm}`);
       if (res.status == 200) {
         const data = await res.json();
-        console.log(data);
         setPosts(data.getAllPost);
       }
     } catch (error) {}

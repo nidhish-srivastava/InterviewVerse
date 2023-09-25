@@ -1,27 +1,25 @@
 import { useTrackerContext } from "../context/context";
-import { useState,useEffect } from "react";
+import {  useState } from "react";
 import { useForm } from "react-hook-form";
 import { FormData, tagType } from "./Create";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
-import { singlePostPromise } from "./MySinglePost";
+
 const Update = () => {
-  const {id} = useParams()
-  const {  loggedInUser,singlePostObj } = useTrackerContext();
-  // const [singlePostOb,setSinglePostObj] = useState<FormData>()
+  const {  loggedInUser} = useTrackerContext();
   const [tagNames, setTagNames] = useState<tagType[]>(
-    singlePostObj?.tags || []
+    JSON.parse(sessionStorage.getItem("update-form") || "")?.tags || []
   );
   const navigate = useNavigate();
-  
 
   const { handleSubmit, register } = useForm({
     defaultValues: {
-      desc: singlePostObj?.desc,
-      details: singlePostObj?.details,
-      topic: singlePostObj?.topic,
+      desc: JSON.parse(sessionStorage.getItem("update-form") || "").desc,
+      details:  JSON.parse(sessionStorage.getItem("update-form") || "").details,
+      topic:  JSON.parse(sessionStorage.getItem("update-form") || "").topic,
     },
   });
+
 
   const editTagHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -55,18 +53,13 @@ const Update = () => {
       }
     );
     if (response.status == 200) {
+      sessionStorage.clear()
       alert("Updated Successully");
       navigate(`/my-posts/${loggedInUser?.username}`);
     }
   };
 
-  // useEffect(() => {
-  //   const fetchSinglePost = async () => {
-  //     const data = await singlePostPromise(id);
-  //     setSinglePostObj(data.post);
-  //   };
-  //   fetchSinglePost()
-  // }, [])
+  
   
 
 

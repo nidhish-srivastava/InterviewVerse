@@ -3,10 +3,11 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { useTrackerContext } from "../context/context";
 import FullSinglePost from "../components/FullSinglePost";
 import Button from "../components/Button";
+import { FormData } from "./Create";
 
 export const singlePostPromise = async (
   id: string | undefined
-): Promise<any> => {
+): Promise<FormData | undefined> => {
   const response = await fetch(`http://localhost:3000/post/single/${id}`);
   if (response.status == 200) {
     return await response.json();
@@ -15,16 +16,15 @@ export const singlePostPromise = async (
 
 const MySinglePost = () => {
   const { id } = useParams();
-  const { singlePostObj, setSinglePostObj } = useTrackerContext();
   const [modal, setModal] = useState(false);
-
-  //* We can memoize this function using useCallback
-  const fetchSinglePost = async () => {
-    const data = await singlePostPromise(id);
-    setSinglePostObj(data.post);
-  };
+  const [singlePostObj,setSinglePostObj] = useState<FormData>()
 
   useEffect(() => {
+  const fetchSinglePost = async () => {
+    const data = await singlePostPromise(id);
+    setSinglePostObj(data);
+    sessionStorage.setItem("update-form",JSON.stringify(data))
+  };
     fetchSinglePost();
   }, []);
 

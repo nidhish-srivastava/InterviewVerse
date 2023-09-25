@@ -86,14 +86,14 @@ export const updatePost = async (req: Request, res: Response) => {
   const {desc,tags,details,topic} = req.body
   const response = await Post.updateOne({ authRef : id }, {desc : desc,tags : tags,details : details,topic : topic});
   // console.log(response);
-  res.status(200).json({ msg: "Updated Successfully", response });
+  res.status(200).send(`<h3>Updated successfully</h3>`);
 };
 
 export const getSingle = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
     const post = await Post.findById(id).populate('authRef','username');
-    res.status(200).json({ msg: "Single Post", post });
+    res.status(200).json(post);
   } catch (error) {
     res.status(500).json({ msg: "Error" });
   }

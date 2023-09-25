@@ -11,7 +11,7 @@ const SinglePost = () => {
   const [singlePost,setSinglePost] = useState<FormData>()
   const fetchSingleUserPost = async() =>{
     const data = await singlePostPromise(id)
-    setSinglePost(data.post)
+    setSinglePost(data)
   }
 
 

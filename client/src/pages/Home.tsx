@@ -13,8 +13,6 @@ const Home = () => {
   // const page = searchParams.get('page')
   // const pageSize = searchParams.get('pageSize')
 
-  
-
   const fetchData = async () => {
     try {
       // const res = await fetch(`http://localhost:3000/post?topic=${searchTerm}&username=${searchTerm}`);

@@ -4,7 +4,6 @@ import { nanoid } from "nanoid";
 import { useNavigate } from "react-router-dom";
 import { useTrackerContext } from "../context/context";
 import Button from "../components/Button";
-import useFormPersist from "react-hook-form-persist";
 
 export type tagType = {
   name: string;

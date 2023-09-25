@@ -18,7 +18,6 @@ const MyPosts = () => {
       if(response.status==200){
       const data = await response.json();
       setUserPosts(data);
-      // console.log(data);
       }
     }
   useEffect(()=>{

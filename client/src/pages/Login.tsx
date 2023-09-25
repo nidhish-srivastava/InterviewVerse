@@ -11,9 +11,7 @@ const Login = () => {
     username : "",
     password : ""
   })
-  console.log(inputs);
   
-  // const navigate = useNavigate()
   const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };

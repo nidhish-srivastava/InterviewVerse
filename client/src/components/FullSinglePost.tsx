@@ -17,7 +17,7 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
           <button>{e.name}</button>
         ))}
       </div>
-      {show ? <h4>{singlePostObj?.authRef?.username}</h4> : null}
+      {show ? <h4>{singlePostObj?.username}</h4> : null}
     </main>
   );
 };

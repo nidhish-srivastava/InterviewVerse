@@ -208,7 +208,7 @@ li {
   // Media query for tablets
   @media screen and (min-width: 768px) {
     .input {
-      width: 90%; // Reduce width for tablets to prevent overflow
+      width: 300px; // Reduce width for tablets to prevent overflow
       padding: 12px; // Increase padding for tablets
     }
   }
@@ -216,7 +216,7 @@ li {
   // Media query for desktops
   @media screen and (min-width: 1024px) {
     .input {
-      width: 300px; // Reduce width for desktops to prevent overflow
+      width: 350px; // Reduce width for desktops to prevent overflow
       padding: 14px; // Increase padding for desktops
     }
   }

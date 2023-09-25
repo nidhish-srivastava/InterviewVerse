@@ -13,7 +13,7 @@ const PostCard = ({post,show} : PostCardProps) => {
       <p className="post-description">{post.desc}</p>
         {show ? 
       <div className="post-author">
-        <span>- {post.authRef?.username}</span>
+        <span>- {post.username}</span>
       </div> : null
       }
       <div className="post-tags">

@@ -20,8 +20,8 @@ const SinglePost = () => {
   },[])
   return (
     <Fragment>
-      <Link to={`/${singlePost?.authRef?.username}`}>
-      <Button className='visit-profile-btn' label={`Visit ${singlePost?.authRef?.username}'s Profile`}/>
+      <Link to={`/${singlePost?.username}`}>
+      <Button className='visit-profile-btn' label={`Visit ${singlePost?.username}'s Profile`}/>
       </Link>
       {<FullSinglePost show = {false} singlePostObj={singlePost} />}
     </Fragment>

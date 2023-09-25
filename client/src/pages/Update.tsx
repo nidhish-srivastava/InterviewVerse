@@ -2,10 +2,11 @@ import { useTrackerContext } from "../context/context";
 import {  useState } from "react";
 import { useForm } from "react-hook-form";
 import { FormData, tagType } from "./Create";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
 
 const Update = () => {
+  const {id} = useParams()
   const {  loggedInUser} = useTrackerContext();
   const [tagNames, setTagNames] = useState<tagType[]>(
     JSON.parse(sessionStorage.getItem("update-form") || "")?.tags || []
@@ -42,7 +43,7 @@ const Update = () => {
       details: data.details,
     };
     const response = await fetch(
-      `http://localhost:3000/post/${loggedInUser?.id}`,
+      `http://localhost:3000/post/${id}`,
       {
         method: "PATCH",
         body: JSON.stringify(updateFormData),

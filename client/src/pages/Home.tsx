@@ -1,29 +1,46 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect,  useState } from "react";
 import { FormData } from "./Create";
-import { Link } from "react-router-dom";
+import { Link,useSearchParams } from "react-router-dom";
 import PostCard from "../components/PostCard";
 import InputTag from "../components/InputTag";
 
 const Home = () => {
   const [posts, setPosts] = useState<FormData[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [notFound, setNotFound] = useState("");
+  const [searchParams,setSearchParams] = useSearchParams()
+
+  // const page = searchParams.get('page')
+  // const pageSize = searchParams.get('pageSize')
+
+  
+
   const fetchData = async () => {
     try {
+      // const res = await fetch(`http://localhost:3000/post?topic=${searchTerm}&username=${searchTerm}`);
       const res = await fetch(`http://localhost:3000/post?topic=${searchTerm}`);
-      if (res.status == 200) {
         const data = await res.json();
         setPosts(data.getAllPost);
-      }
-    } catch (error) {}
+        if(data.getAllPost.length == 0) setNotFound(`${searchTerm} value Not found`) 
+        if(data.getAllPost.length >  1) setNotFound("")
+    } catch (error) {
+  }
   };
 
+  
   useEffect(() => {
-    console.log(posts);
     const timer = setTimeout(() => {
       fetchData();
+      if(searchTerm.length>1){
+        setSearchParams({searchUserParam : searchTerm})
+      }
+      else{
+        setSearchParams({})
+      }
     }, 700);
     return () => clearInterval(timer);
   }, [searchTerm]);
+
 
   return (
     <Fragment>
@@ -31,7 +48,7 @@ const Home = () => {
         <InputTag
         className="search-bar-input"
          type="search"
-         placeholder="Search based on Topic"
+         placeholder="Search for Topics, People"
          value={searchTerm}
          onChange={e=>setSearchTerm(e.target.value)}
         />
@@ -41,11 +58,12 @@ const Home = () => {
       </div>
       <main className="post-container">
         {posts.map((e, i) => (
-          <Link to={`/${e.authRef?.username}/${e._id}`}>
+          <Link to={`/${e?.username}/${e._id}`}>
          <PostCard show = {true} post={e} key={i} />
           </Link>
         ))}
       </main>
+      {notFound}
     </Fragment>
   );
 };

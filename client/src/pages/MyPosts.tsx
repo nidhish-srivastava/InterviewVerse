@@ -1,24 +1,22 @@
-import { useTrackerContext } from "../context/context";
 import { useState,useEffect } from "react";
 import { FormData } from "./Create";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import PostCard from "../components/PostCard";
 
 const MyPosts = () => {
-  const { loggedInUser } = useTrackerContext();
+  const {id} = useParams()
   const [userPosts, setUserPosts] = useState<FormData[]>([]);
 
   const getUserPosts = async () => {
     const response = await fetch(
-      `http://localhost:3000/post/${loggedInUser?.id}`,{
+      `http://localhost:3000/post/${id}`,{
         headers : {
           Authorization : "Bearer " + localStorage.getItem("token")
         }
       }) 
-      if(response.status==200){
       const data = await response.json();
+      console.log(data);
       setUserPosts(data);
-      }
     }
   useEffect(()=>{
     getUserPosts()

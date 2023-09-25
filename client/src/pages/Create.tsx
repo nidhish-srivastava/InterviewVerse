@@ -19,6 +19,7 @@ export type FormData = {
     _id : string
     username : string
   }
+  username ?: string
   _id ?: string
 };
 
@@ -55,7 +56,7 @@ const Create = () => {
       tags: tags,
       topic: data.topic,
       details: data.details,
-      authRef: loggedInUser?.id,
+      username: loggedInUser?.username,
     };
     try {
       const response = await fetch(`http://localhost:3000/post`, {
@@ -67,12 +68,14 @@ const Create = () => {
         body: JSON.stringify(formData),
       });
 
+      console.log(response);
+      
+
       if(response.status==201){
         sessionStorage.clear()  //* this feature added cuz if we create a new form,then old data is already present
         navigate(`/my-posts/${loggedInUser?.username}`)
       }
       if (response.status !== 201) {
-        
         alert("First login then continue writing");
         navigate("/login");
       }

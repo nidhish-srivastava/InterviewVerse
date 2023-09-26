@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Post } from "../mongodb/model";
+import { Auth, Post } from "../mongodb/model";
 
 interface ReqQuery {
   topic?: string; // Assuming 'topic' is a string in req.query
@@ -27,7 +27,6 @@ export const getAll = async (req: Request, res: Response) => {
     queryObject.topic = cleanInput(topic);
   }
 
-
   // if(username){
   //   queryObject.username = cleanInput(username)
   // }
@@ -49,6 +48,9 @@ export const searchUserPosts = async (req: Request, res: Response) => {
   const { username } = req.params;
   try {
     const response = await getSinglePromise(username);
+    if (response.length == 0) {
+      res.status(404).send(`<h3>${username} not found</h3>`);
+    }
     res.status(200).json(response);
   } catch (error) {}
 };
@@ -58,6 +60,30 @@ export const getLoggedInUserPosts = async (req: Request, res: Response) => {
     const { id } = req.params;
     const response = await getSinglePromise(id);
     res.status(200).json(response);
+  } catch (error) {}
+};
+
+export const saveInSavedPosts = async (req: Request, res: Response) => {
+  const {postId,userId} = req.body
+  try {
+    // const user = await Auth.findById({ _id: userId });
+    // user?.savedPosts?.push(postId);
+    // const data = await user?.save();
+    //* Replaced three lines with a single  --> flex
+    const data = await Auth.updateOne({_id : userId},{ $addToSet : {savedPosts : postId }})
+    res.status(200).send(`Post saved successfully`)
+  } catch (error) {}
+};
+
+export const getSavedPosts = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const response = await Auth.findById({ _id: id }).populate({
+      path: "savedPosts",
+      model: "Post",
+      select: "desc username tags details topic",
+    });
+    res.json(response?.savedPosts)
   } catch (error) {}
 };
 

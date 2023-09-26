@@ -1,4 +1,4 @@
 Dificult coz i state passing will be difficult --> When i login,i shud either redirect to Create if i dont have any tracks,if i have then i shud be directed to home page
 
-
+Whenever i navigate to read a full post saved inside my Saved Post section,if i have saved it,it shud show an option of removing it
 

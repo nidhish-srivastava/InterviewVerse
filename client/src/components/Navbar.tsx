@@ -32,6 +32,7 @@ const Navbar = () => {
       <div>
       {loggedInUser?.username?.length ?? 0 > 1 ? (
         <div>
+          <Link to={`/saved-posts/${loggedInUser?.username}`}>Saved Posts</Link>
           <Link to={`/my-posts/${loggedInUser?.username}`}>My Posts</Link>
         <Button
           onClick={() => {

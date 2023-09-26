@@ -39,7 +39,9 @@ const Register = () => {
 
   return (
     <Fragment>
-      <Link to={`/`}>Home</Link>
+      <Link to={`/`}>
+        <Button label='Home'/>
+        </Link>
       <form onSubmit={handleSubmit} className="form-group">
       <InputTag type="text" placeholder='Enter username' value={inputs.username} onChange={handleChange} label='Username' id='username' name = "username"/>
       <InputTag type='password' placeholder='Enter password' value={inputs.password} onChange={handleChange} label='Password' id='password' name = "password" />

@@ -239,11 +239,6 @@ li {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
-  .post-content {
-    display: flex;
-    flex-direction: column;
-  }
-
   .post-title,
   .post-description,
   .post-details,
@@ -251,6 +246,11 @@ li {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
     color: #333;
+  }
+
+  .post-date{
+    display: block;
+    text-align: right;
   }
 
   .post-author {
@@ -275,11 +275,6 @@ li {
   }
 
   @media (min-width: 800px) {
-    .post-content {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
 
     .post-title,
     .post-description,
@@ -701,6 +696,8 @@ button {
   background-color: lightcoral;
 }
 
+// .save-post-btn{
+// }
 
 // Delete modal
 

@@ -18,6 +18,7 @@ interface iPost {
 interface iAuth {
   username: string;
   password: string;
+  savedPosts : string[] | null
 }
 
 const postSchema = new Schema<iPost>(
@@ -42,6 +43,7 @@ const postSchema = new Schema<iPost>(
 const authSchema = new Schema<iAuth>({
   username: { type: String, required: true },
   password: { type: String, required: true },
+  savedPosts : [{type : Schema.Types.ObjectId,ref : "Post"}]
 });
 
 const Post = model<iPost>("Post", postSchema);

@@ -6,6 +6,7 @@ type ButtonProps = {
     btnType : "button" | "submit"  //* if we give string,we get error
     className : string
     onClick : MouseEventHandler<HTMLButtonElement>
+    style : {[id : string] : string}
 }
 
 const Button = ({
@@ -14,6 +15,7 @@ const Button = ({
   isDisabled,
   btnType,
   className,
+  style
 } : Partial<ButtonProps>) => {
   const buttonClasses = `button ${className || ''}`;
 
@@ -23,6 +25,7 @@ const Button = ({
       className={buttonClasses}
       onClick={onClick}
       disabled = {isDisabled}
+      style={style}
     >
         {label}
     </button>

@@ -21,6 +21,7 @@ export type FormData = {
   }
   username ?: string
   _id ?: string
+  updatedAt?:string
 };
 
 const Create = () => {

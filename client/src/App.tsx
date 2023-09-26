@@ -12,6 +12,7 @@ import MySinglePost from "./pages/MySinglePost";
 import Update from "./pages/Update";
 import SinglePost from "./pages/SinglePost";
 import SingleProfile from "./pages/SingleProfile";
+import SavedPosts from "./pages/SavedPosts";
 
 const Layout = () => {
   return (
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path : "/saved-posts/:id",
+        element : <SavedPosts/>
       },
       {
         path: "/my-posts/:id",
@@ -99,7 +104,6 @@ const router = createBrowserRouter([
 // ])
 
 function App() {
-  // const {isAuthenticated} = useTrackerContext()
   return (
     <div>
       <RouterProvider router={router} />

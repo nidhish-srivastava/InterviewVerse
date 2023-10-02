@@ -76,9 +76,9 @@ export const saveInSavedPosts = async (req: Request, res: Response) => {
 };
 
 export const getSavedPosts = async (req: Request, res: Response) => {
-  const { id } = req.params;
+  const { userId } = req.params;
   try {
-    const response = await Auth.findById({ _id: id }).populate({
+    const response = await Auth.findById({ _id: userId }).populate({
       path: "savedPosts",
       model: "Post",
       select: "desc username tags details topic",
@@ -86,6 +86,36 @@ export const getSavedPosts = async (req: Request, res: Response) => {
     res.json(response?.savedPosts)
   } catch (error) {}
 };
+
+export const deleteSavedPosts = async(req:Request,res:Response)=>{
+  const {userId,postId} = req.params
+  try {
+     await Auth.findByIdAndUpdate(userId,
+      {
+        $pull : {savedPosts : postId}
+      },
+      {new : true}
+      )
+      res.status(200).json("Deleted successfully")
+    // const response = await Auth.findByIdAndDelete({_id : postId})
+    // console.log(response);
+  } catch (error) {
+    res.status(400).json("Unable to delete")
+  }
+}
+
+export const checkIfSaved = async(req:Request,res:Response)=>{
+  const {postId,userId} = req.params
+  try {
+    // const response = await Auth.findById(userId)
+    // const savedPosts = response?.savedPosts?.map(e=>e.toString()),THen we write the find method on this array to find this post
+    //* Using below,we save 3 lines
+    const response = await Auth.findOne({_id : userId,savedPosts : postId})
+    if(response?.savedPosts?.length ?? 0 >0) res.status(200).send(true) 
+  } catch (error) {
+    
+  }
+}
 
 export const create = async (req: Request, res: Response) => {
   const { desc, tags, details, topic, username } = req.body;

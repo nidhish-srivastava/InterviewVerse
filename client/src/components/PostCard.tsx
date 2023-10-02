@@ -16,7 +16,7 @@ const dateFormatter = (date: Date | string | number) => {
   return formattedDate;
 };
 
-const PostCard = ({ post, show }: PostCardProps) => {
+const PostCard = ({ post, show  }: PostCardProps) => {
   return (
     <div className="post-card">
       <h2 className="post-title">{post.topic}</h2>

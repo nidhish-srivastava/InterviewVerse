@@ -47,7 +47,7 @@ const Home = () => {
         <InputTag
         className="search-bar-input"
          type="search"
-         placeholder="Search for Topics, People"
+         placeholder="Search for Topics"
          value={searchTerm}
          onChange={e=>setSearchTerm(e.target.value)}
         />

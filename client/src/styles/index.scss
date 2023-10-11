@@ -72,7 +72,7 @@ li {
     justify-content: space-between;
     gap: 16px; /* Spacing between navigation items */
 
-    a,.logout-btn {
+    .home,.create {
       color: inherit; /* Inherit text color from the parent (.header) */
       text-decoration: none;
       font-weight: bold;
@@ -86,15 +86,7 @@ li {
       }
     }
 
-    .logout-btn {
-      background-color: #f20e25; /* Logout button background color */
-      color: #fff; /* Logout button text color */
-      cursor: pointer;
-      font-size: 1rem;
-      &:hover{
-        background-color: #333;
-      }
-    }
+    
   }
 
   @media (max-width: 800px) {
@@ -775,8 +767,57 @@ button {
   }
 }
 
+/* Styles for the modal */
+/* Styles for the modal */
+/* Styles for the modal */
+.modal {
+  position: absolute;
+  right: 5px;   /* Position to the right of the page */
+  border-radius: 5px;
+  z-index: 999;
+  color: black;
+}
 
 
+.modal-content {
+  padding: 1rem;
+  display: flex;
+  margin-top: 2px;
+  flex-direction: column;
+  box-shadow: 2px 0 10px 3px rgba(0, 0, 0, 0.2);
+  align-items: center;
+  justify-content: center;
+}
+.logout-btn {
+  background-color: white; /* Logout button background color */
+  color: black;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.modal-content a,.logout-btn{
+  color: inherit; /* Inherit text color from the parent (.header) */
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 10px; /* Spacing around navigation items */
+  border-radius: 5px; /* Rounded corners for buttons and links */
+  transition: background-color 0.3s ease;
+  font-size: 1.1rem;
+  &:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
 
 
+/* Styling for the View Profile button in the header */
+.view-profile-button {
+  background-color: #007BFF;
+  border: none;
+  padding: 4px 20px;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
 
+/* Styling for the Close button in the modal */

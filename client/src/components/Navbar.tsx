@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useTrackerContext } from "../context/context";
 import { Link } from "react-router-dom";
 import Button from "./Button";
+import defaultDp from '../img/defauldp.jpg'
 
 const Navbar = () => {
   const { loggedInUser, setLoggedInUser, setIsAuthenticated } =
@@ -34,22 +35,10 @@ const Navbar = () => {
         </div>
         <div>
           {loggedInUser?.username?.length ?? 0 > 1 ? (
-            <div>
-              {/* <Link to={`/saved-posts/${loggedInUser?.username}`}>Saved Posts</Link>
-          <Link to={`/my-posts/${loggedInUser?.username}`}>My Posts</Link>
-        <Button
-          onClick={() => {
-            localStorage.setItem("token", "");
-            window.location.href = "/";
-          }}
-          label="Logout"
-          className="logout-btn"
-        />  */}
-              <Button
-                label="Profile"
-                className="view-profile-button"
-                onClick={() => setShowModal((e) => !e)}
-              />
+            <>
+              <div className="dp-wrapper" onClick={() => setShowModal((e) => !e)}>
+                <img src={defaultDp} alt="dp" loading="lazy" />
+              </div>
               {showModal && (
                 <div
                   className="modal"
@@ -77,7 +66,7 @@ const Navbar = () => {
                   </div>
                 </div>
               )}
-            </div>
+            </>
           ) : (
             <div style={{ padding: "1rem",fontSize : "1.2rem"}}>
               <Link to="/register" style={{fontWeight : 600,marginRight : "1rem"}}>SignUp</Link>

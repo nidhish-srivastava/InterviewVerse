@@ -63,7 +63,18 @@ li {
 
 /* Header.scss */
 
+.dp-wrapper{
+  width: 50px;
+  cursor: pointer;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
 
+.dp-wrapper img{
+  width: 100%;
+  display: block;
+}
 
 .header {
   background-color: #007bff; /* Header background color */
@@ -89,8 +100,6 @@ li {
         background-color: #0056b3; /* Hover background color */
       }
     }
-
-    
   }
 
   @media (max-width: 800px) {

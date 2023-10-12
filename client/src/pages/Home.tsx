@@ -17,7 +17,7 @@ const Home = () => {
         const data = await res.json();
         // console.log(data);
         setPosts(data.getAllPost);
-        if(data.getAllPost.length == 0) setSearchParams({searchUserParam : `${searchTerm} not found`})
+        if(data.getAllPost.length == 0 && searchTerm.length>1) setSearchParams({searchUserParam : `${searchTerm} not found`})
     } catch (error) {
   }
   };
@@ -30,7 +30,7 @@ const Home = () => {
         setSearchParams({searchUserParam : searchTerm})
       }
       else{
-        setSearchParams({})
+        setSearchParams({searchUserParam : ""})
       }
     }, 700);
     return () => clearInterval(timer);
@@ -46,11 +46,14 @@ const Home = () => {
          placeholder="Search for Topics"
          value={searchTerm}
          onChange={e=>setSearchTerm(e.target.value)}
-        />
+         />
         <span className="search-icon">
           <i className="fa-solid fa-magnifying-glass"></i>
         </span>
       </div>
+      <h4>
+         {searchParam.get('searchUserParam')}
+      </h4>
       <main className="post-container">
         {posts.map((e, i) => (
           <Link to={`/${e?.username}/${e._id}`}>
@@ -58,7 +61,6 @@ const Home = () => {
           </Link>
         ))}
       </main>
-      {searchParam.get('searchUserParam')}
     </Fragment>
   );
 };

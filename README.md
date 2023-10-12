@@ -8,3 +8,7 @@
   - [Sass](https://sass-lang.com/) - Styling
   - [Typescipt](https://www.typescriptlang.org/)- Language
   - [MongoDB](https://www.mongodb.com/) - Database
+
+
+https://github.com/nidhish-srivastava/InterView_Tracker/assets/108972571/5f8069ed-aa73-4b73-a6f1-c99c0d46efd9
+

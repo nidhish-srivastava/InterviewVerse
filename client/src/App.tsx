@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         element: <MySinglePost />,
       },
       {
-        path : "/:myProfile",
+        path : "/:myProfile/my-profile",
         element : <MyProfile/>
       },
       {

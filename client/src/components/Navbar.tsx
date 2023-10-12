@@ -42,10 +42,9 @@ const Navbar = () => {
               {showModal && (
                 <div
                   className="modal"
-                  style={showModal ? { display: "block" } : { display: "none" }}
-                >
+                  style={showModal ? { display: "block" } : { display: "none" }}>
                   <div className="modal-content">
-                  <Link to={`/${loggedInUser?.username}`}>
+                  <Link to={`/${loggedInUser?.username}/my-profile`}>
                       {/* {loggedInUser?.username} */}
                       My Profile
                     </Link>

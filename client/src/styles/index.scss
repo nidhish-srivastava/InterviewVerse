@@ -13,6 +13,10 @@ a {
   text-decoration: inherit;
 }
 
+.center{
+  text-align: center;
+}
+
 body {
   margin: 0;
 }
@@ -768,8 +772,6 @@ button {
 }
 
 /* Styles for the modal */
-/* Styles for the modal */
-/* Styles for the modal */
 .modal {
   position: absolute;
   right: 5px;   /* Position to the right of the page */
@@ -787,6 +789,7 @@ button {
   box-shadow: 2px 0 10px 3px rgba(0, 0, 0, 0.2);
   align-items: center;
   justify-content: center;
+  background-color: white;
 }
 .logout-btn {
   background-color: white; /* Logout button background color */

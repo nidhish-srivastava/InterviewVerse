@@ -26,7 +26,7 @@ const SinglePost = () => {
       }
     );
     if (response.status == 200) {
-      toast.success("Deleted Successfully");
+      toast.success("Removed Successfully");
       setTimeout(() => {
         navigate(`/saved-posts/${loggedInUser?.username}`);
       }, 1000);
@@ -66,12 +66,14 @@ const SinglePost = () => {
 
   useEffect(() => {
     const singlePostHandler = async () => {
+      const fetchSinglePost = await singlePostPromise(id);
+      console.log(fetchSinglePost);
+      setSinglePost(fetchSinglePost);
       const checkIfSaved = await checkIfSavedPromise();
+      console.log(checkIfSaved);
       if(checkIfSaved == "true") setPresent(true)
       else setPresent(false)
-      const fetchSinglePost = await singlePostPromise(id);
-      setSinglePost(fetchSinglePost);
-      await Promise.race([fetchSinglePost,checkIfSaved])
+      await Promise.all([fetchSinglePost,checkIfSaved()])
     };
     singlePostHandler()
   }, []);

@@ -7,21 +7,17 @@ import InputTag from "../components/InputTag";
 const Home = () => {
   const [posts, setPosts] = useState<FormData[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [notFound, setNotFound] = useState("");
-  const [_,setSearchParams] = useSearchParams()
+  const [searchParam,setSearchParams] = useSearchParams()
 
-  // const page = searchParams.get('page')
-  // const pageSize = searchParams.get('pageSize')
 
   const fetchData = async () => {
     try {
       // const res = await fetch(`http://localhost:3000/post?topic=${searchTerm}&username=${searchTerm}`);
       const res = await fetch(`http://localhost:3000/post?topic=${searchTerm}`);
         const data = await res.json();
-        console.log(data);
+        // console.log(data);
         setPosts(data.getAllPost);
-        if(data.getAllPost.length == 0) setNotFound(`${searchTerm} value Not found`) 
-        if(data.getAllPost.length >  1) setNotFound("")
+        if(data.getAllPost.length == 0) setSearchParams({searchUserParam : `${searchTerm} not found`})
     } catch (error) {
   }
   };
@@ -62,7 +58,7 @@ const Home = () => {
           </Link>
         ))}
       </main>
-      {notFound}
+      {searchParam.get('searchUserParam')}
     </Fragment>
   );
 };

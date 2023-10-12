@@ -13,6 +13,7 @@ import Update from "./pages/Update";
 import SinglePost from "./pages/SinglePost";
 import SingleProfile from "./pages/SingleProfile";
 import SavedPosts from "./pages/SavedPosts";
+import MyProfile from "./pages/MyProfile";
 
 const Layout = () => {
   return (
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "/my-posts/:id/:id",
         element: <MySinglePost />,
+      },
+      {
+        path : "/:myProfile",
+        element : <MyProfile/>
       },
       {
         path: "/:id/:id",

@@ -27,6 +27,7 @@ const SavedPosts = () => {
   return (
     <>
     <h3 style={{padding : "2rem"}}>{savedPosts.length==0 && "No posts saved !!!"}</h3>
+    <h2 className="center">Saved Posts</h2>
       <main className="post-container">
         {savedPosts.map((e, i) => (
           <Link to={`/${e?.username}/${e._id}`}>

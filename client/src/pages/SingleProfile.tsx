@@ -31,8 +31,8 @@ const SingleProfile = () => {
         <h3>{username} not found</h3>
       )
     :  <Fragment>
-      <h3>{username}</h3>
-      <h3 style={{textAlign : "center"}}>
+      <h3 style={{padding : "1rem"}}>{username}</h3>
+      <h3 className="center">
       List of all his interview experiences
       </h3>
       <main className="post-container">

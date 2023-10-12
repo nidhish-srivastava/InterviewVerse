@@ -9,9 +9,7 @@ export const singlePostPromise = async (
   id: string | undefined
 ): Promise<FormData | undefined> => {
   const response = await fetch(`http://localhost:3000/post/single/${id}`);
-  if (response.status == 200) {
     return await response.json();
-  }
 };
 
 const MySinglePost = () => {

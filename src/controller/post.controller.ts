@@ -46,6 +46,7 @@ const getSinglePromise = async (username: string | undefined): Promise<any> => {
 
 export const searchUserPosts = async (req: Request, res: Response) => {
   const { username } = req.params;
+  console.log(username);
   try {
     const response = await getSinglePromise(username);
     if (response.length == 0) {

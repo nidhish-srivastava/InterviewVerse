@@ -56,6 +56,10 @@ const Navbar = () => {
                   style={showModal ? { display: "block" } : { display: "none" }}
                 >
                   <div className="modal-content">
+                  <Link to={`/${loggedInUser?.username}`}>
+                      {/* {loggedInUser?.username} */}
+                      My Profile
+                    </Link>
                     <Link  to={`/saved-posts/${loggedInUser?.username}`}>
                       Saved Posts
                     </Link>
@@ -75,9 +79,9 @@ const Navbar = () => {
               )}
             </div>
           ) : (
-            <div style={{ padding: "1rem" }}>
-              <Link to="/register">SignUp</Link>
-              <Link to="/login">Login</Link>
+            <div style={{ padding: "1rem",fontSize : "1.2rem"}}>
+              <Link to="/register" style={{fontWeight : 600,marginRight : "1rem"}}>SignUp</Link>
+              <Link to="/login" style={{fontWeight : 600}}>Login</Link>
             </div>
           )}
         </div>

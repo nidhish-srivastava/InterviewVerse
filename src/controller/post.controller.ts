@@ -20,7 +20,6 @@ const cleanInput = (input: string) => {
 };
 
 export const getAll = async (req: Request, res: Response) => {
-  connectmongodb()
   const { topic, username } = req.query as ReqQuery;
   const queryObject: Record<string, any> = {}; //* wierd ts stuf :))
 

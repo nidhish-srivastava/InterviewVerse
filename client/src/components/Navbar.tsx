@@ -43,7 +43,7 @@ const Navbar = () => {
                 <div
                   className="modal"
                   style={showModal ? { display: "block" } : { display: "none" }}>
-                  <div className="modal-content">
+                  <div className="modal-content" onClick={()=>setShowModal(false)}>
                   <Link to={`/${loggedInUser?.username}/my-profile`}>
                       {/* {loggedInUser?.username} */}
                       My Profile

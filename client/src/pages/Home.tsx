@@ -18,7 +18,6 @@ const Home = () => {
         // console.log(data);
         setPosts(data.getAllPost);
         if(data.getAllPost.length == 0 && searchTerm.length>1) setSearchParams({searchUserParam : `${searchTerm} not found`})
-        if(searchTerm.length==0) setSearchParams("")
     } catch (error) {
   }
   };
@@ -31,7 +30,7 @@ const Home = () => {
         setSearchParams({searchUserParam : searchTerm})
       }
       else{
-        setSearchParams({searchUserParam : ""})
+        setSearchParams("")
       }
     }, 700);
     return () => clearInterval(timer);

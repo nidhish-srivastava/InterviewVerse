@@ -17,7 +17,7 @@ const SinglePost = () => {
 
   const removeSavedPost = async () => {
     const response = await fetch(
-      `http://localhost:3000/post/savedPosts/${loggedInUser?.id}/${id}`,
+      `https://inter-view-tracker.vercel.app/post/savedPosts/${loggedInUser?.id}/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -39,7 +39,7 @@ const SinglePost = () => {
       userId: loggedInUser?.id,
     };
     if (loggedInUser?.username.length ?? 0 > 1) {
-      await fetch(`http://localhost:3000/post/savedPosts`, {
+      await fetch(`https://inter-view-tracker.vercel.app/post/savedPosts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const SinglePost = () => {
 
   const checkIfSavedPromise = async (): Promise<any> => {
     const response = await fetch(
-      `http://localhost:3000/post/savedPosts/check/${id}/${loggedInUser?.id}`,
+      `https://inter-view-tracker.vercel.app/post/savedPosts/check/${id}/${loggedInUser?.id}`,
       {
         method: "GET",
         headers: {

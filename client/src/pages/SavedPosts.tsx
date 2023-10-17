@@ -9,7 +9,7 @@ const SavedPosts = () => {
   const [savedPosts, setSavedPosts] = useState<FormData[]>([]);
   const fetchSavePosts = async () => {
     const response = await fetch(
-      `http://localhost:3000/post/savedPosts/${loggedInUser?.id}`,
+      `https://inter-view-tracker.vercel.app/post/savedPosts/${loggedInUser?.id}`,
       {
         method: "GET",
         headers: {

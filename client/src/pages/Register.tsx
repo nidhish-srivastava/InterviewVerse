@@ -23,7 +23,7 @@ const Register = () => {
     e.preventDefault();
     if(confirmPassword==inputs.password){
       try {
-        const response = await axios.post("http://localhost:3000/auth/signup", inputs);
+        const response = await axios.post("https://inter-view-tracker.vercel.app/auth/signup", inputs);
       localStorage.setItem("token",response.data.token)
         setLoggedInUser({username : response.data.username})
         alert('Registration Successfull')

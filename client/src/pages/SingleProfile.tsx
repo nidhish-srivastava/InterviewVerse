@@ -12,7 +12,7 @@ const SingleProfile = () => {
   const userProfileHandler = async() =>{
     // WHat we are passing is the post id,we need to pass the user auth id,then only it can find the user using authRef,then we will populate it with his posts
     // First we need to find userAuth id
-    const response = await fetch(`http://localhost:3000/post/search/${username}`)
+    const response = await fetch(`https://inter-view-tracker.vercel.app/post/search/${username}`)
     console.log(response);
     if(response.status==200){
       const data = await response.json()

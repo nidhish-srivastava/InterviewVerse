@@ -60,7 +60,7 @@ const Create = () => {
       username: loggedInUser?.username,
     };
     try {
-      const response = await fetch(`http://localhost:3000/post`, {
+      const response = await fetch(`https://inter-view-tracker.vercel.app/post`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

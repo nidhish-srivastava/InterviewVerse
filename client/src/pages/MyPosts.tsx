@@ -9,7 +9,7 @@ const MyPosts = () => {
 
   const getUserPosts = async () => {
     const response = await fetch(
-      `http://localhost:3000/post/${id}`,{
+      `https://inter-view-tracker.vercel.app/post/${id}`,{
         headers : {
           Authorization : "Bearer " + localStorage.getItem("token")
         }

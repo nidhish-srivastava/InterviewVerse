@@ -18,7 +18,7 @@ const Login = () => {
   const handleSubmit = async(e : React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
     try {
-      const response = await axios.post("http://localhost:3000/auth/login",{inputs})
+      const response = await axios.post("https://inter-view-tracker.vercel.app/auth/login",{inputs})
       localStorage.setItem("token",response.data.token)
       setLoggedInUser({username : response.data.username})
       alert('Logged In Successfully')

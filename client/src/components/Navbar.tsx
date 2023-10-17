@@ -10,7 +10,7 @@ const Navbar = () => {
   const [showModal, setShowModal] = useState(false);
 
   const getProfile = async () => {
-    const response = await fetch(`http://localhost:3000/auth/me`, {
+    const response = await fetch(`https://inter-view-tracker.vercel.app/auth/me`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),

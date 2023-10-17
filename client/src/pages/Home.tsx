@@ -13,11 +13,12 @@ const Home = () => {
   const fetchData = async () => {
     try {
       // const res = await fetch(`http://localhost:3000/post?topic=${searchTerm}&username=${searchTerm}`);
-      const res = await fetch(`http://localhost:3000/post?topic=${searchTerm}`);
+      const res = await fetch(`https://inter-view-tracker.vercel.app/post?topic=${searchTerm}`);
         const data = await res.json();
         // console.log(data);
         setPosts(data.getAllPost);
         if(data.getAllPost.length == 0 && searchTerm.length>1) setSearchParams({searchUserParam : `${searchTerm} not found`})
+        if(searchTerm.length==0) setSearchParams("")
     } catch (error) {
   }
   };

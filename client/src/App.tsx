@@ -1,12 +1,9 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
-// import Footer from './components/Footer'
 import Home from "./pages/Home";
-// import Single from './pages/MySinglePost'
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Create from "./pages/Create";
-// import { useTrackerContext } from './context/context'
 import MyPosts from "./pages/MyPosts";
 import MySinglePost from "./pages/MySinglePost";
 import Update from "./pages/Update";

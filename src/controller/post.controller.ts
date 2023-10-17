@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Auth, Post } from "../mongodb/model";
-import { connectmongodb } from "mongodb/connect";
+import { connectmongodb } from "../mongodb/connect";
 
 interface ReqQuery {
   topic?: string; // Assuming 'topic' is a string in req.query

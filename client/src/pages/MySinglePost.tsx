@@ -4,11 +4,12 @@ import { useTrackerContext } from "../context/context";
 import FullSinglePost from "../components/FullSinglePost";
 import Button from "../components/Button";
 import { FormData } from "./Create";
+import { url } from "../utils";
 
 export const singlePostPromise = async (
   id: string | undefined
 ): Promise<FormData | undefined> => {
-  const response = await fetch(`https://inter-view-tracker.vercel.app/post/single/${id}`);
+  const response = await fetch(`${url}/post/single/${id}`);
     return await response.json();
 };
 
@@ -53,7 +54,7 @@ function DeleteModal({ setModal }: DeleteModalType) {
   const navigate = useNavigate()
   const { id } = useParams();
   const deleteHandler = async () => {
-    await fetch(`https://inter-view-tracker.vercel.app/post/${id}`, {
+    await fetch(`${url}/post/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),

@@ -2,6 +2,7 @@ import { Fragment,useEffect,useState } from "react"
 import { useParams,Link } from "react-router-dom"
 import { FormData } from "./Create"
 import PostCard from "../components/PostCard"
+import { url } from "../utils"
 
 const SingleProfile = () => {
   const  {username} = useParams()
@@ -12,7 +13,7 @@ const SingleProfile = () => {
   const userProfileHandler = async() =>{
     // WHat we are passing is the post id,we need to pass the user auth id,then only it can find the user using authRef,then we will populate it with his posts
     // First we need to find userAuth id
-    const response = await fetch(`https://inter-view-tracker.vercel.app/post/search/${username}`)
+    const response = await fetch(`${url}/post/search/${username}`)
     console.log(response);
     if(response.status==200){
       const data = await response.json()

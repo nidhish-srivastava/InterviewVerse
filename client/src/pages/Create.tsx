@@ -4,6 +4,7 @@ import { nanoid } from "nanoid";
 import { useNavigate } from "react-router-dom";
 import { useTrackerContext } from "../context/context";
 import Button from "../components/Button";
+import { url } from "../utils";
 
 export type tagType = {
   name: string;
@@ -60,7 +61,7 @@ const Create = () => {
       username: loggedInUser?.username,
     };
     try {
-      const response = await fetch(`https://inter-view-tracker.vercel.app/post`, {
+      const response = await fetch(`${url}/post`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

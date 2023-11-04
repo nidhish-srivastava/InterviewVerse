@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { FormData, tagType } from "./Create";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
+import { url } from "../utils";
 
 const Update = () => {
   const {id} = useParams()
@@ -43,7 +44,7 @@ const Update = () => {
       details: data.details,
     };
     const response = await fetch(
-      `https://inter-view-tracker.vercel.app/post/${id}`,
+      `${url}/post/${id}`,
       {
         method: "PATCH",
         body: JSON.stringify(updateFormData),

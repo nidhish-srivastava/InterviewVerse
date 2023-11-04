@@ -3,6 +3,7 @@ import { FormData } from "./Create";
 import { Link,useSearchParams } from "react-router-dom";
 import PostCard from "../components/PostCard";
 import InputTag from "../components/InputTag";
+import { url } from "../utils";
 
 const Home = () => {
   const [posts, setPosts] = useState<FormData[]>([]);
@@ -13,7 +14,7 @@ const Home = () => {
   const fetchData = async () => {
     try {
       // const res = await fetch(`http://localhost:3000/post?topic=${searchTerm}&username=${searchTerm}`);
-      const res = await fetch(`https://inter-view-tracker.vercel.app/post?topic=${searchTerm}`);
+      const res = await fetch(`${url}/post?topic=${searchTerm}&username=${searchTerm}`);
         const data = await res.json();
         // console.log(data);
         setPosts(data.getAllPost);
@@ -43,7 +44,7 @@ const Home = () => {
         <InputTag
         className="search-bar-input"
          type="search"
-         placeholder="Search for Topics"
+         placeholder="Search Topic or User"
          value={searchTerm}
          onChange={e=>setSearchTerm(e.target.value)}
          />

@@ -2,6 +2,7 @@ import { useState,useEffect } from "react";
 import { FormData } from "./Create";
 import { Link, useParams } from "react-router-dom";
 import PostCard from "../components/PostCard";
+import { url } from "../utils";
 
 const MyPosts = () => {
   const {id} = useParams()
@@ -9,7 +10,7 @@ const MyPosts = () => {
 
   const getUserPosts = async () => {
     const response = await fetch(
-      `https://inter-view-tracker.vercel.app/post/${id}`,{
+      `${url}/post/${id}`,{
         headers : {
           Authorization : "Bearer " + localStorage.getItem("token")
         }

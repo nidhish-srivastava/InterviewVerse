@@ -6,6 +6,7 @@ import FullSinglePost from "../components/FullSinglePost";
 import Button from "../components/Button";
 import { useTrackerContext } from "../context/context";
 import toast, { Toaster } from "react-hot-toast";
+import { url } from "../utils";
 
 const SinglePost = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const SinglePost = () => {
 
   const removeSavedPost = async () => {
     const response = await fetch(
-      `https://inter-view-tracker.vercel.app/post/savedPosts/${loggedInUser?.id}/${id}`,
+      `${url}/post/savedPosts/${loggedInUser?.id}/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -39,7 +40,7 @@ const SinglePost = () => {
       userId: loggedInUser?.id,
     };
     if (loggedInUser?.username.length ?? 0 > 1) {
-      await fetch(`https://inter-view-tracker.vercel.app/post/savedPosts`, {
+      await fetch(`${url}/post/savedPosts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +54,7 @@ const SinglePost = () => {
 
   const checkIfSavedPromise = async (): Promise<any> => {
     const response = await fetch(
-      `https://inter-view-tracker.vercel.app/post/savedPosts/check/${id}/${loggedInUser?.id}`,
+      `${url}/post/savedPosts/check/${id}/${loggedInUser?.id}`,
       {
         method: "GET",
         headers: {

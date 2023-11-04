@@ -4,6 +4,7 @@ import axios from "axios";
 import { useTrackerContext } from "../context/context";
 import InputTag from "../components/InputTag";
 import Button from "../components/Button";
+import { url } from "../utils";
 
 const Register = () => {
   const {setLoggedInUser} = useTrackerContext()
@@ -23,7 +24,7 @@ const Register = () => {
     e.preventDefault();
     if(confirmPassword==inputs.password){
       try {
-        const response = await axios.post("https://inter-view-tracker.vercel.app/auth/signup", inputs);
+        const response = await axios.post(`${url}/auth/signup`, inputs);
       localStorage.setItem("token",response.data.token)
         setLoggedInUser({username : response.data.username})
         alert('Registration Successfull')

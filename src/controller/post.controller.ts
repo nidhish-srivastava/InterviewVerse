@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import { Auth, Post } from "../mongodb/model";
 
-interface ReqQuery {
-  topic?: string; // Assuming 'topic' is a string in req.query
-  username?: string;
-}
+// interface ReqQuery {
+//   topic?: string; // Assuming 'topic' is a string in req.query
+//   username?: string;
+// }
 
 const cleanInput = (input: string) => {
   return new RegExp(
@@ -19,13 +19,24 @@ const cleanInput = (input: string) => {
 };
 
 export const getAll = async (req: Request, res: Response) => {
-  const { topic, username } = req.query as ReqQuery;
-  const queryObject: Record<string, any> = {}; //* wierd ts stuf :))
+  // const { topic, username } = req.query as ReqQuery;
+  // const queryObject: Record<string, any> = {}; //* wierd ts stuf :))
 
-  if (topic) {
-    // queryObject.topic = { $regex: topic, $options: "i" };
-    queryObject.topic = cleanInput(topic);
-  }
+  // if (topic) {
+  //   // queryObject.topic = { $regex: topic, $options: "i" };
+  //   queryObject.topic = cleanInput(topic);
+  // }
+  
+
+  const keyword = req.query
+  ? {
+    $or: [  // If any one of the query is true,we get our result
+      // { username: { $regex: req.query.username, $options: "i" } },
+      // { topic: { $regex: req.query.topic, $options: "i" } },
+      {username : cleanInput(req.query.username as string)},
+      {topic : cleanInput(req.query.topic as string)},
+    ],
+  } : {}
 
   // if(username){
   //   queryObject.username = cleanInput(username)
@@ -33,7 +44,7 @@ export const getAll = async (req: Request, res: Response) => {
 
   try {
     // const getAllPost = await Post.find(queryObject);
-    const getAllPost = await Post.find(queryObject);
+    const getAllPost = await Post.find(keyword)
     res.status(200).json({ msg: "All posts read", getAllPost });
   } catch (error) {
     res.status(500).json({ msg: "Error is coming", error });

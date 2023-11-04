@@ -3,13 +3,14 @@ import { useTrackerContext } from "../context/context";
 import PostCard from "../components/PostCard";
 import { Link } from "react-router-dom";
 import { FormData } from "./Create";
+import { url } from "../utils";
 
 const SavedPosts = () => {
   const { loggedInUser } = useTrackerContext();
   const [savedPosts, setSavedPosts] = useState<FormData[]>([]);
   const fetchSavePosts = async () => {
     const response = await fetch(
-      `https://inter-view-tracker.vercel.app/post/savedPosts/${loggedInUser?.id}`,
+      `${url}/post/savedPosts/${loggedInUser?.id}`,
       {
         method: "GET",
         headers: {

@@ -3,6 +3,7 @@ import { useTrackerContext } from "../context/context";
 import { Link } from "react-router-dom";
 import Button from "./Button";
 import defaultDp from '../img/defauldp.jpg'
+import { url } from "../utils";
 
 const Navbar = () => {
   const { loggedInUser, setLoggedInUser, setIsAuthenticated } =
@@ -10,7 +11,7 @@ const Navbar = () => {
   const [showModal, setShowModal] = useState(false);
 
   const getProfile = async () => {
-    const response = await fetch(`https://inter-view-tracker.vercel.app/auth/me`, {
+    const response = await fetch(`${url}/auth/me`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),

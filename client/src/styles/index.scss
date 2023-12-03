@@ -85,6 +85,7 @@ li {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
     gap: 16px; /* Spacing between navigation items */
 
     .home,.create {
@@ -102,6 +103,17 @@ li {
     }
   }
 
+  .signupbar{
+    display: flex;
+    gap: 2rem;
+    font-size: 1.2rem;
+    margin-right: 2rem;
+    padding: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+
   @media (max-width: 800px) {
     /* Mobile-first responsive adjustments */
     flex-direction: column;
@@ -109,7 +121,7 @@ li {
 
     .nav {
       flex-direction: column;
-      gap: 8px;
+      // gap: 8px;
     }
 
     .logout-btn {

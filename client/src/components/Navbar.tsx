@@ -68,7 +68,9 @@ const Navbar = () => {
               )}
             </>
           ) : (
-            <div style={{ padding: "1rem",fontSize : "1.2rem"}}>
+            <div className="signupbar" 
+            // style={{ padding: "1rem",fontSize : "1.2rem",display:"flex",justifyContent:"center"}}
+            >
               <Link to="/register" style={{fontWeight : 600,marginRight : "1rem"}}>SignUp</Link>
               <Link to="/login" style={{fontWeight : 600}}>Login</Link>
             </div>

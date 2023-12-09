@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Lato&display=swap');
 :root {
   line-height: 1.5;
   font-weight: 400;
@@ -31,6 +32,10 @@ li {
   margin: 0;
 }
 
+img{
+  display: block;
+  width: 100%;
+}
 
 .post-container{
   width: 80%;
@@ -71,10 +76,6 @@ li {
   overflow: hidden;
 }
 
-.dp-wrapper img{
-  width: 100%;
-  display: block;
-}
 
 .header {
   background-color: #007bff; /* Header background color */
@@ -87,7 +88,7 @@ li {
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 16px; /* Spacing between navigation items */
-
+    font-family: 'Lato', sans-serif;
     .home,.interview-track {
       color: inherit; /* Inherit text color from the parent (.header) */
       text-decoration: none;
@@ -314,6 +315,10 @@ li {
   }
 }
 
+
+.full-post-date{
+  margin-left: auto;
+}
 
 // custom btn
 /* Button.scss */
@@ -878,3 +883,58 @@ button {
   width: 80%;
   margin: 4rem auto;
 }
+
+.hero-section{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: 2rem auto;
+}
+
+.left-side-hero{
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: center;
+  p{
+    text-align: center;
+    // font-size: rem;
+    font-family: "Poppins",sans-serif;
+  }
+  h1{
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 2rem;
+  }
+}
+.hero-img-container{
+  width: 80%;
+  padding: 3rem;
+}
+
+@media (min-width : 768px) {
+  .hero-section{
+    flex-direction: row;
+  }
+  .hero-img-container{
+    width: 40%;
+  }
+  .left-side-hero{
+    width: 40%;
+  }
+  .left-side-hero p{
+    text-align: left;
+    font-size: 1.1rem;
+  }
+}
+
+
+.create-interview-hero-btn{
+  background-color: rgb(101, 119, 73);
+  &:hover{
+    background-color: #63686d;
+  }
+}
+

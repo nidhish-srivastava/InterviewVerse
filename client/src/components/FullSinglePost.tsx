@@ -1,4 +1,5 @@
 import { FormData } from "../pages/Create";
+import { dateFormatter } from "../utils";
 
 type FullSinglePost = {
   singlePostObj?: FormData;
@@ -17,6 +18,9 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
           <button>{e.name}</button>
         ))}
       </div>
+      <span className="full-post-date">
+        {dateFormatter(singlePostObj?.createdAt as Date | number | string)}
+      </span>
       {show ? <h4>{singlePostObj?.username}</h4> : null}
     </main>
   );

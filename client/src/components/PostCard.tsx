@@ -1,19 +1,9 @@
 import { FormData } from "../pages/Create";
 import Button from "./Button";
-
+import { dateFormatter } from "../utils";
 type PostCardProps = {
   post: FormData;
   show?: true | false;
-};
-
-const dateFormatter = (date: Date | string | number) => {
-  const currentDate = new Date(date);
-  const formattedDate = currentDate.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
-  return formattedDate;
 };
 
 const PostCard = ({ post, show  }: PostCardProps) => {
@@ -32,7 +22,7 @@ const PostCard = ({ post, show  }: PostCardProps) => {
         ))}
       </div>
       <span className="post-date">
-        {post.updatedAt ? dateFormatter(post.updatedAt) : null}
+        {post.updatedAt ? dateFormatter(post.createdAt as string | number | Date) : null}
       </span>
     </div>
   );

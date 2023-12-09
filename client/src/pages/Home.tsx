@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom"
+import Hero from "../components/Hero"
 function Home() {
   return (
-    <div>
-          <Link className = "create" to="/create">Create Interview Track</Link>
-    </div>
+    <>
+          <Hero/>
+    </>
   )
 }
 

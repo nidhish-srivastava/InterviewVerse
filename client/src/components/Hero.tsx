@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+import {  useNavigate } from "react-router-dom"
 import hero from '../assets/Hero.jpg'
 import Button from "./Button"
 import { useTrackerContext } from "../context/context"

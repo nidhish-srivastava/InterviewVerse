@@ -7,6 +7,9 @@ import Button from "../components/Button";
 import { useTrackerContext } from "../context/context";
 import toast, { Toaster } from "react-hot-toast";
 import { url } from "../utils";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
 
 const SinglePost = () => {
   const navigate = useNavigate();
@@ -14,6 +17,7 @@ const SinglePost = () => {
   const { loggedInUser } = useTrackerContext();
   const [singlePost, setSinglePost] = useState<FormData>();
   const [present, setPresent] = useState(false);
+  const [loading,setLoading] = useState(false)
 
 
   const removeSavedPost = async () => {
@@ -67,14 +71,18 @@ const SinglePost = () => {
 
   useEffect(() => {
     const singlePostHandler = async () => {
-      const fetchSinglePost = await singlePostPromise(id);
-      console.log(fetchSinglePost);
-      setSinglePost(fetchSinglePost);
-      const checkIfSaved = await checkIfSavedPromise();
-      console.log(checkIfSaved);
-      if(checkIfSaved == "true") setPresent(true)
-      else setPresent(false)
-      await Promise.all([fetchSinglePost,checkIfSaved()])
+      setLoading(true)
+      try {
+        const fetchSinglePost = await singlePostPromise(id);
+        setSinglePost(fetchSinglePost);
+        const checkIfSaved = await checkIfSavedPromise();
+        if(checkIfSaved == "true") setPresent(true)
+        else setPresent(false)
+        await Promise.resolve([fetchSinglePost,checkIfSaved()])
+        setLoading(false)
+      } catch (error) {
+        setLoading(false)
+      }
     };
     singlePostHandler()
   }, []);
@@ -90,30 +98,51 @@ const SinglePost = () => {
           padding: "0 1rem",
         }}
       >
+
         <Link to={`/${singlePost?.username}`}>
+          {
+            loading ? <Button
+            className="visit-profile-btn"
+            label={`Loading`}
+          /> : 
           <Button
             className="visit-profile-btn"
             label={`Visit ${singlePost?.username}'s Profile`}
           />
+          }
         </Link>
         <div>
-          {loggedInUser?.username !== singlePost?.username &&
-            (present ? (
-              <Button
+          {
+            (loading && (loggedInUser?.username.length ?? 0 > 1)) ?   <Button
+            className="visit-profile-btn"
+            label={`Loading`}
+          /> : <>
+            {loggedInUser?.username !== singlePost?.username &&
+              (present ? (
+                <Button
                 onClick={removeSavedPost}
                 style={{ padding: ".6rem", margin: "1rem" }}
                 label="Remove from Saved"
-              />
-            ) : (
+                />
+                ) : (
               <Button
                 onClick={savePostHandler}
                 style={{ padding: ".6rem", margin: "1rem" }}
                 label="Save this post"
-              />
-            ))}
+                />
+                ))}
+                </>
+              }
         </div>
       </div>
-      {<FullSinglePost show={false} singlePostObj={singlePost} />}
+      <div style={{width : "80%",margin : "0 auto"}}>
+        {
+          loading ? <div className="skeleton-loading">
+            <Skeleton count={5}/>
+            </div> : 
+      <FullSinglePost show={false} singlePostObj={singlePost} />
+      }
+        </div>
     </Fragment>
   );
 };

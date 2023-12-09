@@ -32,7 +32,7 @@ const Navbar = () => {
       <nav className="nav">
         <div>
           <Link className="home" to="/">Home</Link>
-          <Link className = "create" to="create">Create</Link>
+          <Link className = "interview-track" to="/interview-tracks">Interview Tracks</Link>
         </div>
         <div>
           {loggedInUser?.username?.length ?? 0 > 1 ? (

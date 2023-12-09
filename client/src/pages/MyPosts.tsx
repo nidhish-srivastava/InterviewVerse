@@ -3,41 +3,47 @@ import { FormData } from "./Create";
 import { Link, useParams } from "react-router-dom";
 import PostCard from "../components/PostCard";
 import { url } from "../utils";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const MyPosts = () => {
   const {id} = useParams()
   const [userPosts, setUserPosts] = useState<FormData[]>([]);
+  const [loading,setLoading] = useState(false)
 
-  const getUserPosts = async () => {
-    const response = await fetch(
-      `${url}/post/${id}`,{
-        headers : {
-          Authorization : "Bearer " + localStorage.getItem("token")
-        }
-      }) 
-      const data = await response.json();
-      console.log(data);
-      setUserPosts(data);
-    }
   useEffect(()=>{
+    const getUserPosts = async () => {
+      setLoading(true)
+      try {
+        const response = await fetch(
+          `${url}/post/${id}`,{
+            headers : {
+              Authorization : "Bearer " + localStorage.getItem("token")
+            }
+          }) 
+          const data = await response.json();
+          setUserPosts(data);
+          setLoading(false)
+      } catch (error) {
+        setLoading(false)
+      }
+      }
     getUserPosts()
   },[])
   return (
     <main className="post-container">
-      {userPosts.length == 0 && <h2>No Interview Tracks</h2>}
-      {userPosts.map((e,i)=>(
-        <Link to={`${e._id}`}>
-          <PostCard post={e} key={i} show = {false}/>
-        </Link>
-      ))}
-      {/* 
-      <span className="edit-icon">
-      <i className="fa-regular fa-pen-to-square"></i>
-      </span>
-      <span className="delete-icon">
-      <i className="fa-solid fa-trash"></i>
-      </span>
-      */}
+      {
+          loading ? <div className="skeleton-loading">
+          <Skeleton count={5}/>
+          </div> : <>
+          {userPosts.length == 0 && <h2>No Interview Tracks</h2>}
+          {userPosts.map((e,i)=>(
+            <Link to={`${e._id}`}>
+              <PostCard post={e} key={i} show = {false}/>
+            </Link>
+          ))}
+          </>
+      }
     </main>
   );
 };

@@ -27,15 +27,22 @@ const Navbar = () => {
   useEffect(() => {
     getProfile();
   }, []);
+
+  const logincheck = loggedInUser?.username?.length ?? 0
   return (
     <header className="header">
       <nav className="nav">
-        <div>
+        <div className="navbar-left">
           <Link className="home" to="/">Home</Link>
           <Link className = "interview-track" to="/interview-tracks">Interview&nbsp;Tracks</Link>
+          {
+            logincheck > 1 ? 
+            <Link className="create" to={`/create`}>Create</Link>
+            : null
+          }
         </div>
         <div>
-          {loggedInUser?.username?.length ?? 0 > 1 ? (
+          {logincheck > 1 ? (
             <>
               <div className="dp-wrapper" onClick={() => setShowModal((e) => !e)}>
                 <img src={defaultDp} alt="dp" loading="lazy" />

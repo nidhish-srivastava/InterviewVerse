@@ -89,7 +89,7 @@ img{
     flex-wrap: wrap;
     gap: 16px; /* Spacing between navigation items */
     font-family: 'Lato', sans-serif;
-    .home,.interview-track {
+    .home,.interview-track,.create {
       color: inherit; /* Inherit text color from the parent (.header) */
       text-decoration: none;
       font-weight: bold;
@@ -129,6 +129,13 @@ img{
       margin-top: 12px;
     }
   }
+}
+
+.navbar-left{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 

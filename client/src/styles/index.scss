@@ -260,7 +260,6 @@ li {
   .post-description,
   .post-details,
   .post-author {
-    font-size: 1.5rem;
     margin-bottom: 0.5rem;
     color: #333;
   }
@@ -612,11 +611,41 @@ $font-size-button-desktop: 18px;
   font-size: 1rem;
 }
 
-.edit-div{
-  position: absolute;
-  top: 5rem;
-  right: 1rem;
-}
+// .edit-div{
+//   display: hidden;
+// }
+
+// @media (min-width : 1000px) {
+  .edit-div{
+    position: absolute;
+    top: 4rem;
+    right: 0;
+  }
+  .edit-div .update-btn,.edit-div .delete-btn{
+    margin: .31rem;
+  }
+
+  @media (max-width : 800px) {
+    .edit-div{
+      top: 6rem;
+    }
+    .edit-div .update-btn,.edit-div .delete-btn{
+      margin: .1rem;
+      padding: .61rem;
+    }
+  }
+  @media (max-width : 500px) {
+    .edit-div{
+      display: flex;
+      position: static;
+      justify-content: center;
+      align-items: center;
+      margin-top: 1rem;
+      margin-bottom: -1rem;
+    }
+  }
+
+// }
 
 
 

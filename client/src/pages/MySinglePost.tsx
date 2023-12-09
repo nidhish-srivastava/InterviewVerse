@@ -29,7 +29,6 @@ const MySinglePost = () => {
 
   return (
     <Fragment>
-    {singlePostObj && <FullSinglePost show = {false} singlePostObj = {singlePostObj} />}
     <div className="edit-div">
       <Link to="update">
         <Button label="Update" className="update-btn" />
@@ -37,6 +36,7 @@ const MySinglePost = () => {
       {/* <button onClick={() => setModal(true)}>Delete</button> */}
       <Button className="delete-btn" label="Delete" onClick={() => setModal(true)}/>
     </div>
+    {singlePostObj && <FullSinglePost show = {false} singlePostObj = {singlePostObj} />}
         {/* Delete</Button> */}
       {modal ? <DeleteModal setModal={setModal} /> : null}
     </Fragment>

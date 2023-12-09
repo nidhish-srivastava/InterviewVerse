@@ -8,9 +8,10 @@ import MyPosts from "./pages/MyPosts";
 import MySinglePost from "./pages/MySinglePost";
 import Update from "./pages/Update";
 import SinglePost from "./pages/SinglePost";
-import SingleProfile from "./pages/SingleProfile";
+import UserProfile from "./pages/UserProfile";
 import SavedPosts from "./pages/SavedPosts";
 import MyProfile from "./pages/MyProfile";
+import InterviewTrackExplore from "./pages/InterviewTrackExplore";
 
 const Layout = () => {
   return (
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path : "/interview-tracks",
+        element : <InterviewTrackExplore/>
       },
       {
         path : "/saved-posts/:id",
@@ -59,7 +64,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/:username",
-        element: <SingleProfile />,
+        element: <UserProfile />,
       },
       {
         path: "/create",

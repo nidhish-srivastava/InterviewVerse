@@ -16,6 +16,7 @@
     "react-hook-form": "^7.46.1",
     "react-hook-form-persist": "^3.0.0",
     "react-hot-toast": "^2.4.1",
+    "react-loading-skeleton": "^3.3.1",
     "react-router-dom": "^6.15.0",
     "sass": "^1.67.0"
   },

@@ -6,6 +6,7 @@ import InputTag from '../components/InputTag'
 import Button from '../components/Button'
 import { url } from '../utils'
 
+
 const Login = () => {
   const {setLoggedInUser} = useTrackerContext()
   const [inputs,setInputs] = useState({
@@ -24,7 +25,6 @@ const Login = () => {
       setLoggedInUser({username : response.data.username})
       alert('Logged In Successfully')
       // navigate("/")
-
       window.location.href = "/"
     } catch (error) {
     }

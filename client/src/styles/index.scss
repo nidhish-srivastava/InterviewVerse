@@ -88,7 +88,7 @@ li {
     flex-wrap: wrap;
     gap: 16px; /* Spacing between navigation items */
 
-    .home,.create {
+    .home,.interview-track {
       color: inherit; /* Inherit text color from the parent (.header) */
       text-decoration: none;
       font-weight: bold;
@@ -710,7 +710,7 @@ button {
 .visit-profile-btn{
   padding: .5rem;
   margin-top: 1rem;
-  background-color: lightcoral;
+  background-color: rgb(142, 163, 223);
 }
 
 // .save-post-btn{
@@ -845,3 +845,7 @@ button {
 }
 
 /* Styling for the Close button in the modal */
+.skeleton-loading{
+  width: 80%;
+  margin: 4rem auto;
+}

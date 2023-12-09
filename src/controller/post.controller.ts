@@ -51,15 +51,14 @@ export const getAll = async (req: Request, res: Response) => {
   }
 };
 
-const getSinglePromise = async (username: string | undefined): Promise<any> => {
+const findUserPromise = async (username: string | undefined): Promise<any> => {
   return await Post.find({ username: username });
 };
 
 export const searchUserPosts = async (req: Request, res: Response) => {
   const { username } = req.params;
-  console.log(username);
   try {
-    const response = await getSinglePromise(username);
+    const response = await findUserPromise(username);
     if (response.length == 0) {
       res.status(404).send(`<h3>${username} not found</h3>`);
     }
@@ -70,7 +69,7 @@ export const searchUserPosts = async (req: Request, res: Response) => {
 export const getLoggedInUserPosts = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const response = await getSinglePromise(id);
+    const response = await findUserPromise(id);
     res.status(200).json(response);
   } catch (error) {}
 };

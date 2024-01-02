@@ -99,18 +99,7 @@ const SinglePost = () => {
         }}
       >
 
-        <Link to={`/${singlePost?.username}`}>
-          {
-            loading ? <Button
-            className="visit-profile-btn"
-            label={`Loading`}
-          /> : 
-          <Button
-            className="visit-profile-btn"
-            label={`Visit ${singlePost?.username}'s Profile`}
-          />
-          }
-        </Link>
+       
         <div>
           {
             (loading && (loggedInUser?.username.length ?? 0 > 1)) ?   <Button
@@ -140,7 +129,7 @@ const SinglePost = () => {
           loading ? <div className="skeleton-loading">
             <Skeleton count={5}/>
             </div> : 
-      <FullSinglePost show={false} singlePostObj={singlePost} />
+      <FullSinglePost loading={loading} show={false} singlePostObj={singlePost} />
       }
         </div>
     </Fragment>

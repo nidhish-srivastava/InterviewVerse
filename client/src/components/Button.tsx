@@ -7,6 +7,7 @@ type ButtonProps = {
     className : string
     onClick : MouseEventHandler<HTMLButtonElement>
     style : {[id : string] : string}
+    overrideClassName : boolean
 }
 
 const Button = ({
@@ -15,14 +16,15 @@ const Button = ({
   isDisabled,
   btnType,
   className,
-  style
+  style,
+  overrideClassName = false
 } : Partial<ButtonProps>) => {
-  const buttonClasses = `button ${className || ''}`;
+  const buttonClasses = `button  ${className || ''}`;
 
   return (
     <button
     type={btnType || "button"}
-      className={buttonClasses}
+      className={overrideClassName ? "" : buttonClasses}
       onClick={onClick}
       disabled = {isDisabled}
       style={style}

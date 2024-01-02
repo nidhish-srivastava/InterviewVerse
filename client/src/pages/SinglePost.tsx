@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect, Fragment } from "react";
 import { FormData } from "./Create";
 import { singlePostPromise } from "./MySinglePost";

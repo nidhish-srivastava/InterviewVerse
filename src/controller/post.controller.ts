@@ -6,6 +6,11 @@ import { Auth, Post } from "../mongodb/model";
 //   username?: string;
 // }
 
+
+const findUserPromise = async (username: string | undefined): Promise<any> => {
+  return await Post.find({ username: username });
+};
+
 const cleanInput = (input: string) => {
   return new RegExp(
     input
@@ -51,9 +56,7 @@ export const getAll = async (req: Request, res: Response) => {
   }
 };
 
-const findUserPromise = async (username: string | undefined): Promise<any> => {
-  return await Post.find({ username: username });
-};
+
 
 export const searchUserPosts = async (req: Request, res: Response) => {
   const { username } = req.params;

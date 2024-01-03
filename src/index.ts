@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express'
 import cors from 'cors'
 import postRouter from './routes/post.route'
 import authRouter from './routes/auth.route'
+import readingListRouter from './routes/readinglist.route'
 import { connectmongodb } from "./mongodb/connect";
 const port = process.env.PORT || 3000
 const app = express()
@@ -23,5 +24,6 @@ app.get('/',(req:Request,res:Response)=>{
 })
 app.use('/post',postRouter)
 app.use('/auth',authRouter)
+app.use('/readingList',readingListRouter)
 
 export default app  

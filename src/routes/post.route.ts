@@ -18,4 +18,4 @@ router.delete('/:_id',authenticateJwt,deletePost)
 router.get('/single/:id',getSingle)
 
 
-export default router
+export default router   

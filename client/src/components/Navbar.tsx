@@ -27,10 +27,14 @@ const Navbar = () => {
     getProfile();
   }, []);
 
+  const closeModal = () =>{
+    setShowModal(false)
+  }
+
   return (
     <header className="header">
       <nav className="nav">
-        <div className="navbar-left">
+        <div className="navbar-left" onClick={closeModal}>
           <Link className="home" to="/">Home</Link>
           <Link className = "interview-track" to="/interview-tracks">Interview&nbsp;Tracks</Link>
           {
@@ -49,9 +53,8 @@ const Navbar = () => {
                 <div
                   className="modal"
                   style={showModal ? { display: "block" } : { display: "none" }}>
-                  <div className="modal-content" onClick={()=>setShowModal(false)}>
+                  <div className="modal-content" onClick={closeModal}>
                   <Link to={`/${loggedInUser?.username}/my-profile`}>
-                      {/* {loggedInUser?.username} */}
                       My Profile
                     </Link>
                     <Link  to={`/saved-posts/${loggedInUser?.username}`}>
@@ -74,7 +77,6 @@ const Navbar = () => {
             </>
           ) : (
             <div className="signupbar" 
-            // style={{ padding: "1rem",fontSize : "1.2rem",display:"flex",justifyContent:"center"}}
             >
               <Link to="/register" style={{fontWeight : 600,marginRight : "1rem"}}>SignUp</Link>
               <Link to="/login" style={{fontWeight : 600}}>Login</Link>

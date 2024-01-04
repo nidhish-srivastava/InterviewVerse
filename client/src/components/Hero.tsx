@@ -5,10 +5,10 @@ import { useTrackerContext } from "../context/context"
 import toast, { Toaster } from "react-hot-toast"
 function Hero() {
 
-  const {loggedInUser} = useTrackerContext()
+  const {isAuthenticated} = useTrackerContext()
   const navigate = useNavigate()
   const navigateHandler = () =>{
-      if(loggedInUser?.username.length ??0 > 1){
+      if(isAuthenticated){
         navigate("/create")
       }
       toast.error("First Login")

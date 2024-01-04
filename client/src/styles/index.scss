@@ -882,11 +882,42 @@ button {
 
 
 .save-icon,.saved-icon{
-  position: absolute;
+  // position: absolute;
   font-size: 1.5rem;
   right: 2rem;
+  margin-left: 2rem;
 }
 
 .saved-icon,.save-icon{
   width: 25px;
+}
+
+.save-icon-container{
+  position: relative;
+}
+
+.modal-save-btn{
+  position: absolute;
+  width: 250px;
+  padding: 1.4rem;
+  background-color: white;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+  top: 30px;
+  left: -80px;
+}
+
+.list-bar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  input{
+   height: 1rem;
+   width: 1rem;
+
+  }
+  span{
+    margin-left: auto;
+    font-size: 12px;
+  }
 }

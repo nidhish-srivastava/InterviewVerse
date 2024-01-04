@@ -336,6 +336,7 @@ img{
 .dp-wrapper-profile-full-post{
   display: flex;
   gap: .5rem;
+  position: relative;
 }
 
 .button {
@@ -879,3 +880,13 @@ button {
   }
 }
 
+
+.save-icon,.saved-icon{
+  position: absolute;
+  font-size: 1.5rem;
+  right: 2rem;
+}
+
+.saved-icon,.save-icon{
+  width: 25px;
+}

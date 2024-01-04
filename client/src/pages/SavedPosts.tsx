@@ -33,8 +33,8 @@ const SavedPosts = () => {
     <h2 className="center">Saved Posts</h2>
       <main className="post-container">
         {savedPosts.map((e, i) => (
-          <Link to={`/${e?.username}/${e._id}`}>
-            <PostCard post={e} key={i} show={true} />
+          <Link to={`/${e?.username}/${e._id}`} key={i} >
+            <PostCard post={e} show={true} />
           </Link>
         ))}
       </main>

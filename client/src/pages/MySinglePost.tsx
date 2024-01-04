@@ -4,14 +4,7 @@ import { useTrackerContext } from "../context/context";
 import FullSinglePost from "../components/FullSinglePost";
 import Button from "../components/Button";
 import { FormData } from "./Create";
-import { url } from "../utils";
-
-export const singlePostPromise = async (
-  id: string | undefined
-): Promise<FormData | undefined> => {
-  const response = await fetch(`${url}/post/single/${id}`);
-    return await response.json();
-};
+import { fetchSinglePostPromise, url } from "../utils";
 
 const MySinglePost = () => {
   const { id } = useParams();
@@ -20,8 +13,8 @@ const MySinglePost = () => {
 
   useEffect(() => {
   const fetchSinglePost = async () => {
-    const data = await singlePostPromise(id);
-    setSinglePostObj(data);
+    const data = await fetchSinglePostPromise(id);
+    setSinglePostObj(data as any);
     sessionStorage.setItem("update-form",JSON.stringify(data))
   };
     fetchSinglePost();

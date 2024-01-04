@@ -1,22 +1,87 @@
+import { useTrackerContext } from "../context/context";
 import { FormData } from "../pages/Create";
-import { dateFormatter, defaultDp, timeToReadPost } from "../utils";
-import { Link } from "react-router-dom";
+import { dateFormatter, defaultDp, timeToReadPost, url } from "../utils";
+import { Link, useParams } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import { useEffect, useState } from "react";
+import savedIcon from '../assets/saved-icon.png'
+import saveIcon from '../assets/save-icon.png'
 
 type FullSinglePost = {
   singlePostObj?: FormData;
   show?: boolean;
-  loading?:boolean
 };
 
-const FullSinglePost = ({ singlePostObj, show,loading }: FullSinglePost) => {
-  // const countTime = useMemo(() =>{
-  //   const timeToReadOneWord = 0.005
-  //   let time =  Math.round((singlePostObj?.details?.trim().split(" ").length as number)*timeToReadOneWord)
-  //   if(time==0) return 1
-  //   return time
-  // },[])
+const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
+    const { id } = useParams();
+    const {loggedInUser} = useTrackerContext()
+ const {isAuthenticated} = useTrackerContext()
+ const [present, setPresent] = useState(false);
+
+
+  const removeSavedPost = async () => {
+    const response = await fetch(
+      `${url}/post/savedPosts/${loggedInUser?.id}/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+    if (response.status == 200) {
+      toast.success("Removed Successfully");
+      // setTimeout(() => {
+      //   navigate(`/saved-posts/${loggedInUser?.username}`);
+      // }, 1000);
+    }
+  };
+
+  const savePostHandler = async () => {
+    const formData = {
+      postId: id,
+      userId: loggedInUser?.id,
+    };
+    if (isAuthenticated) {
+      await fetch(`${url}/post/savedPosts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        body: JSON.stringify(formData),
+      });
+      toast.success("Saved Successfully");
+    } else toast.error("Please Login to save");
+  };
+
+  const checkIfSavedPromise = async (): Promise<any> => {
+    const response = await fetch(
+      `${url}/post/savedPosts/check/${id}/${loggedInUser?.id}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+    return response.text();
+  };
+
+  useEffect(()=>{
+    const checkHandler = async()=>{
+      const check = await checkIfSavedPromise();
+      if (check == "true") setPresent(true);
+      else setPresent(false);
+    }
+    if(isAuthenticated){
+      checkHandler()
+    }
+  },[])
 
   return (
+    <>
+    <Toaster/>
     <main className="my-single-post">
       <h1>
         {singlePostObj?.topic}
@@ -29,29 +94,31 @@ const FullSinglePost = ({ singlePostObj, show,loading }: FullSinglePost) => {
           <img src={defaultDp} alt="" loading="lazy"/>
         </div>
         <Link to={`/${singlePostObj?.username}`}>
-          {
-            loading ? <span>...</span>: 
           <span
           >
             {`${singlePostObj?.username}`}
             </span>
-        }
         </Link>
         &nbsp; 
         &nbsp; 
         <div style={{fontSize : "15px"}}>
-        {/* <span> */}
         {dateFormatter(singlePostObj?.createdAt as Date | number | string)}
-        {/* </span> */}
-        {/* <span> */}
         &nbsp; 
         &nbsp; 
       {timeToReadPost(singlePostObj?.details)} min read
-        {/* </span> */}
+      {
+        present ?  
+        <div className="saved-icon" onClick={removeSavedPost}>
+          <img src={savedIcon} loading="lazy" alt="" />
+        </div>
+          : 
+        <div className="save-icon" onClick={savePostHandler}>
+          <img src={saveIcon} alt="" />
+        </div>
+      }
+
         </div>
         </div>
-        {/* <div> */}
-        {/* </div> */}
       </div>
       <span>
 <hr />
@@ -60,11 +127,12 @@ const FullSinglePost = ({ singlePostObj, show,loading }: FullSinglePost) => {
       <p>{singlePostObj?.details}</p>
       <div style={{textAlign : "center"}}>
         {singlePostObj?.tags?.map((e) => (
-          <button>{e.name}</button>
+          <button key={e.id}>{e.name}</button>
         ))}
       </div>
       {show ? <h4>{singlePostObj?.username}</h4> : null}
     </main>
+    </>
   );
 };
 

@@ -6,7 +6,7 @@ import defaultDp from '../img/defauldp.jpg'
 import { url } from "../utils";
 
 const Navbar = () => {
-  const { loggedInUser, setLoggedInUser, setIsAuthenticated } =
+  const { loggedInUser, setLoggedInUser, setIsAuthenticated,isAuthenticated } =
     useTrackerContext();
   const [showModal, setShowModal] = useState(false);
 
@@ -17,7 +17,6 @@ const Navbar = () => {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     });
-    // console.log(response.status);
     if (response.status != 403) {
       const data = await response.json();
       setLoggedInUser({ username: data.username, id: data._id });
@@ -28,7 +27,6 @@ const Navbar = () => {
     getProfile();
   }, []);
 
-  const logincheck = loggedInUser?.username?.length ?? 0
   return (
     <header className="header">
       <nav className="nav">
@@ -36,13 +34,13 @@ const Navbar = () => {
           <Link className="home" to="/">Home</Link>
           <Link className = "interview-track" to="/interview-tracks">Interview&nbsp;Tracks</Link>
           {
-            logincheck > 1 ? 
+            isAuthenticated ? 
             <Link className="create" to={`/create`}>Create</Link>
             : null
           }
         </div>
         <div>
-          {logincheck > 1 ? (
+          {isAuthenticated ? (
             <>
               <div className="dp-wrapper" onClick={() => setShowModal((e) => !e)}>
                 <img src={defaultDp} alt="dp" loading="lazy" />
@@ -57,7 +55,7 @@ const Navbar = () => {
                       My Profile
                     </Link>
                     <Link  to={`/saved-posts/${loggedInUser?.username}`}>
-                      Saved Posts
+                      Library
                     </Link>
                     <Link to={`/my-posts/${loggedInUser?.username}`}>
                       My Posts

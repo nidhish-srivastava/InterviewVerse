@@ -37,8 +37,8 @@ const MyPosts = () => {
           <Skeleton count={5}/>
           </div> : <>
           {userPosts.length == 0 && <h2>No Interview Tracks</h2>}
-          {userPosts.map((e,i)=>(
-            <Link to={`${e._id}`}  key={e._id}>
+          {userPosts.map((e)=>(
+            <Link to={`${e?._id}`}  key={e?._id}>
               <PostCard post={e} show = {false}/>
             </Link>
           ))}

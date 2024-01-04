@@ -6,27 +6,26 @@ import { FormData } from "./Create";
 import { url } from "../utils";
 
 const SavedPosts = () => {
-  const { loggedInUser } = useTrackerContext();
+  const { loggedInUser ,isAuthenticated} = useTrackerContext();
   const [savedPosts, setSavedPosts] = useState<FormData[]>([]);
-  const fetchSavePosts = async () => {
-    const response = await fetch(
-      `${url}/post/savedPosts/${loggedInUser?.id}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }
-    );
-    const data = await response.json();
-    console.log(data);
-    
-    setSavedPosts(data);
-  };
-
+  
   useEffect(() => {
-    fetchSavePosts();
-  }, []);
+    const fetchSavePosts = async (userId : string | undefined) => {
+      const response = await fetch(
+        `${url}/post/savedPosts/${userId}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
+      const data = await response.json();
+      setSavedPosts(data);
+    };
+      fetchSavePosts(loggedInUser?.id);
+  }, [isAuthenticated]);
+
   return (
     <>
     <h3 style={{padding : "2rem"}}>{savedPosts.length==0 && "No posts saved !!!"}</h3>

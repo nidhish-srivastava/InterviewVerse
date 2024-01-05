@@ -326,18 +326,9 @@ img{
 }
 
 
-.full-post-date{
-  // margin-left: auto;
-}
 
-// custom btn
-/* Button.scss */
 
-.dp-wrapper-profile-full-post{
-  display: flex;
-  gap: .5rem;
-  position: relative;
-}
+
 
 .button {
   display: inline-block;
@@ -530,18 +521,15 @@ $font-size-button-desktop: 18px;
   }
 }
 
-.full-post-detail-bar{
-}
 
 .dp-wrapper-fullpost{
-  width: 4%;
-  height: 4%;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   overflow: hidden;
-  @media (max-width : 600px) {
-    width: 10%;
-  height: 10%;
-    
+  @media (max-width : 450px) {
+    width: 30%;
+    height: 30%;  
   }
 }
 
@@ -896,6 +884,13 @@ button {
   position: relative;
 }
 
+.dp-wrapper-profile-full-post{
+  display: flex;
+  gap: .5rem;
+  position: relative;
+}
+
+
 .modal-save-btn{
   position: absolute;
   width: 250px;
@@ -904,6 +899,13 @@ button {
   box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
   top: 30px;
   left: -80px;
+  @media (max-width : 630px) {
+    // top: -125px;
+    left: -250px;
+  }
+  @media (max-width : 420px) {
+    left: -200px;
+  }
 }
 
 .list-bar{

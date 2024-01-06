@@ -69,8 +69,8 @@ const InterviewTrackExplore = () => {
         </div>
       <main className="post-container">
         {posts.map((e, i) => (
-          <Link to={`/${e?.username}/${e._id}`}>
-         <PostCard show = {true} post={e} key={i} />
+          <Link to={`/${e?.username}/${e._id}`} key={i}>
+         <PostCard show = {true} post={e} />
           </Link>
         ))}
       </main>

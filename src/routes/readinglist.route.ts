@@ -9,6 +9,6 @@ router.delete('/',deleteReadingList)
 
 router.get('/fetchPost',fetchPostsFromReadingList)
 router.post('/insertPost',insertInReadingList)
-router.delete('/removePost',removePostFromReadingList)
+router.put('/removePost',removePostFromReadingList)
 
 export default router

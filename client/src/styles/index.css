@@ -68,6 +68,7 @@ img {
   height: 50px;
   border-radius: 50%;
   overflow: hidden;
+  /* text-align: center; */
 }
 
 .header {

@@ -12,6 +12,14 @@ type FullSinglePost = {
   show?: boolean;
 };
 
+type existingLists = {
+  visibilty: "public" | "private";
+  _id: string;
+  name: string;
+  description: string;
+  posts: string[];
+};
+
 const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
   const { id } = useParams();
   const { loggedInUser } = useTrackerContext();
@@ -20,7 +28,10 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
   const [showModal, setShowModal] = useState(false);
   const modalRef = useRef<HTMLDivElement | null>(null);
   const [check, setCheck] = useState(false);
-  // const [existingLists,setExistingLists] = useState([])
+  const [existingLists, setExistingLists] = useState<existingLists[]>([]);
+
+  const postId = singlePostObj?._id;
+    const userId = loggedInUser?.id;
 
   const removeSavedPost = async () => {
     const response = await fetch(
@@ -90,8 +101,8 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
     // Logic for saving the post(post should be saved when user opens the modal)
     if (!showModal) {
       setShowModal(true);
+      fetchReadingLists();
       if (!present) {
-        // fetchReadingLists()
         savePostHandler();
       }
     }
@@ -112,11 +123,14 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
     }
   };
 
-  // const fetchReadingLists = async()=>{
-  //   const response = await fetch(`${url}/readingList/fetchAll/${loggedInUser?.id}`)
-  //   const data = await response.json()
-  //   setExistingLists(data)
-  // }
+  const fetchReadingLists = async () => {
+    const response = await fetch(
+      `${url}/readingList/fetchAll/${loggedInUser?.id}`
+    );
+    const data = await response.json();
+    console.log(data);
+    setExistingLists(data);
+  };
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -138,6 +152,57 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
       document.body.removeEventListener("click", handleOutsideClick);
     };
   }, []);
+
+  const addToThisList = async (
+    listId: string | undefined,
+    listName: string | undefined
+  ) => {
+  
+    try {
+      const response = await fetch(`${url}/readingList/insertPost`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ listId, postId, userId }),
+      });
+      if (response.status == 201) {
+        toast.success(`Interview Track added to ${listName}`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const removeList = async(listId: string | undefined,
+    listName: string | undefined)=>{
+      try {
+        const response = await fetch(`${url}/readingList/removePost`,{
+          method : "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ listId, postId, userId }),
+        })
+        if(response.status==200){
+        toast.success(`Interview Track removed from ${listName}`);
+        }
+      } catch (error) {
+        
+      }
+  }
+
+  const handleNewListOnChange = (e: React.ChangeEvent<HTMLInputElement>, listId: string | undefined,
+    listName: string | undefined) => {
+    if(e.target.checked){
+      addToThisList(listId, listName);
+      toggleModal()
+    }
+    else{
+      removeList(listId,listName)
+      toggleModal()
+    }
+  };
 
   return (
     <>
@@ -176,19 +241,28 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
                       <i className="fa-solid fa-lock"></i>
                     </span>
                   </div>
-                  {/* {
-                  existingLists.map((e:any)=>(
-                <div className="list-bar">
-                  <input type="checkbox"/>
-                <h4>{e?.name}</h4>
-                <span>
-                  {e?.visibilty!="public" &&
-                <i className="fa-solid fa-lock"></i>
-              }
-              </span>
-                </div>
-                  ))
-                } */}
+                  {existingLists.map((e) => (
+                    <div
+                      className="list-bar"
+                      style={{ cursor: "pointer" }}
+                      key={e?._id}
+                    >
+                      {/* <div className="list-bar" style={{cursor : "pointer"}} key={e?._id} onClick={()=>clickOnOtherListHandler(e?._id,e?.name)}> */}
+                      <input
+                        id=""
+                        name={e?.name}
+                        type="checkbox"
+                        onChange={(inp)=>handleNewListOnChange(inp,e?._id,e?.name)}
+                        checked={e.posts.includes(singlePostObj?._id as string)}
+                      />
+                      <label htmlFor={e?.name}>{e?.name}</label>
+                      <span>
+                        {e?.visibilty != "public" && (
+                          <i className="fa-solid fa-lock"></i>
+                        )}
+                      </span>
+                    </div>
+                  ))}
                   <div
                     style={{ marginTop: "1.3rem", marginBottom: ".7rem" }}
                   ></div>

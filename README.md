@@ -14,13 +14,13 @@
 
 * Login,SignUp,Logout using Jwt token,localstorage and authentication middleware using Bearer header
 
-* Well Defined user and admin role
-
 * Search a interview track based on Topic
 
 * Perform CRUD operations on your Interview Track
 
 * Save other's interview experience
+
+* We can create different types of reading lists based on our choice
 
 * Visit a user's profile while reading his post and explore all of his interview tracks
 

@@ -282,8 +282,6 @@ img{
     color: #666;
   }
 
-  .tags-time-bar{
-  }
 
   .post-tags {
     display: flex;
@@ -922,4 +920,28 @@ button {
     margin-left: auto;
     font-size: 12px;
   }
+}
+
+.library-container{
+  width: 80%;
+  margin: 2rem auto 0;
+}
+
+.my-lists-bar{
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.library-heading{
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.reading-list-container{
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
 }

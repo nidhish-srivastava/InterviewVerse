@@ -9,9 +9,10 @@ import MySinglePost from "./pages/MySinglePost";
 import Update from "./pages/Update";
 import SinglePost from "./pages/SinglePost";
 import UserProfile from "./pages/UserProfile";
-import SavedPosts from "./pages/SavedPosts";
+import Lists from "./pages/Lists";
 import MyProfile from "./pages/MyProfile";
 import InterviewTrackExplore from "./pages/InterviewTrackExplore";
+import ListsPosts from "./pages/ReadingListPosts";
 
 const Layout = () => {
   return (
@@ -39,8 +40,12 @@ const router = createBrowserRouter([
         element : <InterviewTrackExplore/>
       },
       {
-        path : "/saved-posts/:id",
-        element : <SavedPosts/>
+        path : "/lists",
+        element : <Lists/>
+      },
+      {
+        path : "/lists/:id",
+        element : <ListsPosts/>
       },
       {
         path: "/my-posts/:id",

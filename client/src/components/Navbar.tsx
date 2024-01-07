@@ -57,7 +57,7 @@ const Navbar = () => {
                   <Link to={`/${loggedInUser?.username}/my-profile`}>
                       My Profile
                     </Link>
-                    <Link  to={`/saved-posts/${loggedInUser?.username}`}>
+                    <Link  to={`/lists`}>
                       Library
                     </Link>
                     <Link to={`/my-posts/${loggedInUser?.username}`}>

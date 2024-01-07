@@ -12,7 +12,7 @@ type FullSinglePost = {
   show?: boolean;
 };
 
-type existingLists = {
+export type customReadingLists = {
   visibilty: "public" | "private";
   _id: string;
   name: string;
@@ -28,7 +28,7 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
   const [showModal, setShowModal] = useState(false);
   const modalRef = useRef<HTMLDivElement | null>(null);
   const [check, setCheck] = useState(false);
-  const [existingLists, setExistingLists] = useState<existingLists[]>([]);
+  const [customReadingLists, setCustomReadingLists] = useState<customReadingLists[]>([]);
 
   const postId = singlePostObj?._id;
     const userId = loggedInUser?.id;
@@ -129,7 +129,7 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
     );
     const data = await response.json();
     console.log(data);
-    setExistingLists(data);
+    setCustomReadingLists(data);
   };
 
   useEffect(() => {
@@ -241,7 +241,7 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
                       <i className="fa-solid fa-lock"></i>
                     </span>
                   </div>
-                  {existingLists.map((e) => (
+                  {customReadingLists.map((e) => (
                     <div
                       className="list-bar"
                       style={{ cursor: "pointer" }}

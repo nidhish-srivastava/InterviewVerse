@@ -27,8 +27,3 @@
 * React toast notifications for better user experience
 
 * Creating a Post Form managment done using react-hook-form with form persistence while updating after reload(using session storage)
-
-* Followed React best practices by creating Resuable components with Proper use of hooks and proper folder sturcture
-
-* Followed Express best practices with proper error handling and route protection and folder structure and reusability principles
-

@@ -945,3 +945,11 @@ button {
   flex-direction: column;
   gap: 4rem;
 }
+
+.list-heading-bar{
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}

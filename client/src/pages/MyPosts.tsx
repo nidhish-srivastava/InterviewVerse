@@ -5,6 +5,7 @@ import PostCard from "../components/PostCard";
 import { url } from "../utils";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import PostsContainer from "../components/PostsContainer";
 
 const MyPosts = () => {
   const {id} = useParams()
@@ -31,9 +32,9 @@ const MyPosts = () => {
     getUserPosts()
   },[])
   return (
-    <main className="post-container">
+      <PostsContainer>
       {
-          loading ? <div className="skeleton-loading">
+        loading ? <div className="skeleton-loading">
           <Skeleton count={5}/>
           </div> : <>
           {userPosts.length == 0 && <h2>No Interview Tracks</h2>}
@@ -44,7 +45,7 @@ const MyPosts = () => {
           ))}
           </>
       }
-    </main>
+          </PostsContainer>
   );
 };
 

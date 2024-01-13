@@ -12,7 +12,8 @@ import UserProfile from "./pages/UserProfile";
 import Lists from "./pages/Lists";
 import MyProfile from "./pages/MyProfile";
 import InterviewTrackExplore from "./pages/InterviewTrackExplore";
-import ListsPosts from "./pages/ReadingListPosts";
+import DefaultReadingList from "./pages/DefaultReadingList";
+import CustomListsPosts from "./pages/CustomListPosts";
 
 const Layout = () => {
   return (
@@ -44,8 +45,12 @@ const router = createBrowserRouter([
         element : <Lists/>
       },
       {
-        path : "/lists/:id",
-        element : <ListsPosts/>
+        path : "/lists/custom/:id",
+        element : <CustomListsPosts/>
+      },
+      {
+        path : "/lists/default",
+        element : <DefaultReadingList/>
       },
       {
         path: "/my-posts/:id",

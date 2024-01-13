@@ -5,6 +5,7 @@ import PostCard from "../components/PostCard"
 import { url } from "../utils"
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import PostsContainer from "../components/PostsContainer"
 
 const SingleProfile = () => {
   const  {username} = useParams()
@@ -49,13 +50,13 @@ const SingleProfile = () => {
       <h3 className="center">
       List of all his interview experiences
       </h3>
-      <main className="post-container">
+        <PostsContainer>
         {userPosts.map((e,i)=>(
           <Link to={`${e._id}`}>
           <PostCard post={e} key={i} show={false} />
           </Link>
         ))}
-      </main>
+        </PostsContainer>
       </Fragment>
       }
     </>

@@ -17,7 +17,7 @@ export type customReadingLists = {
   _id: string;
   name: string;
   description: string;
-  posts: string[];
+  posts?: string[] | FormData[]
 };
 
 const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
@@ -253,7 +253,7 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
                         name={e?.name}
                         type="checkbox"
                         onChange={(inp)=>handleNewListOnChange(inp,e?._id,e?.name)}
-                        checked={e.posts.includes(singlePostObj?._id as string)}
+                        checked={e?.posts?.includes(singlePostObj?._id as string)}
                       />
                       <label htmlFor={e?.name}>{e?.name}</label>
                       <span>

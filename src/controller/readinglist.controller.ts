@@ -89,8 +89,18 @@ const insertInReadingList = async (req: Request, res: Response) => {
   res.status(201).json({ message: "Post added to reading list successfully" });
 };
 
+const fetchPostsFromDefaultList = async(req:Request,res:Response)=>{
+  const {userId} = req.params
+  const defaultList = await Auth.findOne({_id : userId}).populate({
+    path : 'savedPosts',
+    model : 'Post',
+    select : 'desc username details tags topic'
+  })
+  res.json(defaultList?.savedPosts)
+}
+
 const fetchPostsFromReadingList = async(req:Request,res:Response)=>{
-    const {userId,listId} = req.body
+    const {userId,listId} = req.params
     
     const user = await Auth.findOne({ _id: userId, 'readingLists._id': listId })
     .populate({
@@ -126,5 +136,6 @@ export {
   updateNameOfReadingList,
   deleteReadingList,
   insertInReadingList,
-  fetchPostsFromReadingList
+  fetchPostsFromReadingList,
+  fetchPostsFromDefaultList
 };

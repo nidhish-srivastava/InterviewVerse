@@ -6,6 +6,7 @@ import InputTag from "../components/InputTag";
 import { url } from "../utils";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import PostsContainer from "../components/PostsContainer";
 
 const InterviewTrackExplore = () => {
   const [posts, setPosts] = useState<FormData[]>([]);
@@ -67,13 +68,13 @@ const InterviewTrackExplore = () => {
             </div> : null
         }
         </div>
-      <main className="post-container">
+        <PostsContainer>
         {posts.map((e, i) => (
           <Link to={`/${e?.username}/${e._id}`} key={i}>
          <PostCard show = {true} post={e} />
           </Link>
         ))}
-      </main>
+        </PostsContainer>
     </Fragment>
   );
 };

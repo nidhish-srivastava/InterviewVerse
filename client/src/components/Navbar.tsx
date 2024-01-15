@@ -45,7 +45,7 @@ const Navbar = () => {
         </div>
         <div>
           {isAuthenticated ? (
-            <>
+            <div className="dp-wrapper-navbar">
               <div className="dp-wrapper" onClick={() => setShowModal((e) => !e)}>
                 <img src={defaultDp} alt="dp" loading="lazy" />
               </div>
@@ -73,7 +73,7 @@ const Navbar = () => {
                   </div>
                 </div>
               )}
-            </>
+            </div>
           ) : (
             <div className="signupbar" 
             >

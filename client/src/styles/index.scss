@@ -71,13 +71,6 @@ img{
 
 /* Header.scss */
 
-.dp-wrapper{
-  width: 50px;
-  cursor: pointer;
-  height: 50px;
-  border-radius: 50%;
-  overflow: hidden;
-}
 
 
 .header {
@@ -199,7 +192,9 @@ img{
 }
 
 
-
+.dp-wrapper-navbar{
+  position: relative;
+}
 
 // InputTag.scss
 .input-container {
@@ -768,6 +763,15 @@ button {
   }
 }
 
+.dp-wrapper{
+  width: 50px;
+  cursor: pointer;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+ 
 /* Styles for the modal */
 .modal {
   position: absolute;
@@ -775,6 +779,7 @@ button {
   border-radius: 5px;
   z-index: 999;
   color: black;
+  width: 400%;
 }
 
 

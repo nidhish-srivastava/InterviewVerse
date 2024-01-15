@@ -92,7 +92,7 @@ const Update = () => {
           </span>
         ))}
       </div>
-      <Button btnType="submit" label="Update"/>
+      <Button btnType="submit">Update</Button>
     </form>
   );
 };

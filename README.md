@@ -8,6 +8,7 @@
   - [Sass](https://sass-lang.com/) - Styling
   - [Typescipt](https://www.typescriptlang.org/)- Language
   - [MongoDB](https://www.mongodb.com/) - Database
+  - [Vercel](https://vercel.com/) - Deployment
 
 
 ### Features

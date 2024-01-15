@@ -24,10 +24,10 @@ const MySinglePost = () => {
     <Fragment>
     <div className="edit-div">
       <Link to="update">
-        <Button label="Update" className="update-btn" />
+        <Button className="update-btn">Update</Button>
       </Link>
       {/* <button onClick={() => setModal(true)}>Delete</button> */}
-      <Button className="delete-btn" label="Delete" onClick={() => setModal(true)}/>
+      <Button className="delete-btn" onClick={() => setModal(true)}>Delete</Button>
     </div>
     {singlePostObj && <FullSinglePost show = {false} singlePostObj = {singlePostObj} />}
         {/* Delete</Button> */}
@@ -63,8 +63,8 @@ function DeleteModal({ setModal }: DeleteModalType) {
         This is a desctructive action,R u sure u wanna delete your interview
         track
       </h2>
-      <Button label="Cancel" onClick={() => setModal(false)}/>
-      <Button label="Delete" onClick={deleteHandler}/>
+      <Button  onClick={() => setModal(false)}>Cancel</Button>
+      <Button  onClick={deleteHandler}>Delete</Button>
       </div>
     </div>
   );

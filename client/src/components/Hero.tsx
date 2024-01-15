@@ -24,7 +24,7 @@ function Hero() {
             {/* <button className="create-interview-hero-btn"> */}
           {/* <Link className = "create" to={`${loggedInUser?.username.length ??0 > 1 ? "/create" : "/login"}`}> */}
           <span>
-            <Button onClick={navigateHandler} style={{width : "fit-content"}} label="Create Interview Track" className="create-interview-hero-btn"/>
+            <Button onClick={navigateHandler} style={{width : "fit-content"}} className="create-interview-hero-btn">Create Interview Track</Button>
           </span>
             {/* </Link> */}
             {/* </button> */}

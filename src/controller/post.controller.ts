@@ -134,8 +134,6 @@ export const checkIfSaved = async(req:Request,res:Response)=>{
 export const create = async (req: Request, res: Response) => {
   const { desc, tags, details, topic, username } = req.body;
 
-  // console.log(desc,tags,details,topic);
-  // console.log(tags);
   const newPost = new Post({
     desc: desc,
     tags: tags,

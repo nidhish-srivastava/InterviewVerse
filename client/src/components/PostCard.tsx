@@ -19,7 +19,7 @@ const PostCard = ({ post, show  }: PostCardProps) => {
       <div className="tags-time-bar">
       <div className="post-tags">
         {post.tags?.map((tag, i) => (
-          <Button label={tag.name} className="post-tag" key={i} />
+          <Button className="post-tag" key={i}>{tag.name}</Button>
           ))}
         &nbsp; 
         &nbsp; 

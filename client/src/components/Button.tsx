@@ -1,23 +1,23 @@
 import { MouseEventHandler } from "react";
 
 type ButtonProps = {
-    label : string
     isDisabled : boolean
     btnType : "button" | "submit"  //* if we give string,we get error
     className : string
     onClick : MouseEventHandler<HTMLButtonElement>
     style : {[id : string] : string}
     overrideClassName : boolean
+    children : React.ReactNode
 }
 
 const Button = ({
-  label,
   onClick,
   isDisabled,
   btnType,
   className,
   style,
-  overrideClassName = false
+  overrideClassName = false,
+  children
 } : Partial<ButtonProps>) => {
   const buttonClasses = `button  ${className || ''}`;
 
@@ -29,7 +29,7 @@ const Button = ({
       disabled = {isDisabled}
       style={style}
     >
-        {label}
+      {children}
     </button>
   );
 };

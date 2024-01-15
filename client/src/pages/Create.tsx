@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useTrackerContext } from "../context/context";
 import Button from "../components/Button";
 import { url } from "../utils";
+import toast from "react-hot-toast";
 
 export type tagType = {
   name: string;
@@ -40,13 +41,11 @@ const Create = () => {
         name: tag,
         id: nanoid(),
       };
-      // console.log(tagObj);
       setTags((e) => [...e, tagObj]);
       setTag("");
     }
   };
 
-  // console.log("render");
 
   const deleteTag = (id: string) => {
     const deleteTag = tags.filter((e) => e.id !== id);
@@ -71,16 +70,14 @@ const Create = () => {
         body: JSON.stringify(formData),
       });
 
-      console.log(response);
-      
+      if (response.status !== 201) {
+        toast("Error")
+      }
 
       if(response.status==201){
         sessionStorage.clear()  //* this feature added cuz if we create a new form,then old data is already present
+        toast.success("Interview Track created successfully")
         navigate(`/my-posts/${loggedInUser?.username}`)
-      }
-      if (response.status !== 201) {
-        alert("First login then continue writing");
-        navigate("/login");
       }
     } catch (error) {}
   };
@@ -89,18 +86,20 @@ const Create = () => {
       <label htmlFor="topic">Enter Topic</label>
       <input
         id="topic"
+        autoFocus={true}
         type="text"
         {...register("topic")}
         placeholder="Enter topic"
+        required
       />
       <label htmlFor="desc">Desc</label>
-      <input {...register("desc")} id="desc" type="text" placeholder="Enter description"></input>
+      <input required {...register("desc")} id="desc" type="text" placeholder="Enter description"></input>
       <label htmlFor="tags">Enter Tags</label>
       <input
         type="text"
         value={tag}
         onChange={(e) => setTag(e.target.value)}
-        placeholder="Enter tags"
+        placeholder="Type topic then press Enter"
         id="tags"
         onKeyDown={enterKeyHandler}
       />
@@ -121,10 +120,11 @@ const Create = () => {
         id="details"
         cols={30}
         rows={10}
+        required
         {...register("details")}
         placeholder="Enter in detail"
       />
-      <Button btnType="submit" label="Create"/>
+      <Button btnType="submit">Create</Button>
     </form>
   );
 };

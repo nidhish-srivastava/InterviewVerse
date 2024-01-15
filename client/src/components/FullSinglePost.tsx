@@ -299,9 +299,3 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
 };
 
 export default FullSinglePost;
-
-//* I need to create an api which checks wether this post is present in all the lists or not which is quite complex
-
-// const CreateNewListModal = () =>{
-
-// }

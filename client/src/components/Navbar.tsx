@@ -68,9 +68,8 @@ const Navbar = () => {
                         localStorage.setItem("token", "");
                         window.location.href = "/";
                       }}
-                      label="Logout"
                       className="logout-btn"
-                    />
+                    >Logout</Button>
                   </div>
                 </div>
               )}

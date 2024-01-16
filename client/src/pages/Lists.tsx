@@ -3,6 +3,8 @@ import { useTrackerContext } from "../context/context";
 import { url } from "../utils";
 import { customReadingLists } from "../components/FullSinglePost";
 import { Link } from "react-router-dom";
+import LibraryCategories from "../components/LibraryCategories";
+import LibraryContainer from "../components/LibraryContainer";
 
 const Lists = () => {
   const { loggedInUser ,isAuthenticated} = useTrackerContext();
@@ -20,16 +22,8 @@ const Lists = () => {
   }, [isAuthenticated]);
 
   return (
-    <main className="library-container">
-    <div className="library-heading">Your Library</div>
-    <div className="my-lists-bar">
-    <h4>Your Lists</h4>
-    <h4>Saved Lists</h4>
-    <h4>Reading History</h4>
-    </div>
-    <div style={{margin : "0 auto",opacity : "0.2",marginTop : "1rem"}}>
-      <hr />
-    </div>
+      <LibraryContainer>
+    <LibraryCategories/>
     <div className="reading-list-container">
       <Link to={`/lists/default`}>
       <h3>Reading Lists</h3>
@@ -40,8 +34,7 @@ const Lists = () => {
       </Link>
       ))}
       </div>
-
-    </main>
+      </LibraryContainer>
   );
 };
 

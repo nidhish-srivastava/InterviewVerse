@@ -14,6 +14,8 @@ import MyProfile from "./pages/MyProfile";
 import InterviewTrackExplore from "./pages/InterviewTrackExplore";
 import DefaultReadingList from "./pages/DefaultReadingList";
 import CustomListsPosts from "./pages/CustomListPosts";
+import SavedLists from "./pages/SavedLists";
+import ReadingHistory from "./pages/ReadingHistory";
 
 const Layout = () => {
   return (
@@ -80,6 +82,14 @@ const router = createBrowserRouter([
         path: "/create",
         element: <Create />,
       },
+      {
+        path : "/saved-lists",
+        element : <SavedLists/>
+      },
+      {
+        path : "/reading-history",
+        element : <ReadingHistory/>
+      }
     ],
   },
   {

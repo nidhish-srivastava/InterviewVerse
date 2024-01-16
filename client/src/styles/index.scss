@@ -972,3 +972,12 @@ button {
   align-items: center;
   gap: 1rem;
 }
+
+.active {
+  color: #007bff; /* Primary blue color */
+  font-weight: bold;
+  text-decoration: none; /* Remove default underline */
+  border-bottom: 2px solid #007bff; /* Distinctive underline */
+  padding-bottom: 5px; /* Add space for visual separation */
+  
+}

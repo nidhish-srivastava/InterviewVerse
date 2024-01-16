@@ -128,7 +128,7 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
       `${url}/readingList/fetchAll/${loggedInUser?.id}`
     );
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     setCustomReadingLists(data);
   };
 

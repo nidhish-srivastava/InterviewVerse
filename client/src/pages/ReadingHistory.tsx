@@ -1,11 +1,11 @@
-import LibraryCategories from "../components/LibraryCategories"
+import MyLibraryCategories from "../components/MyLibraryCategories"
 import LibraryContainer from "../components/LibraryContainer"
 
 function ReadingHistory() {
   return (
     <>
     <LibraryContainer>
-        <LibraryCategories/>
+        <MyLibraryCategories/>
     </LibraryContainer>
     </>
   )

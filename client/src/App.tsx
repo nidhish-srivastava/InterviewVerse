@@ -4,18 +4,19 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Create from "./pages/Create";
-import MyPosts from "./pages/MyPosts";
+import MyInterviewTracks from "./pages/MyInterviewTracks";
 import MySinglePost from "./pages/MySinglePost";
 import Update from "./pages/Update";
 import SinglePost from "./pages/SinglePost";
 import UserProfile from "./pages/UserProfile";
-import Lists from "./pages/Lists";
-import MyProfile from "./pages/MyProfile";
+import MyLists from "./pages/MyLists";
 import InterviewTrackExplore from "./pages/InterviewTrackExplore";
 import DefaultReadingList from "./pages/DefaultReadingList";
 import CustomListsPosts from "./pages/CustomListPosts";
 import SavedLists from "./pages/SavedLists";
 import ReadingHistory from "./pages/ReadingHistory";
+import UserReadingList from "./pages/UserReadingList";
+import UserCustomLists from "./pages/UserCustomLists";
 
 const Layout = () => {
   return (
@@ -43,35 +44,31 @@ const router = createBrowserRouter([
         element : <InterviewTrackExplore/>
       },
       {
-        path : "/lists",
-        element : <Lists/>
+        path : "/me/lists",
+        element : <MyLists/>
       },
       {
-        path : "/lists/custom/:id",
+        path : "/me/lists/custom/:id",
         element : <CustomListsPosts/>
       },
       {
-        path : "/lists/default",
+        path : "/me/lists/default",
         element : <DefaultReadingList/>
       },
       {
-        path: "/my-posts/:id",
-        element: <MyPosts />,
+        path: "/me/interview-tracks",
+        element: <MyInterviewTracks />,
       },
       {
-        path: "/my-posts/:id/:id",
+        path: "/:id/interview-tracks/:id",
         element: <MySinglePost />,
-      },
-      {
-        path : "/:myProfile/my-profile",
-        element : <MyProfile/>
       },
       {
         path: "/:id/:id",
         element: <SinglePost />,
       },
       {
-        path: "/my-posts/:id/:id/update",
+        path: "/:id/interview-tracks/:id/update",
         element: <Update />,
       },
       {
@@ -79,15 +76,23 @@ const router = createBrowserRouter([
         element: <UserProfile />,
       },
       {
+        path : "/:username/reading-lists",
+        element : <UserReadingList/>
+      },
+      {
+        path : ":username/reading-lists/:id",
+        element :<UserCustomLists/>
+      },
+      {
         path: "/create",
         element: <Create />,
       },
       {
-        path : "/saved-lists",
+        path : "/me/saved-lists",
         element : <SavedLists/>
       },
       {
-        path : "/reading-history",
+        path : "/me/reading-history",
         element : <ReadingHistory/>
       }
     ],

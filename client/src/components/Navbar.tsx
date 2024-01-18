@@ -6,7 +6,7 @@ import defaultDp from '../img/defauldp.jpg'
 import { url } from "../utils";
 
 const Navbar = () => {
-  const { loggedInUser, setLoggedInUser, setIsAuthenticated,isAuthenticated } =
+  const { setLoggedInUser, setIsAuthenticated,isAuthenticated } =
     useTrackerContext();
   const [showModal, setShowModal] = useState(false);
 
@@ -54,14 +54,14 @@ const Navbar = () => {
                   className="modal"
                   style={showModal ? { display: "block" } : { display: "none" }}>
                   <div className="modal-content" onClick={closeModal}>
-                  <Link to={`/${loggedInUser?.username}/my-profile`}>
+                  {/* <Link to={`/${loggedInUser?.username}/my-profile`}>
                       My Profile
-                    </Link>
-                    <Link  to={`/lists`}>
+                    </Link> */}
+                    <Link  to={`/me/lists`}>
                       Library
                     </Link>
-                    <Link to={`/my-posts/${loggedInUser?.username}`}>
-                      My Posts
+                    <Link to={`/me/interview-tracks`}>
+                      My Interviews
                     </Link>
                     <Button
                       onClick={() => {

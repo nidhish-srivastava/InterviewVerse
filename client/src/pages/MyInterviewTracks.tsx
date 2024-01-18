@@ -1,14 +1,15 @@
 import { useState,useEffect } from "react";
 import { FormData } from "./Create";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PostCard from "../components/PostCard";
 import { url } from "../utils";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import PostsContainer from "../components/PostsContainer";
+import { useTrackerContext } from "../context/context";
 
-const MyPosts = () => {
-  const {id} = useParams()
+const MyInterviewTracks = () => {
+  const {loggedInUser} = useTrackerContext()
   const [userPosts, setUserPosts] = useState<FormData[]>([]);
   const [loading,setLoading] = useState(false)
 
@@ -17,7 +18,7 @@ const MyPosts = () => {
       setLoading(true)
       try {
         const response = await fetch(
-          `${url}/post/${id}`,{
+          `${url}/post/${loggedInUser?.username}`,{
             headers : {
               Authorization : "Bearer " + localStorage.getItem("token")
             }
@@ -30,14 +31,15 @@ const MyPosts = () => {
       }
       }
     getUserPosts()
-  },[])
+  },[loggedInUser])
   return (
+    <>
+        <h3 className="center" style={{marginTop : "2rem"}}>My Interview Experiences</h3>
       <PostsContainer>
       {
         loading ? <div className="skeleton-loading">
           <Skeleton count={5}/>
           </div> : <>
-          {userPosts.length == 0 && <h2>No Interview Tracks</h2>}
           {userPosts.map((e)=>(
             <Link to={`${e?._id}`}  key={e?._id}>
               <PostCard post={e} show = {false}/>
@@ -46,7 +48,8 @@ const MyPosts = () => {
           </>
       }
           </PostsContainer>
+    </>
   );
 };
 
-export default MyPosts;
+export default MyInterviewTracks;

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ReadingList, Auth } from "../mongodb/model";
+import {  Auth } from "../mongodb/model";
 
 const findUserPromise = (userId: string | undefined): Promise<any> => {
   return Auth.findById(userId);
@@ -20,6 +20,22 @@ const fetchAllReadingLists = async (req: Request, res: Response) => {
     res.json(readingLists);
   } catch (error) {}
 };
+
+const fetchPublicListsOfUser = async(req:Request,res:Response)=>{
+  const {username} = req.params
+  try {
+    const user = await Auth.find({username : username})
+    const readingLists = user[0].readingLists
+    const filterPublicLists = readingLists.map((e:any)=>{
+      if(e.visibilty=='public') return e
+    })
+    res.json(filterPublicLists)
+  } catch (error) {
+    
+  }
+}
+
+// i need to fetch public reading lists only when i visit a specific user
 
 const updateNameOfReadingList = async (req: Request, res: Response) => {
   const { userId, listId, newName } = req.body;
@@ -137,5 +153,6 @@ export {
   deleteReadingList,
   insertInReadingList,
   fetchPostsFromReadingList,
-  fetchPostsFromDefaultList
+  fetchPostsFromDefaultList,
+  fetchPublicListsOfUser
 };

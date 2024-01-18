@@ -1,4 +1,3 @@
-import { useTrackerContext } from "../context/context";
 import {  useState } from "react";
 import { useForm } from "react-hook-form";
 import { FormData, tagType } from "./Create";
@@ -8,7 +7,6 @@ import { url } from "../utils";
 
 const Update = () => {
   const {id} = useParams()
-  const {  loggedInUser} = useTrackerContext();
   const [tagNames, setTagNames] = useState<tagType[]>(
     JSON.parse(sessionStorage.getItem("update-form") || "")?.tags || []
   );
@@ -57,7 +55,7 @@ const Update = () => {
     if (response.status == 200) {
       sessionStorage.clear()
       alert("Updated Successully");
-      navigate(`/my-posts/${loggedInUser?.username}`);
+      navigate(`/me/interview-tracks`);
     }
   };
 

@@ -1,4 +1,4 @@
-import LibraryCategories from "../components/LibraryCategories";
+import LibraryCategories from "../components/MyLibraryCategories";
 import LibraryContainer from "../components/LibraryContainer";
 
 function SavedLists() {

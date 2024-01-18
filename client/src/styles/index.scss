@@ -947,7 +947,6 @@ button {
 }
 
 .my-lists-bar{
-  margin-top: 2rem;
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -956,6 +955,7 @@ button {
 .library-heading{
   font-size: 2.5rem;
   font-weight: 600;
+  margin-bottom: 2rem;
 }
 
 .reading-list-container{

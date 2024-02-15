@@ -17,6 +17,7 @@ import SavedLists from "./pages/SavedLists";
 import ReadingHistory from "./pages/ReadingHistory";
 import UserReadingList from "./pages/UserReadingList";
 import UserCustomLists from "./pages/UserCustomLists";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const Layout = () => {
   return (
@@ -44,56 +45,96 @@ const router = createBrowserRouter([
         element : <InterviewTrackExplore/>
       },
       {
-        path : "/me/lists",
-        element : <MyLists/>
-      },
-      {
-        path : "/me/lists/custom/:id",
-        element : <CustomListsPosts/>
-      },
-      {
-        path : "/me/lists/default",
-        element : <DefaultReadingList/>
-      },
-      {
-        path: "/me/interview-tracks",
-        element: <MyInterviewTracks />,
-      },
-      {
-        path: "/:id/interview-tracks/:id",
-        element: <MySinglePost />,
-      },
-      {
         path: "/:id/:id",
         element: <SinglePost />,
-      },
-      {
-        path: "/:id/interview-tracks/:id/update",
-        element: <Update />,
       },
       {
         path: "/:username",
         element: <UserProfile />,
       },
       {
-        path : "/:username/reading-lists",
-        element : <UserReadingList/>
-      },
-      {
-        path : ":username/reading-lists/:id",
-        element :<UserCustomLists/>
-      },
-      {
         path: "/create",
         element: <Create />,
       },
       {
+        path : "/me/lists",
+        element : (
+          <ProtectedRoute>
+            <MyLists/>
+          </ProtectedRoute>
+        )
+      },
+      {
+        path : "/me/lists/custom/:id",
+        element : (
+          <ProtectedRoute>
+          <CustomListsPosts/>
+          </ProtectedRoute>
+        )
+      },
+      {
+        path : "/me/lists/default",
+        element : (
+          <ProtectedRoute>
+            <DefaultReadingList/>
+          </ProtectedRoute>
+        ) 
+      },
+      {
+        path: "/me/interview-tracks",
+        element:(
+          <ProtectedRoute>
+            <MyInterviewTracks />
+          </ProtectedRoute>
+        )
+      },
+      {
+        path: "/:id/interview-tracks/:id",
+        element: (
+          <ProtectedRoute>
+            <MySinglePost />
+          </ProtectedRoute>
+        )
+      },
+      {
+        path: "/:id/interview-tracks/:id/update",
+        element: (
+          <ProtectedRoute>
+            <Update />
+          </ProtectedRoute>
+        )
+      },
+      {
+        path : "/:username/reading-lists",
+        element : (
+          <ProtectedRoute>
+          <UserReadingList/>
+          </ProtectedRoute>
+        )
+      },
+      {
+        path : "/:username/reading-lists/:id",
+        element : (
+          <ProtectedRoute>
+          <UserCustomLists/>
+          </ProtectedRoute>
+        )
+      },
+      {
         path : "/me/saved-lists",
-        element : <SavedLists/>
+        element : (
+          <ProtectedRoute>
+          <SavedLists/>
+          </ProtectedRoute>
+        )
       },
       {
         path : "/me/reading-history",
-        element : <ReadingHistory/>
+        element : (
+          <ProtectedRoute>
+          <ReadingHistory/>
+          </ProtectedRoute>
+        )
       }
     ],
   },
@@ -106,6 +147,7 @@ const router = createBrowserRouter([
     element: <Login />,
   },
 ]);
+
 
 // const router2 = createBrowserRouter([
 //   {

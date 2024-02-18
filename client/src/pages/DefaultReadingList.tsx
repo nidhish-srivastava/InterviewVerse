@@ -1,41 +1,28 @@
-import { useEffect, useState } from "react"
 import { useTrackerContext } from "../context/context"
 import PostsContainer from "../components/PostsContainer";
 import { Link } from "react-router-dom";
 import PostCard from "../components/PostCard";
 import { url } from "../utils";
-import { FormData } from "./Create";
+import useFetchHook from "../utils/hooks/useFetchHook";
+import SkeletonLoader from "../components/SkeletonLoader";
 
 function DefaultReadingList() {
   const {loggedInUser} = useTrackerContext()
-  const [posts, setPosts] = useState<FormData[]>([]);
+  const {data,isLoading,error} = useFetchHook(`${url}/readingList/fetchPost/${loggedInUser?.id}`)
         
-  useEffect(()=>{
-    const fetchDefaultSavedList = async() =>{
-      try {
-        const response = await fetch(`${url}/readingList/fetchPost/${loggedInUser?.id}`)
-        if(response.status==200){
-          const data = await response.json()
-          setPosts(data)
-        }
-      } catch (error) {
-        console.log(error);
-        
-      }
-    }
-    fetchDefaultSavedList()
-  },[])
     return (
-    <div>
+    <>
       <h4 className="center" style={{marginTop:"2rem"}}>Default Reading List</h4>
+    <h4 className="center" style={{marginTop : "2rem"}}>{error}</h4>
+       <SkeletonLoader isLoading={isLoading}/>
           <PostsContainer>
-        {posts?.map((e, i) => (
+        {data?.map((e, i) => (
           <Link to={`/${e?.username}/${e._id}`} key={i} >
             <PostCard post={e} show={true} />
           </Link>
         ))}
       </PostsContainer>
-      </div>
+      </>
   )
 }
 

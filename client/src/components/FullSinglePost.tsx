@@ -241,7 +241,7 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
                       <i className="fa-solid fa-lock"></i>
                     </span>
                   </div>
-                  {customReadingLists.map((e) => (
+                  {customReadingLists?.map((e) => (
                     <div
                       className="list-bar"
                       style={{ cursor: "pointer" }}

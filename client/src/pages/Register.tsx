@@ -4,7 +4,7 @@ import { useTrackerContext } from "../context/context";
 import InputTag from "../components/InputTag";
 import Button from "../components/Button";
 import { url } from "../utils";
-import toast, { LoaderIcon, Toaster } from "react-hot-toast";
+import  { LoaderIcon  } from "react-hot-toast";
 
 const Register = () => {
   const { setLoggedInUser } = useTrackerContext();
@@ -23,7 +23,7 @@ const Register = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (confirmPassword != inputs.password)
-      return toast.error("Password not matching");
+      return alert("Password not matching");
     try {
       const response = await fetch(`${url}/auth/signup`, {
         method: "POST",
@@ -31,24 +31,23 @@ const Register = () => {
         body: JSON.stringify(inputs),
       });
       if (response.status == 403) {
-        return toast.error("User already exists");
+        return alert("User already exists");
       }
       setIsLoading(true)
       const data = await response.json();
       localStorage.setItem("token",data.token)
       setLoggedInUser({username : data.username})
-      toast.success('Account created Successfully')
       window.location.href = "/"
-      setIsLoading(false);
     } catch (err) {
-      toast.error("Error while creating account");
+      return alert("Error while creating account");
+    }
+    finally{
       setIsLoading(false)
     }
   };
 
   return (
     <Fragment>
-      <Toaster />
       <Link to={`/`}>
         <Button className="home-btn">Home</Button>
       </Link>

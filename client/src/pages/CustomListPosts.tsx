@@ -1,34 +1,27 @@
-import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom"
 import { url } from "../utils";
 import { useTrackerContext } from "../context/context";
 import PostCard from "../components/PostCard";
-import { customReadingLists } from "../components/FullSinglePost";
 import PostsContainer from "../components/PostsContainer";
+import useFetchHook from "../utils/hooks/useFetchHook";
+import SkeletonLoader from "../components/SkeletonLoader";
+
 
 function CustomListsPosts() {
-  const [customList, setCustomLists] = useState<customReadingLists>();
   const {loggedInUser} = useTrackerContext()
   const params = useParams()
   const listId = params?.id?.split("-")[1]
-
-    useEffect(()=>{
-      const fetchPosts = async()=>{
-        const response = await fetch(`${url}/readingList/fetchPost/${loggedInUser?.id}/${listId}`)
-        if(response.status==200){
-          const data = await response.json()
-          setCustomLists(data)
-        }
-      }
-      fetchPosts()
-    },[])
+  const {data,isLoading,error} = useFetchHook(`${url}/readingList/fetchPost/${loggedInUser?.id}/${listId}`)
+  
    
   return (
-    <div>
+    <>
+    <h4 className="center" style={{marginTop : "2rem"}}>{error}</h4>
+       <SkeletonLoader isLoading={isLoading}/>
       <div className="list-heading-bar">
-      <h3>{customList?.name}</h3>
+      <h3>{data?.name}</h3>
       <span>
-                        {customList?.visibilty == "public" && (
+                        {data?.visibilty == "public" && (
                           <span className="visibility-icon">
                           <i className="fa-solid fa-lock"></i>
                           </span>
@@ -36,14 +29,14 @@ function CustomListsPosts() {
                       </span>
                           </div>
       <PostsContainer>
-        {customList?.posts?.map((e, i) => (
+        {data?.posts?.map((e, i) => (
           <Link to={`/${e?.username}/${e._id}`} key={i} >
             <PostCard post={e} show={true} />
           </Link>
         ))}
       </PostsContainer>
 
-    </div>
+    </>
   )
 }
 

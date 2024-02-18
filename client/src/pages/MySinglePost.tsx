@@ -2,25 +2,23 @@ import { useEffect, useState, Fragment } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import FullSinglePost from "../components/FullSinglePost";
 import Button from "../components/Button";
-import { FormData } from "./Create";
-import { fetchSinglePostPromise, url } from "../utils";
+import useFetchHook from "../utils/hooks/useFetchHook";
+import { url } from "../utils";
+import SkeletonLoader from "../components/SkeletonLoader";
 
 const MySinglePost = () => {
   const { id } = useParams();
   const [modal, setModal] = useState(false);
-  const [singlePostObj,setSinglePostObj] = useState<FormData>()
+  const {data,isLoading} = useFetchHook(`${url}/post/single/${id}`)
 
   useEffect(() => {
-  const fetchSinglePost = async () => {
-    const data = await fetchSinglePostPromise(id);
-    setSinglePostObj(data as any);
     sessionStorage.setItem("update-form",JSON.stringify(data))
-  };
-    fetchSinglePost();
-  }, []);
+  }, [data]);
 
   return (
     <Fragment>
+      <SkeletonLoader isLoading={isLoading}/>
+    {data && <>
     <div className="edit-div">
       <Link to="update">
         <Button className="update-btn">Update</Button>
@@ -28,7 +26,9 @@ const MySinglePost = () => {
       {/* <button onClick={() => setModal(true)}>Delete</button> */}
       <Button className="delete-btn" onClick={() => setModal(true)}>Delete</Button>
     </div>
-    {singlePostObj && <FullSinglePost show = {false} singlePostObj = {singlePostObj} />}
+      <FullSinglePost show = {false} singlePostObj = {data} />
+    </>
+    }
         {/* Delete</Button> */}
       {modal ? <DeleteModal setModal={setModal} /> : null}
     </Fragment>

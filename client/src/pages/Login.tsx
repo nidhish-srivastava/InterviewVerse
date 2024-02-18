@@ -4,7 +4,7 @@ import { useTrackerContext } from '../context/context'
 import InputTag from '../components/InputTag'
 import Button from '../components/Button'
 import { url } from '../utils'
-import toast, { LoaderIcon, Toaster } from 'react-hot-toast'
+import toast, { LoaderIcon} from 'react-hot-toast'
 
 
 const Login = () => {
@@ -22,7 +22,6 @@ const Login = () => {
     e.preventDefault()
     setIsLoading(true)
     try {
-      // const response = await axios.post(`${url}/auth/login`,{inputs})
       const response = await fetch(`${url}/auth/login`,{
         method : "POST",
         headers : {"Content-Type" : "application/json"},
@@ -31,7 +30,6 @@ const Login = () => {
       
       if(response.status!=200) {
         setIsLoading(false)
-        return toast.error("Check Credentials")
       }
       const data = await response.json() 
       localStorage.setItem("token",data.token)
@@ -41,12 +39,10 @@ const Login = () => {
       setIsLoading(false)
     } catch (error) {
       setIsLoading(false)
-      toast.error("Error while logging in")
     }
   }
   return (
     <Fragment>
-      <Toaster/>
       <Link to={`/`}>
         <Button className='home-btn'>Home</Button>
         </Link>

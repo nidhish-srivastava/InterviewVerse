@@ -9,21 +9,31 @@ const Navbar = () => {
   const { setLoggedInUser, setIsAuthenticated,isAuthenticated } =
     useTrackerContext();
   const [showModal, setShowModal] = useState(false);
+  const [isLoading,setIsLoading] = useState(false)
 
+  useEffect(() => {
   const getProfile = async () => {
-    const response = await fetch(`${url}/auth/me`, {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
-    if (response.status != 403) {
-      const data = await response.json();
-      setLoggedInUser({ username: data.username, id: data._id });
-      setIsAuthenticated(true);
+    setIsLoading(true)
+    try {
+      
+      const response = await fetch(`${url}/auth/me`, {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
+      if (response.status != 403) {
+        const data = await response.json();
+        setLoggedInUser({ username: data.username, id: data._id });
+        setIsAuthenticated(true);
+      }
+    } catch (error) {
+      
+    }
+    finally{
+      setIsLoading(false)
     }
   };
-  useEffect(() => {
     getProfile();
   }, []);
 
@@ -74,13 +84,18 @@ const Navbar = () => {
                 </div>
               )}
             </div>
-          ) : (
+          ) : 
+          null
+                    }
+                    {
+                      !isLoading && !isAuthenticated ? 
             <div className="signupbar" 
             >
               <Link to="/register" style={{fontWeight : 600,marginRight : "1rem"}}>SignUp</Link>
               <Link to="/login" style={{fontWeight : 600}}>Login</Link>
             </div>
-          )}
+                      : null
+                    }
         </div>
       </nav>
     </header>

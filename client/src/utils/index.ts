@@ -15,7 +15,7 @@ export const timeToReadPost = (post : string | undefined) =>{
   return time
 }
 
-export const dateFormatter = (date: Date | string | number) => {
+export const dateFormatter = (date?: Date | string | number) => {
     const currentDate = new Date(date);
     const formattedDate = currentDate.toLocaleDateString("en-US", {
       month: "short",

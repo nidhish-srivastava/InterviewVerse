@@ -3,7 +3,7 @@ import PostsContainer from "../components/PostsContainer";
 import { Link } from "react-router-dom";
 import PostCard from "../components/PostCard";
 import { url } from "../utils";
-import useFetchHook from "../utils/hooks/useFetchHook";
+import useFetchHook from "../hooks/useFetchHook";
 import SkeletonLoader from "../components/SkeletonLoader";
 
 function DefaultReadingList() {

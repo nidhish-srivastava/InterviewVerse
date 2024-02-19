@@ -2,7 +2,7 @@ import { useEffect, useState, Fragment } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import FullSinglePost from "../components/FullSinglePost";
 import Button from "../components/Button";
-import useFetchHook from "../utils/hooks/useFetchHook";
+import useFetchHook from "../hooks/useFetchHook";
 import { url } from "../utils";
 import SkeletonLoader from "../components/SkeletonLoader";
 

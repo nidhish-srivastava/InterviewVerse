@@ -3,7 +3,7 @@ import { url } from "../utils";
 import { useTrackerContext } from "../context/context";
 import PostCard from "../components/PostCard";
 import PostsContainer from "../components/PostsContainer";
-import useFetchHook from "../utils/hooks/useFetchHook";
+import useFetchHook from "../hooks/useFetchHook";
 import SkeletonLoader from "../components/SkeletonLoader";
 
 

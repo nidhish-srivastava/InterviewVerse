@@ -4,7 +4,7 @@ import { url } from "../utils"
 import PostsContainer from "../components/PostsContainer"
 import UserProfileSections from "../components/UserProfileSections"
 import LibraryContainer from "../components/LibraryContainer"
-import useFetchHook from "../utils/hooks/useFetchHook"
+import useFetchHook from "../hooks/useFetchHook"
 import SkeletonLoader from "../components/SkeletonLoader"
 
 const SingleProfile = () => {

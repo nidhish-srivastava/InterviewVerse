@@ -2,7 +2,7 @@ import {  useParams } from "react-router-dom";
 import FullSinglePost from "../components/FullSinglePost";
 import  { Toaster } from "react-hot-toast";
 import {url } from "../utils";
-import useFetchHook from "../utils/hooks/useFetchHook";
+import useFetchHook from "../hooks/useFetchHook";
 import SkeletonLoader from "../components/SkeletonLoader";
 
 const SinglePost = () => {

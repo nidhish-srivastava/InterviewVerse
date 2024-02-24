@@ -1006,3 +1006,94 @@ button {
   text-align: right;
   margin: 1rem;
 }
+
+
+
+
+.features-section {
+  background-color: #f7fafc;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.features-heading {
+  font-size: 1.875rem;
+  font-weight: 700;
+  text-align: center;
+  color: #2d3748;
+  margin-bottom: 3rem;
+  font-family: "Lato",sans-serif;
+}
+
+.features-container {
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+@media (min-width: 640px) {
+  .features-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.feature-card {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  background-color: #ffffff;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-title {
+  font-size: 1.2rem; /* Increased font size for better visibility */
+  font-weight: 600; /* Slightly reduced font weight for a balanced look */
+  color: #333333;
+  font-family: 'Lato', sans-serif;
+  margin-bottom: 1rem; /* Increased margin for better separation from the content below */
+  text-transform: uppercase;
+  letter-spacing: 0.5px; /* Added letter spacing for better readability */
+}
+
+
+.feature-description {
+  color: #666666;
+}
+
+
+
+.footer {
+  background-color: #333; /* Set footer background color */
+  color: #fff; /* Set text color */
+  padding: 20px 0; /* Adjust padding */
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.social-icons a {
+  color: #fff; /* Set icon color */
+  text-decoration: none;
+  margin: 0 10px; /* Adjust spacing between icons */
+  font-size: 1.5rem; /* Adjust icon size */
+  transition: color 0.3s ease; /* Smooth transition */
+}
+
+.social-icons a:hover {
+  color: #007bff; /* Change icon color on hover */
+}

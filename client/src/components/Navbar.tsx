@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTrackerContext } from "../context/context";
 import { Link } from "react-router-dom";
 import defaultDp from '../img/defauldp.jpg'
@@ -13,7 +13,7 @@ const Navbar = () => {
     useTrackerContext();
   const [showModal, setShowModal] = useState(false);
   const [isLoading,setIsLoading] = useState(false)
-
+  const modalRef = useRef(null)
   useEffect(() => {
   const getProfile = async () => {
     setIsLoading(true)
@@ -50,6 +50,16 @@ const Navbar = () => {
     window.location.href = "/";
   }
 
+  useEffect(()=>{
+    const handleOutsideClick = (event) =>{
+      if(modalRef.current && !modalRef.current.contains(event.target)){
+        setShowModal(false)
+      }
+    }
+     window.addEventListener("click",handleOutsideClick)
+     return ()=>window.removeEventListener("click",handleOutsideClick)
+  },[modalRef])
+
   return (
     <header className="header">
       <nav className="nav">
@@ -58,10 +68,6 @@ const Navbar = () => {
           <Link className = "interview-track" to="/interview-tracks">Interview&nbsp;Tracks</Link>
         </div>
         <div>
-          {/* {
-            isAuthenticated ? 
-            : null
-          } */}
           {isAuthenticated ? (
             <div className="right-nav-div">
             <Link className="icon create-icon" to={`/new-post`}>
@@ -69,16 +75,18 @@ const Navbar = () => {
                 <CreatePostIcon />
               </span>
               Create
-              </Link>
+              </Link> 
             <div className="dp-wrapper-navbar">
-              <div className="dp-wrapper" onClick={() => setShowModal((e) => !e)}>
-                <img src={defaultDp} alt="dp" loading="lazy" />
+              <div className="dp-wrapper" onClick={() => setShowModal(prev=>!prev)} ref={modalRef}>
+                <img src={defaultDp} alt="dp" loading="lazy"  />
               </div>
               {showModal && (
                 <div
                   className="modal"
-                  style={showModal ? { display: "block" } : { display: "none" }}>
-                  <div className="modal-content" onClick={closeModal}>
+                  >
+                  <div className="modal-content" 
+                  onClick={()=>setShowModal(prev=>!prev)}
+                  >
                     <Link  to={`/me/lists`} className="icon">
                       <span>
                         <BookMarkIcon/>

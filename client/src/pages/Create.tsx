@@ -30,12 +30,10 @@ const Create = () => {
   const { loggedInUser } = useTrackerContext();
   const { register, handleSubmit,watch } = useForm();
   const watchAllFields = watch()
-  console.log(watchAllFields);
   
   const [tags, setTags] = useState<tagType[]>([]);
   const [tag, setTag] = useState("");
   const [canPublish,setCanPublish] = useState(false)
-  // const [isSavedLoader,setIsSavedLoader] = useState(false)
 
   const enterKeyHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key == "Enter") {
@@ -78,6 +76,7 @@ const Create = () => {
   }
 
 
+
   useEffect(()=>{
     let check = false  // checks wether user has given any input or not
     for(let a in watchAllFields){
@@ -94,19 +93,22 @@ const Create = () => {
       const debounceTimer = setTimeout(async()=>{  //* Creating a debounce effect to save the user data once he stops writing
         // here i will submit the post,save it in db as draft,after that,dont create a new post rather update the existing post
         const postId = JSON.parse(sessionStorage.getItem("postId"))?.postId
-        if(postId?.length>1){
-          // console.log("we need to now update the stuff");
-           const response = await updateRequest(`${url}/post/${postId}`,{...watchAllFields,tags : tags})
-           if(response.status==201){
-
-           }
-           
-        }
-        else{
-          if(JSON.parse(sessionStorage.getItem("hasStarted"))){
-            // console.log("create post");
-            createPost()  
+        try {
+          if(postId?.length>1){
+            // console.log("we need to now update the stuff");
+             const response = await updateRequest(`${url}/post/${postId}`,{...watchAllFields,tags : tags})
+             if(response.status==201){
+             }
           }
+          else{
+            if(JSON.parse(sessionStorage.getItem("hasStarted"))){
+              // console.log("create post");
+              createPost()  
+            }
+          }
+          
+        } catch (error) {
+          
         }
       },2000)
       return ()=>clearInterval(debounceTimer)
@@ -133,15 +135,18 @@ const Create = () => {
     } catch (error) {}
   }
 
+  useEffect(()=>{
+      if(window.location.pathname != `${url}/create`){
+        sessionStorage.clear()
+      }
+  },[window.location])
+
 
   return (
     <>
-    {/* {
-      JSON.parse(sessionStorage.getItem("hasStarted")) ?
-       <>
-      {isSavedLoader ? "Saving" : "Saved"}
-      </> : ""
-    } */}
+       <div className="save-post-container">
+      {sessionStorage.getItem("hasStarted") ? "Saved in Draft" : ""}
+      </div> 
     <form onSubmit={handleSubmit(submitHandler)} className="form-container">
       {/* <label htmlFor="position">Position</label>
       <input type="text" id="position" placeholder="For which position you interviewed??"/>

@@ -13,18 +13,15 @@
 
 ### Features
 
-* Login,SignUp,Logout using Jwt token,localstorage and authentication middleware using Bearer header
+* Custom authentication using JWT token
 
 * Search a interview track based on Topic
 
 * Perform CRUD operations on your Interview Track
 
-* Save other's interview experience
+* Create Drafts and publish them accordingly
 
-* We can create different types of reading lists based on our choice
+* Bookmark other's interview experience and create different types of reading lists based on our choice.
 
 * Visit a user's profile while reading his post and explore all of his interview tracks
 
-* React toast notifications for better user experience
-
-* Creating a Post Form managment done using react-hook-form with form persistence while updating after reload(using session storage)

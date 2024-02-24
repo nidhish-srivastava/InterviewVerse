@@ -1,5 +1,5 @@
-export const url = `http://localhost:4000`
-//  export const url = `https://inter-view-tracker.vercel.app`
+// export const url = `http://localhost:4000`
+ export const url = `https://inter-view-tracker.vercel.app`
 
 export const defaultDp = "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
 

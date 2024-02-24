@@ -4,7 +4,7 @@ import { useTrackerContext } from '../context/context'
 import InputTag from '../components/InputTag'
 import Button from '../components/Button'
 import { url } from '../utils'
-import toast, { LoaderIcon} from 'react-hot-toast'
+import  { LoaderIcon} from 'react-hot-toast'
 
 
 const Login = () => {
@@ -29,15 +29,17 @@ const Login = () => {
       })
       
       if(response.status!=200) {
+        alert("Check credentials")
         setIsLoading(false)
+        return
       }
       const data = await response.json() 
       localStorage.setItem("token",data.token)
       setLoggedInUser({username : data.username})
-      toast.success('Logged In Successfully')
       window.location.href = "/"
-      setIsLoading(false)
     } catch (error) {
+    }
+    finally{
       setIsLoading(false)
     }
   }

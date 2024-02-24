@@ -8,7 +8,7 @@ function Hero() {
   const navigate = useNavigate()
   const navigateHandler = () =>{
       if(isAuthenticated){
-        navigate("/create")
+        navigate("/new-post")
       }
       else{
       }

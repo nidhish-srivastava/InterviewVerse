@@ -1,54 +1,28 @@
 import { Request, Response } from "express";
 import { Auth, Post } from "../mongodb/model";
-
-// interface ReqQuery {
-//   topic?: string; // Assuming 'topic' is a string in req.query
-//   username?: string;
-// }
-
-
-const findUserPromise = async (username: string | undefined): Promise<any> => {
-  return await Post.find({ username: username });
-};
-
-const cleanInput = (input: string) => {
-  return new RegExp(
-    input
-      ?.trim()
-      .replace(/\s{2,}/g, " ")
-      .replace(/,(?!\s)/g, ", ")
-      .toString()
-      .toLowerCase(),
-    "i"
-  );
-};
+import { cleanInput } from "../utils";
 
 export const getAll = async (req: Request, res: Response) => {
-  // const { topic, username } = req.query as ReqQuery;
-  // const queryObject: Record<string, any> = {}; //* wierd ts stuf :))
-
-  // if (topic) {
-  //   // queryObject.topic = { $regex: topic, $options: "i" };
-  //   queryObject.topic = cleanInput(topic);
-  // }
-  
-
   const keyword = req.query
   ? {
-    $or: [  // If any one of the query is true,we get our result
-      // { username: { $regex: req.query.username, $options: "i" } },
-      // { topic: { $regex: req.query.topic, $options: "i" } },
-      {username : cleanInput(req.query.username as string)},
-      {topic : cleanInput(req.query.topic as string)},
-    ],
+    $and : [
+      {
+        $or: [  
+          // If any one of the query is true,we get our result
+          // { username: { $regex: req.query.username, $options: "i" } },
+          // { topic: { $regex: req.query.topic, $options: "i" } },
+          {username : cleanInput(req.query.username as string)},
+          {topic : cleanInput(req.query.topic as string)},
+          
+        ],
+      },
+      {
+        published : true
+      }
+    ]
   } : {}
 
-  // if(username){
-  //   queryObject.username = cleanInput(username)
-  // }
-
   try {
-    // const getAllPost = await Post.find(queryObject);
     const getAllPost = await Post.find(keyword)
     res.status(200).json({ msg: "All posts read", getAllPost });
   } catch (error) {
@@ -56,12 +30,10 @@ export const getAll = async (req: Request, res: Response) => {
   }
 };
 
-
-
 export const searchUserPosts = async (req: Request, res: Response) => {
   const { username } = req.params;
   try {
-    const response = await findUserPromise(username);
+    const response = await Post.find({ username: username });
     if (response.length == 0) {
       res.status(404).send(`<h3>${username} not found</h3>`);
     }
@@ -69,13 +41,24 @@ export const searchUserPosts = async (req: Request, res: Response) => {
   } catch (error) {}
 };
 
-export const getLoggedInUserPosts = async (req: Request, res: Response) => {
+export const fetchPublishedPosts = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
-    const response = await findUserPromise(id);
-    res.status(200).json(response);
+    const { username } = req.params;
+    
+    const response = await Post.find({username : username,published : true})
+    res.json(response);
   } catch (error) {}
 };
+
+export const fetchDrafts = async(req:Request,res:Response)=>{
+  const {username} = req.params
+     try {
+      const response = await Post.find({username : username,published : false})
+      res.json(response)
+     } catch (error) {
+      
+     }
+}
 
 export const saveInSavedPosts = async (req: Request, res: Response) => {
   const {postId,userId} = req.body
@@ -132,23 +115,25 @@ export const checkIfSaved = async(req:Request,res:Response)=>{
 }
 
 export const create = async (req: Request, res: Response) => {
-  const { desc, tags, details, topic, username } = req.body;
-
+  const { desc, tags, details, topic, username,published } = req.body;
   const newPost = new Post({
-    desc: desc,
-    tags: tags,
-    details: details,
-    topic: topic,
-    username: username,
+    desc,
+    tags,
+    details,
+    topic,
+    username,
+    published
   });
-
+  
   try {
-    await newPost.save();
-    res.status(201).send("Post created");
+    const response = await newPost.save();
+    res.status(201).json({postId : response._id});
   } catch (error) {
     res.status(500).json({ msg: "Error is coming", error });
   }
 };
+
+
 
 export const deletePost = async (req: Request, res: Response) => {
   const { _id } = req.params;
@@ -162,15 +147,26 @@ export const deletePost = async (req: Request, res: Response) => {
 
 export const updatePost = async (req: Request, res: Response) => {
   const { id } = req.params;
-  // console.log(id);
   const { desc, tags, details, topic } = req.body;
-  await Post.updateOne(
+  const response = await Post.updateOne(
     { _id: id },
     { desc: desc, tags: tags, details: details, topic: topic }
   );
-  // console.log(response);
-  res.status(200).send(`<h3>Updated successfully</h3>`);
+  if(response.modifiedCount >= 1){
+    res.status(201).json("Updated successfully")
+  }
 };
+
+export const publishPost = async(req:Request,res:Response) =>{
+  const {id} = req.params
+  const response = await Post.updateOne(
+    {_id : id},
+    {published : true}
+  )
+  if(response.modifiedCount >= 1){
+    res.status(201).json("Updated successfully")
+  }
+}
 
 export const getSingle = async (req: Request, res: Response) => {
   const { id } = req.params;

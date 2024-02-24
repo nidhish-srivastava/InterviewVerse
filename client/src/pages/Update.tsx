@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import {   useState } from "react";
 import { useForm } from "react-hook-form";
 import { FormData, tagType } from "./Create";
 import { useNavigate, useParams } from "react-router-dom";
@@ -58,12 +58,10 @@ const Update = () => {
       navigate(`/me/interview-tracks`);
     }
   };
-
-  
-  
-
+   
 
   return (
+    <>
     <form className="form-container" onSubmit={handleSubmit(submitHandler)}>
       <label htmlFor="Topic">Topic</label>
       <input type="text" {...register("topic")} id="topic" />
@@ -92,6 +90,7 @@ const Update = () => {
       </div>
       <Button btnType="submit">Update</Button>
     </form>
+    </>
   );
 };
 

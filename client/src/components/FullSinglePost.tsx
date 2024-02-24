@@ -224,6 +224,8 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
             &nbsp; &nbsp;
             {timeToReadPost(singlePostObj?.details)} min read
           </div>
+          {
+            isAuthenticated && <>
           {singlePostObj?.username != loggedInUser?.username && (
             <div className="save-icon-container" ref={modalRef}>
               {showModal && (
@@ -281,6 +283,8 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
               )}
             </div>
           )}
+            </>
+          }
         </div>
         <span>
           <hr />

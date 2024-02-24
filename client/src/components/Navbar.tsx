@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { useTrackerContext } from "../context/context";
 import { Link } from "react-router-dom";
-import Button from "./Button";
 import defaultDp from '../img/defauldp.jpg'
 import { url } from "../utils";
+import { Draft } from "./Icons/Draft";
+import { BookMarkIcon } from "./Icons/Bookmark";
+import { CreatePostIcon } from "./Icons/CreatePost";
+import { LogoutIcon } from "./Icons/Logout";
 
 const Navbar = () => {
   const { setLoggedInUser, setIsAuthenticated,isAuthenticated } =
@@ -41,20 +44,32 @@ const Navbar = () => {
     setShowModal(false)
   }
 
+  const logouthandler = () =>{
+    sessionStorage.clear()
+    localStorage.setItem("token", "");
+    window.location.href = "/";
+  }
+
   return (
     <header className="header">
       <nav className="nav">
         <div className="navbar-left" onClick={closeModal}>
           <Link className="home" to="/">Home</Link>
           <Link className = "interview-track" to="/interview-tracks">Interview&nbsp;Tracks</Link>
-          {
-            isAuthenticated ? 
-            <Link className="create" to={`/create`}>Create</Link>
-            : null
-          }
         </div>
         <div>
+          {/* {
+            isAuthenticated ? 
+            : null
+          } */}
           {isAuthenticated ? (
+            <div className="right-nav-div">
+            <Link className="icon create-icon" to={`/new-post`}>
+              <span>
+                <CreatePostIcon />
+              </span>
+              Create
+              </Link>
             <div className="dp-wrapper-navbar">
               <div className="dp-wrapper" onClick={() => setShowModal((e) => !e)}>
                 <img src={defaultDp} alt="dp" loading="lazy" />
@@ -64,25 +79,38 @@ const Navbar = () => {
                   className="modal"
                   style={showModal ? { display: "block" } : { display: "none" }}>
                   <div className="modal-content" onClick={closeModal}>
-                  {/* <Link to={`/${loggedInUser?.username}/my-profile`}>
-                      My Profile
-                    </Link> */}
-                    <Link  to={`/me/lists`}>
-                      Library
+                    <Link  to={`/me/lists`} className="icon">
+                      <span>
+                        <BookMarkIcon/>
+                      </span>
+                      Bookmarks
                     </Link>
-                    <Link to={`/me/interview-tracks`}>
+                    <Link to={`drafts`} className="icon">
+                      <span>
+                      <Draft/>
+                      </span>
+                     Drafts
+                    </Link>
+                    <Link to={`/me/interview-tracks`} className="icon">
+                      <span>
+                        <Draft/>
+                      </span>
                       My Interviews
                     </Link>
-                    <Button
-                      onClick={() => {
-                        localStorage.setItem("token", "");
-                        window.location.href = "/";
-                      }}
-                      className="logout-btn"
-                    >Logout</Button>
+                    {/* <div className="logout-btn-container"> */}
+                    <a
+                    onClick={logouthandler}
+                    className="logout-icon icon"
+                    >
+                        <span>
+                        <LogoutIcon/>
+                        </span>
+                        Logout</a>
+                      </div>
                   </div>
-                </div>
+                // </div>
               )}
+            </div>
             </div>
           ) : 
           null

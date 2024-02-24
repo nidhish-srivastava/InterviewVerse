@@ -85,7 +85,7 @@ img{
     flex-wrap: wrap;
     gap: 16px; /* Spacing between navigation items */
     font-family: 'Lato', sans-serif;
-    .home,.interview-track,.create {
+    .home,.interview-track {
       color: inherit; /* Inherit text color from the parent (.header) */
       text-decoration: none;
       font-weight: bold;
@@ -121,9 +121,6 @@ img{
       // gap: 8px;
     }
 
-    .logout-btn {
-      margin-top: 12px;
-    }
   }
 }
 
@@ -795,20 +792,10 @@ button {
   background-color: white;
 }
 
-.modal-content .icon{
-  display: flex;
-  gap: .31rem;
-  width: 90%;
-}
 
-.logout-btn {
-  background-color: white; /* Logout button background color */
-  color: black;
-  font-weight: 600;
-  cursor: pointer;
-}
 
-.modal-content a,.logout-btn{
+
+.modal-content a{
   color: inherit; /* Inherit text color from the parent (.header) */
   text-decoration: none;
   font-weight: bold;
@@ -987,5 +974,30 @@ button {
   text-decoration: none; /* Remove default underline */
   border-bottom: 2px solid #007bff; /* Distinctive underline */
   padding-bottom: 5px; /* Add space for visual separation */
+  
+}
+
+.right-nav-div{
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.create-icon{
+  color: inherit; /* Inherit text color from the parent (.header) */
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: .41rem;
+}
+
+.icon{
+  display: flex;
+  gap: .31rem;
+  width: 90%;
+  cursor: pointer;
+}
+
+.logout-icon{
   
 }

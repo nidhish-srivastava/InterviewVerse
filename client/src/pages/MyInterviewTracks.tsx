@@ -18,15 +18,16 @@ const MyInterviewTracks = () => {
       setLoading(true)
       try {
         const response = await fetch(
-          `${url}/post/${loggedInUser?.username}`,{
+          `${url}/post/published/${loggedInUser?.username}`,{
             headers : {
               Authorization : "Bearer " + localStorage.getItem("token")
             }
           }) 
           const data = await response.json();
           setUserPosts(data);
-          setLoading(false)
       } catch (error) {
+      }
+      finally{
         setLoading(false)
       }
       }

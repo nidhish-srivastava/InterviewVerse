@@ -18,6 +18,8 @@ import ReadingHistory from "./pages/ReadingHistory";
 import UserReadingList from "./pages/UserReadingList";
 import UserCustomLists from "./pages/UserCustomLists";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Drafts from "./pages/Drafts";
+import DraftEdit from "./pages/DraftEdit";
 
 const Layout = () => {
   return (
@@ -53,8 +55,24 @@ const router = createBrowserRouter([
         element: <UserProfile />,
       },
       {
-        path: "/create",
+        path: "/new-post",
         element: <Create />,
+      },
+      {
+        path : "/drafts",
+        element : (
+          <ProtectedRoute>
+            <Drafts/>
+          </ProtectedRoute>
+        )
+      },
+      {
+        path : "/draft/:id",
+        element : (
+          <ProtectedRoute>
+            <DraftEdit/>
+          </ProtectedRoute>
+        )
       },
       {
         path : "/me/lists",
@@ -147,35 +165,6 @@ const router = createBrowserRouter([
     element: <Login />,
   },
 ]);
-
-
-// const router2 = createBrowserRouter([
-//   {
-//     path : "/",
-//     element : <Layout/>,
-//     children : [
-//       {
-//         path: "/",
-//         element: <Home />,
-//       },
-//       {
-//         path: "/post/:id",
-//         element: <Single />,
-//       },
-//       {
-//         path: "/create",
-//         element: <Create />,
-//       },
-//       {
-//         path : "/login",
-//         element : <Login/>
-//       },{
-//         path : "register",
-//         element : <Register/>
-//       }
-//     ]
-//   }
-// ])
 
 function App() {
   return (

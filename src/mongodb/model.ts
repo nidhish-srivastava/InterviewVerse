@@ -13,6 +13,7 @@ interface iPost {
   }[];
   topic: string;
   username : string
+  published : boolean
 }
 
 interface iAuth {
@@ -25,16 +26,17 @@ interface iAuth {
 const postSchema = new Schema<iPost>(
   {
     authRef: { type: Schema.Types.ObjectId, ref: "Auth" },
-    username : {type : String,required : true},
-    details: { type: String, required: true },
-    desc: { type: String, required: true },
+    username : {type : String},
+    details: { type: String,},
+    desc: { type: String,},
     tags: [
       {
-        name: { type: String, required: true },
-        id: { type: String, required: true },
+        name: { type: String },
+        id: { type: String },
       },
     ],
-    topic: { type: String, required: true },
+    topic: { type: String },
+    published : {type : Boolean,default : false}
   },
   {
     timestamps: true,

@@ -784,15 +784,23 @@ button {
 
 
 .modal-content {
-  padding: 1rem;
+  padding-top: 1rem;
   display: flex;
   margin-top: 2px;
   flex-direction: column;
   box-shadow: 2px 0 10px 3px rgba(0, 0, 0, 0.2);
-  align-items: center;
-  justify-content: center;
+  // align-items: center;
+  // justify-content: center;
+  align-items: start;
   background-color: white;
 }
+
+.modal-content .icon{
+  display: flex;
+  gap: .31rem;
+  width: 90%;
+}
+
 .logout-btn {
   background-color: white; /* Logout button background color */
   color: black;

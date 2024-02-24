@@ -29,7 +29,7 @@ export const signup = async (req: Request, res: Response) => {
   });
   await newUser.save();
   const token = jwt.sign({ username: username }, process.env.SECRET || "", {
-    expiresIn: "1h",
+    expiresIn: "1d",
   });
   res.json({ token });
 };
@@ -47,7 +47,7 @@ export const login = async (req: Request, res: Response) => {
         const token = jwt.sign(
           { username, role: "admin" },
           process.env.SECRET || "",
-          { expiresIn: "1h" }
+          { expiresIn: "1d" }
         );
         res.json({ token, admin });
       } else {

@@ -70,11 +70,11 @@ const Navbar = () => {
         <div>
           {isAuthenticated ? (
             <div className="right-nav-div">
-            <Link className="icon create-icon" to={`/new-post`}>
+            <Link className="icon create-icon" to={`/draft`}>
               <span>
                 <CreatePostIcon />
               </span>
-              Create
+              Write
               </Link> 
             <div className="dp-wrapper-navbar">
               <div className="dp-wrapper" onClick={() => setShowModal(prev=>!prev)} ref={modalRef}>
@@ -93,7 +93,7 @@ const Navbar = () => {
                       </span>
                       Bookmarks
                     </Link>
-                    <Link to={`drafts`} className="icon">
+                    <Link to={`/drafts`} className="icon">
                       <span>
                       <Draft/>
                       </span>

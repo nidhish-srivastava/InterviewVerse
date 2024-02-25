@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
-import { useTrackerContext } from "../context/context";
 import Button from "../components/Button";
 import { updateRequest, url } from "../utils";
 import toast from "react-hot-toast";
+import { useParams } from "react-router-dom";
 
 export type tagType = {
   name: string;
@@ -26,10 +26,32 @@ export type FormData = {
   createdAt?:string
 };
 
-const Create = () => {
-  const { loggedInUser } = useTrackerContext();
-  const { register, handleSubmit,watch } = useForm();
-  const watchAllFields = watch()
+const DraftWrite = () => {
+    const {id} = useParams()
+    const { register, handleSubmit,watch,setValue } = useForm<FormData>({
+      defaultValues : {}
+    });
+    const watchAllFields = watch()
+
+    useEffect(()=>{
+        const fetchDraftData = async()=>{
+          try {
+              const response = await fetch(`${url}/post/single/${id}`)
+              if (!response.ok) {
+                  throw new Error('Failed to fetch data');
+                }
+                const result = await response.json();
+                setValue("desc",result?.desc)
+                setValue("details",result?.details)
+                setValue("topic",result?.topic)
+                setTags(result?.tags)
+          } catch (error) {
+
+          }
+          } 
+          fetchDraftData()
+    },[])
+
   
   const [tags, setTags] = useState<tagType[]>([]);
   const [tag, setTag] = useState("");
@@ -53,60 +75,29 @@ const Create = () => {
     setTags(deleteTag);
   };
 
-  //* Created a function which is triggered after 4 seconds of the user stops writing,Once request is send,then we are just editing 
-  const createPost = async() =>{
-    try {
-      const response = await fetch(`${url}/post`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-        body: JSON.stringify({...watchAllFields,tags : tags,username : loggedInUser?.username,published : false}),
-      });
-      if(response.status==201){
-        const data = await response.json()
-        sessionStorage.setItem("postId",JSON.stringify(data))
-      }
-    } catch (error) {
-      
-    }
-    finally{
-    }
-  }
-
-
-
+  
+  
   useEffect(()=>{
-    let check = false  // checks wether user has given any input or not
+      let check = false  // checks wether user has given any input or not
     for(let a in watchAllFields){
-      if(watchAllFields[a].length>0){
-        check = true
-        setCanPublish(true)
-        sessionStorage.setItem("hasStarted",JSON.stringify({hasStarted : true}))
+        if(watchAllFields[a]?.length>0){
+            check = true
+            setCanPublish(true)
+            sessionStorage.setItem("hasStarted",JSON.stringify({hasStarted : true}))
       }
     }
     if(check==false){
       setCanPublish(false)
     }
     
-      const debounceTimer = setTimeout(async()=>{  //* Creating a debounce effect to save the user data once he stops writing
+    //* Created a function which is triggered after 4 seconds of the user stops writing,Once request is send,then we are just editing 
+    const debounceTimer = setTimeout(async()=>{  //* Creating a debounce effect to save the user data once he stops writing
         // here i will submit the post,save it in db as draft,after that,dont create a new post rather update the existing post
-        const postId = JSON.parse(sessionStorage.getItem("postId"))?.postId
         try {
-          if(postId?.length>1){
             // console.log("we need to now update the stuff");
-             const response = await updateRequest(`${url}/post/${postId}`,{...watchAllFields,tags : tags})
+             const response = await updateRequest(`${url}/post/${id}`,{...watchAllFields,tags : tags})
              if(response.status==201){
              }
-          }
-          else{
-            if(JSON.parse(sessionStorage.getItem("hasStarted"))){
-              // console.log("create post");
-              createPost()  
-            }
-          }
-          
         } catch (error) {
           
         }
@@ -114,40 +105,27 @@ const Create = () => {
       return ()=>clearInterval(debounceTimer)
   },[watchAllFields])
 
-  const submitHandler = async () => {
+  const publishPostHandler = async () => {
     try {
-      const postId = JSON.parse(sessionStorage.getItem("postId"))?.postId
-      if(postId?.length>1){
-        // console.log("publish block");
-        
-        const response = await updateRequest(`${url}/post/publish/${postId}`,{published : true})
+        const response = await updateRequest(`${url}/post/publish/${id}`,{published : true})
         if (response.status !== 201) {
           toast("Error while creating post")
         }
         if(response.status==201){
-          // console.log("published");
           sessionStorage.clear()  //* this feature added cuz if we create a new form,then old data is already present
-          
           window.location.pathname = "/"
         }
-      }
-      
     } catch (error) {}
   }
 
-  useEffect(()=>{
-      if(window.location.pathname != `${url}/create`){
-        sessionStorage.clear()
-      }
-  },[window.location])
-
+  // problem is my old data is not coming
 
   return (
     <>
        <div className="save-post-container">
       {sessionStorage.getItem("hasStarted") ? "Saved in Draft" : ""}
       </div> 
-    <form onSubmit={handleSubmit(submitHandler)} className="form-container">
+    <form onSubmit={handleSubmit(publishPostHandler)} className="form-container">
       {/* <label htmlFor="position">Position</label>
       <input type="text" id="position" placeholder="For which position you interviewed??"/>
       <label htmlFor="company-name">Company name</label>
@@ -205,4 +183,4 @@ const Create = () => {
   );
 };
 
-export default Create;
+export default DraftWrite;

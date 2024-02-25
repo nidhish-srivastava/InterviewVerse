@@ -1,0 +1,2 @@
+remove navbar when creating draft
+default values of draft aint fetching

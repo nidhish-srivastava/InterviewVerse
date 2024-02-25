@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react";
-import { FormData } from "./Create";
+import { FormData } from "./DraftWrite";
 import { Link } from "react-router-dom";
 import PostCard from "../components/PostCard";
 import { url } from "../utils";

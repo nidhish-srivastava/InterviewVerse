@@ -3,7 +3,6 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import Create from "./pages/Create";
 import MyInterviewTracks from "./pages/MyInterviewTracks";
 import MySinglePost from "./pages/MySinglePost";
 import Update from "./pages/Update";
@@ -19,7 +18,8 @@ import UserReadingList from "./pages/UserReadingList";
 import UserCustomLists from "./pages/UserCustomLists";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Drafts from "./pages/Drafts";
-import DraftEdit from "./pages/DraftEdit";
+import DraftRedirect from "./pages/DraftRedirect";
+import DraftWrite from "./pages/DraftWrite";
 
 const Layout = () => {
   return (
@@ -55,10 +55,6 @@ const router = createBrowserRouter([
         element: <UserProfile />,
       },
       {
-        path: "/new-post",
-        element: <Create />,
-      },
-      {
         path : "/drafts",
         element : (
           <ProtectedRoute>
@@ -67,10 +63,18 @@ const router = createBrowserRouter([
         )
       },
       {
+        path : "/draft",
+        element : (
+          <ProtectedRoute>
+            <DraftRedirect/>
+          </ProtectedRoute>
+        )
+      },
+      {
         path : "/draft/:id",
         element : (
           <ProtectedRoute>
-            <DraftEdit/>
+            <DraftWrite/> 
           </ProtectedRoute>
         )
       },

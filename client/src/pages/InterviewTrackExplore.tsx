@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { FormData } from "./Create";
+import { FormData } from "./DraftWrite";
 import { Link, useSearchParams } from "react-router-dom";
 import PostCard from "../components/PostCard";
 import InputTag from "../components/InputTag";

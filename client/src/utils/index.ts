@@ -11,7 +11,6 @@ export const timeToReadPost = (post : string | undefined) =>{
 }
 
 export const updateRequest = async(url : string | undefined,data : any)=>{
-  console.log(data);
   try {
    return await fetch(`${url}`,{
       method : "PATCH",

@@ -5,6 +5,7 @@ import Button from "../components/Button";
 import useFetchHook from "../hooks/useFetchHook";
 import { url } from "../utils";
 import SkeletonLoader from "../components/SkeletonLoader";
+import { LoaderIcon } from "react-hot-toast";
 
 const MySinglePost = () => {
   const { id } = useParams();
@@ -42,26 +43,40 @@ type DeleteModalType = {
 };
 
 function DeleteModal({ setModal }: DeleteModalType) {
+  const [deleteLoading,setDeleteLoading] = useState(false)
   const navigate = useNavigate()
   const { id } = useParams();
   const deleteHandler = async () => {
-    await fetch(`${url}/post/${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
-    navigate(`/me/interview-tracks`)
+    setDeleteLoading(true)
+    try {
+      await fetch(`${url}/post/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
+      navigate(`/me/interview-tracks`)
+    } catch (error) {
+      
+    }
+    finally{
+      setDeleteLoading(false)
+    }
   };
   return (
     <div className="deleteModal">
       <div className="modalContent">
-      <h2>
+      <h3 style={{marginBottom : "1rem"}}>
         This is a desctructive action,R u sure u wanna delete your interview
         track
-      </h2>
-      <Button  onClick={() => setModal(false)}>Cancel</Button>
-      <Button  onClick={deleteHandler}>Delete</Button>
+      </h3>
+      <div className="delete-modal-button-container">
+      <Button style={{"padding" : ".4rem"}} onClick={() => setModal(false)}>Cancel</Button>
+      {
+        deleteLoading ? <Button className="loading-btn"><LoaderIcon/> Deleting</Button> : 
+        <Button style={{"padding" : ".4rem"}} onClick={deleteHandler}>Delete</Button>
+      }
+      </div>
       </div>
     </div>
   );

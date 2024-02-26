@@ -4,6 +4,7 @@ import { FormData,tagType } from "./DraftWrite";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
 import { url } from "../utils";
+import  { LoaderIcon } from "react-hot-toast";
 
 const Update = () => {
   const {id} = useParams()
@@ -11,6 +12,7 @@ const Update = () => {
     JSON.parse(sessionStorage.getItem("update-form") || "")?.tags || []
   );
   const navigate = useNavigate();
+  const [updateLoader,setUpdateLoader] = useState(false)
 
   const { handleSubmit, register } = useForm({
     defaultValues: {
@@ -41,21 +43,28 @@ const Update = () => {
       topic: data.topic,
       details: data.details,
     };
-    const response = await fetch(
-      `${url}/post/${id}`,
-      {
-        method: "PATCH",
-        body: JSON.stringify(updateFormData),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
+    setUpdateLoader(true)
+    try {
+      const response = await fetch(
+        `${url}/post/${id}`,
+        {
+          method: "PATCH",
+          body: JSON.stringify(updateFormData),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
+      if (response.status == 201) {
+        sessionStorage.clear()
+        navigate(`/me/interview-tracks`);
       }
-    );
-    if (response.status == 200) {
-      sessionStorage.clear()
-      alert("Updated Successully");
-      navigate(`/me/interview-tracks`);
+    } catch (error) {
+      
+    }
+    finally{
+      setUpdateLoader(false)
     }
   };
    
@@ -88,7 +97,10 @@ const Update = () => {
           </span>
         ))}
       </div>
+      {
+        updateLoader ? <Button className='loading-btn'><LoaderIcon/> Updating</Button>: 
       <Button btnType="submit">Update</Button>
+      }
     </form>
     </>
   );

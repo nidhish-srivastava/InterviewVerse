@@ -13,8 +13,12 @@ const SinglePost = () => {
     <>
       <Toaster />
     <h4 className="center" style={{marginTop : "2rem"}}>{error}</h4>
-        <SkeletonLoader isLoading={isLoading}/>       
+    {
+      isLoading ? 
+      <SkeletonLoader isLoading={isLoading}/>       
+      : 
         <FullSinglePost show={false} singlePostObj={data} />
+    }
     </>
   );
 };

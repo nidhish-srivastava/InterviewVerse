@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import Button from "../components/Button";
 import { updateRequest, url } from "../utils";
-import toast from "react-hot-toast";
+import toast, { LoaderIcon } from "react-hot-toast";
 import { useParams } from "react-router-dom";
 
 export type tagType = {
@@ -28,6 +28,7 @@ export type FormData = {
 
 const DraftWrite = () => {
     const {id} = useParams()
+    const [publishLoader,setPublishLoader] = useState(false)
     const { register, handleSubmit,watch,setValue } = useForm<FormData>({
       defaultValues : {}
     });
@@ -106,6 +107,7 @@ const DraftWrite = () => {
   },[watchAllFields])
 
   const publishPostHandler = async () => {
+    setPublishLoader(true)
     try {
         const response = await updateRequest(`${url}/post/publish/${id}`,{published : true})
         if (response.status !== 201) {
@@ -113,9 +115,12 @@ const DraftWrite = () => {
         }
         if(response.status==201){
           sessionStorage.clear()  //* this feature added cuz if we create a new form,then old data is already present
-          window.location.pathname = "/"
+          window.location.pathname = "/me/interview-tracks"
         }
     } catch (error) {}
+    finally{
+      setPublishLoader(false)
+    }
   }
 
   // problem is my old data is not coming
@@ -123,7 +128,7 @@ const DraftWrite = () => {
   return (
     <>
        <div className="save-post-container">
-      {sessionStorage.getItem("hasStarted") ? "Saved in Draft" : ""}
+      {sessionStorage.getItem("hasStarted") ? "Saved as Draft" : ""}
       </div> 
     <form onSubmit={handleSubmit(publishPostHandler)} className="form-container">
       {/* <label htmlFor="position">Position</label>
@@ -152,9 +157,13 @@ const DraftWrite = () => {
       />
       <div style={{display : "flex",gap : '1rem'}}>
         {tags?.map((e) => (
-          <button>
+          <button type="button">
             {e.name}{" "}
-            <span onClick={() => deleteTag(e.id)}>
+            <span onClick={() => {
+              deleteTag(e.id)
+            }
+            }
+            >
             &nbsp;&nbsp;<b>
             <i className="fa-solid fa-xmark"></i>
             </b>
@@ -173,9 +182,13 @@ const DraftWrite = () => {
       />
       <div className="center">
         {canPublish ? 
+        <>
+        {
+          publishLoader ? <Button className='loading-btn'><LoaderIcon/> Publishing</Button>: 
           <Button btnType="submit">Publish</Button>
-          :
-          <Button style={{"opacity" : "0.5"}}>Publish</Button>
+        }
+        </>
+          : null
       }
       </div>
     </form>

@@ -36,19 +36,18 @@ const MyInterviewTracks = () => {
   return (
     <>
         <h3 className="center" style={{marginTop : "2rem"}}>My Interview Experiences</h3>
-      <PostsContainer>
       {
         loading ? <div className="skeleton-loading">
           <Skeleton count={5}/>
-          </div> : <>
+          </div> : 
+          <PostsContainer>
           {userPosts.map((e)=>(
             <Link to={`${e?._id}`}  key={e?._id}>
               <PostCard post={e} show = {false}/>
             </Link>
           ))}
-          </>
-      }
           </PostsContainer>
+      }
     </>
   );
 };

@@ -720,9 +720,6 @@ button {
       cursor: pointer;
       transition: background-color 0.3s ease;
 
-      &:first-child {
-        background-color: #ddd;
-      }
 
       &:last-child {
         background-color: #f44336;
@@ -1096,4 +1093,9 @@ button {
 
 .social-icons a:hover {
   color: #007bff; /* Change icon color on hover */
+}
+
+.delete-modal-button-container{
+  display: flex;
+  justify-content: center;
 }

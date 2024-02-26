@@ -70,7 +70,7 @@ function DeleteModal({ setModal }: DeleteModalType) {
         This is a desctructive action,R u sure u wanna delete your interview
         track
       </h3>
-      <div className="delete-modal-button-container">
+      <div className="submit-button-container">
       <Button style={{"padding" : ".4rem"}} onClick={() => setModal(false)}>Cancel</Button>
       {
         deleteLoading ? <Button className="loading-btn"><LoaderIcon/> Deleting</Button> : 

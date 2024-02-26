@@ -117,13 +117,12 @@ const DraftWrite = () => {
           sessionStorage.clear()  //* this feature added cuz if we create a new form,then old data is already present
           window.location.pathname = "/me/interview-tracks"
         }
-    } catch (error) {}
-    finally{
+    } catch (error) {
       setPublishLoader(false)
     }
+    finally{
+    }
   }
-
-  // problem is my old data is not coming
 
   return (
     <>
@@ -180,7 +179,7 @@ const DraftWrite = () => {
         {...register("details")}
         placeholder="Explain in detail"
       />
-      <div className="center">
+      <div className="submit-button-container">
         {canPublish ? 
         <>
         {

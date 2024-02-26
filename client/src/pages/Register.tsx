@@ -39,10 +39,10 @@ const Register = () => {
       setLoggedInUser({username : data.username})
       window.location.href = "/"
     } catch (err) {
+      setIsLoading(false)
       return alert("Error while creating account");
     }
     finally{
-      setIsLoading(false)
     }
   };
 

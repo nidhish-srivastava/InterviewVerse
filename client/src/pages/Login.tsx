@@ -38,9 +38,10 @@ const Login = () => {
       setLoggedInUser({username : data.username})
       window.location.href = "/"
     } catch (error) {
+      setIsLoading(false)
+      return alert("Error while creating account");
     }
     finally{
-      setIsLoading(false)
     }
   }
   return (

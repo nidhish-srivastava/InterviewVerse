@@ -1,9 +1,11 @@
 import { useEffect } from "react"
 import { useTrackerContext } from "../context/context"
 import { url } from "../utils"
+import { useNavigate } from "react-router-dom"
 
 function DraftRedirect() {
     const {loggedInUser} = useTrackerContext()
+    const navigate = useNavigate()
     useEffect(()=>{
     const createPost = async() =>{
         try {
@@ -17,7 +19,7 @@ function DraftRedirect() {
           });
           if(response.status==201){
             const data = await response.json()
-            location.replace(`/draft/${data?.postId}`)
+            navigate(`/draft/${data?.postId}`,{replace : true})
           }
         } catch (error) {
           

@@ -1,11 +1,15 @@
+import { Suspense, lazy } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import MyInterviewTracks from "./pages/MyInterviewTracks";
+const MyInterviewTracks = lazy(()=>import("./pages/MyInterviewTracks"))
+// import MyInterviewTracks from "./pages/MyInterviewTracks";
 import MySinglePost from "./pages/MySinglePost";
 import Update from "./pages/Update";
+// const SinglePost = lazy(()=>import("./pages/SinglePost"))
 import SinglePost from "./pages/SinglePost";
 import UserProfile from "./pages/UserProfile";
 import MyLists from "./pages/MyLists";
@@ -20,6 +24,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Drafts from "./pages/Drafts";
 import DraftRedirect from "./pages/DraftRedirect";
 import DraftWrite from "./pages/DraftWrite";
+import SkeletonLoader from "./components/SkeletonLoader";
 
 const Layout = () => {
   return (
@@ -47,7 +52,9 @@ const router = createBrowserRouter([
       },
       {
         path: "/:id/:id",
-        element: <SinglePost />,
+        element: (
+          <SinglePost />
+        )
       },
       {
         path: "/:username",
@@ -103,9 +110,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/me/interview-tracks",
-        element:(
+        element:
+        (
           <ProtectedRoute>
+            <Suspense fallback={<SkeletonLoader isLoading={true}/>}>
             <MyInterviewTracks />
+            </Suspense>
           </ProtectedRoute>
         )
       },

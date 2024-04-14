@@ -1,13 +1,13 @@
-import { useEffect } from "react";
-import Canvas from "../components/Landing/Canvas";
+import { Suspense, lazy, useEffect } from "react";
 import Features from "../components/Landing/Features";
 import Header from "../components/Landing/Header";
-import LazyShow from "../components/Landing/LazyShow";
 import MainHero from "../components/Landing/MainHero";
 import MainHeroImage from "../components/Landing/MainHeroImage";
 import { useTrackerContext } from "../context/context";
 import { url } from "../utils";
-import InterviewTrackExplore from "./InterviewTrackExplore";
+const InterviewTrackExplore = lazy(()=>import("./InterviewTrackExplore"))
+const Canvas = lazy(()=>import("../components/Landing/Canvas"))
+const LazyShow = lazy(()=> import("../components/Landing/LazyShow"))
 
 function Landing() {
   const { loggedInUser, setLoggedInUser, setIsAuthenticated,setIsLoading,isLoading } = useTrackerContext();
@@ -46,9 +46,9 @@ function Landing() {
 
   return loggedInUser ? (
     // If logged in, show the dashboard
-    <>
+    <Suspense>
       <InterviewTrackExplore/>
-    </>
+    </Suspense>
   ) : (
     // If not logged in, show the landing page
     <div className={`bg-background grid gap-y-16 overflow-hidden`}>
@@ -63,13 +63,17 @@ function Landing() {
         </div>
         <MainHeroImage />
       </div>
+      <Suspense>
       <Canvas />
+      </Suspense>
+      <Suspense>
       <LazyShow>
         <>
           <Features />
           {/* <Canvas /> */}
         </>
       </LazyShow>
+      </Suspense>
     </div>
   );
 }

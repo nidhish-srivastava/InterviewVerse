@@ -1,5 +1,5 @@
-import { Auth } from "../mongodb/model";
 import express, { Request, Response, Router } from "express";
+import { Auth } from "../mongodb/model";
 import bcrypt, { hashSync } from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";

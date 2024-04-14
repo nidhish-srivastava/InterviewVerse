@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Suspense, lazy, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTrackerContext } from "../context/context";
 import InputTag from "../components/InputTag";
@@ -6,7 +6,8 @@ import Button from "../components/Button";
 import { url } from "../utils";
 import { LoaderIcon } from "react-hot-toast";
 import loginanimation from "../assets/loginainmation.json";
-import Lottie from "lottie-react";
+const Lottie = lazy(() => import("lottie-react"));
+
 
 const Register = () => {
   const { setLoggedInUser } = useTrackerContext();
@@ -53,7 +54,9 @@ const Register = () => {
       </Link>
       <div className="auth-form-container">
         <div className="hidden sm:block">
+          <Suspense>
           <Lottie animationData={loginanimation} />
+          </Suspense>
         </div>
         <form onSubmit={handleSubmit} className="auth-form-group">
           <InputTag

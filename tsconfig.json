@@ -15,9 +15,6 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "paths": {
-      "*": ["node_modules", "src/*"]
-    },
     "plugins": [
       {
         "transform": "typescript-transform-path",

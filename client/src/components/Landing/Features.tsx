@@ -1,15 +1,13 @@
-import feature1 from "../../assets/product1.jpg"
-import feature2 from "../../assets/product2.jpg"
 const features = [
   {
     name : "Search and Learn",
     description : "Explore interview experiences shared by other users and gain valuable insights.",
-    icon : feature1
+    icon : "https://illustrations.popsy.co/red/engineer.svg"
   },
   {
     name : "Track your Progress",
     description : "Create organized tracks for each interview process and stay on top of your preparations.",
-    icon : feature2
+    icon : "https://illustrations.popsy.co/red/home-office.svg"
   },
   // {
   //   name : "Share your Knowledge",

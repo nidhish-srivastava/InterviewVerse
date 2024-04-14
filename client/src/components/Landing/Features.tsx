@@ -9,16 +9,22 @@ const features = [
     description : "Create organized tracks for each interview process and stay on top of your preparations.",
     icon : "https://illustrations.popsy.co/red/home-office.svg"
   },
-  // {
-  //   name : "Share your Knowledge",
-  //   description : "Contribute to a community of fellow interviewees by sharing your own experiences and insights.",
-  //   icon : "https://illustrations.popsy.co/red/communication.svg"
-  // }
+  {
+    name : "Share your Knowledge",
+    description : "Contribute to a community of fellow interviewees by sharing your own experiences and insights.",
+    icon : "https://illustrations.popsy.co/red/communication.svg"
+  },
+  {
+    name: "Explore User Profiles",
+    description: "Visit profiles of other users to discover their interview experiences, tracks, and contributions to the community.",
+    icon: "https://illustrations.popsy.co/red/shaking-hands.svg"
+  }
+  
 ]
 
 const Features = () => {
   return (
-    <div className={`py-6 bg-background`} id="features">
+    <div className={`pt-6 pb-24 bg-background`} id="features">
       <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div className="text-4xl sm:text-6xl leading-8 font-extrabold tracking-tight text-primary text-center ">
             Features

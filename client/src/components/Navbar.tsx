@@ -5,7 +5,7 @@ import { Draft } from "./Icons/Draft";
 import { BookMarkIcon } from "./Icons/Bookmark";
 import { LogoutIcon } from "./Icons/Logout";
 import logo from "../assets/logo.png";
-import {  MdOutlineExplore } from "react-icons/md";
+// import {  MdOutlineExplore } from "react-icons/md";
 import { IoCreateOutline } from "react-icons/io5";
 import { IoMdSave } from "react-icons/io";
 
@@ -41,10 +41,10 @@ const Navbar = ({}: NavbarProps) => {
         <Link to="/" className="flex items-center justify-center sm:justify-normal w-full sm:w-auto">
           <img alt="logo" className="w-auto h-8" src={logo} />
         </Link>
-        <Link to="/interview-tracks" className="hidden text-xl sm:flex items-center gap-1 font-medium">
+        {/* <Link to="/interview-tracks" className="hidden text-xl sm:flex items-center gap-1 font-medium">
           Explore
           <MdOutlineExplore/>
-        </Link>
+        </Link> */}
       </div>
 
       {/* Right section of the navbar */}

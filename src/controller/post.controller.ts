@@ -33,7 +33,7 @@ export const getAll = async (req: Request, res: Response) => {
 export const searchUserPosts = async (req: Request, res: Response) => {
   const { username } = req.params;
   try {
-    const response = await Post.find({ username: username });
+    const response = await Post.find({ username: username,published : true });
     if (response.length == 0) {
       res.status(404).send(`<h3>${username} not found</h3>`);
     }

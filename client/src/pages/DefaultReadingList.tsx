@@ -5,6 +5,7 @@ import PostCard from "../components/PostCard";
 import { url } from "../utils";
 import useFetchHook from "../hooks/useFetchHook";
 import SkeletonLoader from "../components/SkeletonLoader";
+import Navbar from "../components/Navbar";
 
 function DefaultReadingList() {
   const {loggedInUser} = useTrackerContext()
@@ -12,6 +13,7 @@ function DefaultReadingList() {
         
     return (
     <>
+    <Navbar/>
       <h4 className="center" style={{marginTop:"2rem"}}>Default Reading List</h4>
     <h4 className="center" style={{marginTop : "2rem"}}>{error}</h4>
        <SkeletonLoader isLoading={isLoading}/>

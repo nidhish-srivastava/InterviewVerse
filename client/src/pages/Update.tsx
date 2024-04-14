@@ -71,25 +71,31 @@ const Update = () => {
 
   return (
     <>
-    <form className="form-container" onSubmit={handleSubmit(submitHandler)}>
-      <label htmlFor="Topic">Topic</label>
-      <input type="text" {...register("topic")} id="topic" />
-      <label htmlFor="desc">Description</label>
-      <input type="text" {...register("desc")} id="desc" />
-      <label htmlFor="Details">Details</label>
+    <h3 className="text-center text-2xl font-medium">Update your track</h3>
+    <form className="p-6 rounded-lg w-4/5 mx-auto" onSubmit={handleSubmit(submitHandler)}>
+      <label className="font-bold text-lg" htmlFor="Topic">Topic</label>
+      <input type="text"
+          className="border border-gray-300 p-2 my-2 rounded-md w-full"
+      {...register("topic")} id="topic" />
+      <label className="font-bold text-lg" htmlFor="desc">Description</label>
+      <input type="text" {...register("desc")}
+          className="border border-gray-300 p-2 my-2 rounded-md w-full"
+      
+      id="desc" />
+      <label className="font-bold text-lg" htmlFor="Details">Details</label>
       <textarea
         id="Details"
         cols={30}
         rows={10}
         {...register("details")}
+        className="border border-gray-300 p-2 my-2 rounded-md w-full"
       ></textarea>
-      <div>
-        <label htmlFor="tags">Tags</label>
-        <br />
+        <label htmlFor="tags" className="font-bold text-lg">Tags</label>
+      <div className="flex gap-4 mb-4 mt-3">
         {tagNames.map((tagName, index) => (
           <span key={index}>
             <input
-            style={{width : "fit-content"}}
+            className="bg-blue-500 outline-none text-white px-4 py-2 rounded-md flex items-center"
               type="text"
               value={tagName.name}
               onChange={(event) => editTagHandler(event, tagName.id)} // Step 3: Pass the index as the second argument
@@ -97,10 +103,12 @@ const Update = () => {
           </span>
         ))}
       </div>
+      <div className="text-center mt-12">
       {
         updateLoader ? <Button className='loading-btn'><LoaderIcon/> Updating</Button>: 
-      <Button btnType="submit">Update</Button>
+        <Button btnType="submit">Update</Button>
       }
+      </div>
     </form>
     </>
   );

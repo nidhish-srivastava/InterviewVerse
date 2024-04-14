@@ -6,7 +6,7 @@ type props = {
 
 function UserProfileSections({username} : props) {
   return (
-      <div className="my-lists-bar">
+      <div className="flex items-center gap-8">
         <NavLink
         end
           to={`/${username}`}

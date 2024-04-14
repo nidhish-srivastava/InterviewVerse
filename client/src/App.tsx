@@ -1,15 +1,11 @@
 import { Suspense, lazy } from "react";
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-const MyInterviewTracks = lazy(()=>import("./pages/MyInterviewTracks"))
-// import MyInterviewTracks from "./pages/MyInterviewTracks";
+const MyInterviewTracks = lazy(() => import("./pages/MyInterviewTracks"));
 import MySinglePost from "./pages/MySinglePost";
 import Update from "./pages/Update";
-// const SinglePost = lazy(()=>import("./pages/SinglePost"))
 import SinglePost from "./pages/SinglePost";
 import UserProfile from "./pages/UserProfile";
 import MyLists from "./pages/MyLists";
@@ -20,154 +16,139 @@ import SavedLists from "./pages/SavedLists";
 import ReadingHistory from "./pages/ReadingHistory";
 import UserReadingList from "./pages/UserReadingList";
 import UserCustomLists from "./pages/UserCustomLists";
-import ProtectedRoute from "./components/ProtectedRoute";
 import Drafts from "./pages/Drafts";
 import DraftRedirect from "./pages/DraftRedirect";
 import DraftWrite from "./pages/DraftWrite";
 import SkeletonLoader from "./components/SkeletonLoader";
-
-const Layout = () => {
-  return (
-    <>
-      <Navbar />
-      <Outlet />
-    </>
-  );
-};
-
-// I have created two types of Layouts
+import Landing from "./pages/Landing";
+import CheckAuthentication from "./components/CheckAuthentication";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path : "/interview-tracks",
-        element : <InterviewTrackExplore/>
-      },
-      {
-        path: "/:id/:id",
-        element: (
-          <SinglePost />
-        )
-      },
-      {
-        path: "/:username",
-        element: <UserProfile />,
-      },
-      {
-        path : "/drafts",
-        element : (
-          <ProtectedRoute>
-            <Drafts/>
-          </ProtectedRoute>
-        )
-      },
-      {
-        path : "/draft",
-        element : (
-          <ProtectedRoute>
-            <DraftRedirect/>
-          </ProtectedRoute>
-        )
-      },
-      {
-        path : "/draft/:id",
-        element : (
-          <ProtectedRoute>
-            <DraftWrite/> 
-          </ProtectedRoute>
-        )
-      },
-      {
-        path : "/me/lists",
-        element : (
-          <ProtectedRoute>
-            <MyLists/>
-          </ProtectedRoute>
-        )
-      },
-      {
-        path : "/me/lists/custom/:id",
-        element : (
-          <ProtectedRoute>
-          <CustomListsPosts/>
-          </ProtectedRoute>
-        )
-      },
-      {
-        path : "/me/lists/default",
-        element : (
-          <ProtectedRoute>
-            <DefaultReadingList/>
-          </ProtectedRoute>
-        ) 
-      },
-      {
-        path: "/me/interview-tracks",
-        element:
-        (
-          <ProtectedRoute>
-            <Suspense fallback={<SkeletonLoader isLoading={true}/>}>
-            <MyInterviewTracks />
-            </Suspense>
-          </ProtectedRoute>
-        )
-      },
-      {
-        path: "/:id/interview-tracks/:id",
-        element: (
-          <ProtectedRoute>
-            <MySinglePost />
-          </ProtectedRoute>
-        )
-      },
-      {
-        path: "/:id/interview-tracks/:id/update",
-        element: (
-          <ProtectedRoute>
-            <Update />
-          </ProtectedRoute>
-        )
-      },
-      {
-        path : "/:username/reading-lists",
-        element : (
-          <ProtectedRoute>
-          <UserReadingList/>
-          </ProtectedRoute>
-        )
-      },
-      {
-        path : "/:username/reading-lists/:id",
-        element : (
-          <ProtectedRoute>
-          <UserCustomLists/>
-          </ProtectedRoute>
-        )
-      },
-      {
-        path : "/me/saved-lists",
-        element : (
-          <ProtectedRoute>
-          <SavedLists/>
-          </ProtectedRoute>
-        )
-      },
-      {
-        path : "/me/reading-history",
-        element : (
-          <ProtectedRoute>
-          <ReadingHistory/>
-          </ProtectedRoute>
-        )
-      }
-    ],
+    element: 
+    <Landing />
+  },
+  {
+    path: "/interview-tracks",
+    element:
+    <CheckAuthentication>
+      <InterviewTrackExplore />
+    </CheckAuthentication>
+  },
+  {
+    path: "/:id/:id",
+    element: <SinglePost />,
+  },
+  {
+    path: "/:username",
+    element: <UserProfile />,
+  },
+  {
+    path: "/drafts",
+    element: (
+      <CheckAuthentication>
+        <Drafts />
+      </CheckAuthentication>
+    ),
+  },
+  {
+    path: "/draft",
+    element: (
+      <CheckAuthentication>
+        <DraftRedirect />
+      </CheckAuthentication>
+    ),
+  },
+  {
+    path: "/draft/:id",
+    element: (
+        <CheckAuthentication>
+        <DraftWrite />
+        </CheckAuthentication>
+    ),
+  },
+  {
+    path: "/me/lists",
+    element: (
+      <CheckAuthentication>
+        <MyLists />
+      </CheckAuthentication>
+    ),
+  },
+  {
+    path: "/me/lists/custom/:id",
+    element: (
+      <CheckAuthentication>
+        <CustomListsPosts />
+      </CheckAuthentication>
+    ),
+  },
+  {
+    path: "/me/lists/default",
+    element: (
+      <CheckAuthentication>
+        <DefaultReadingList />
+      </CheckAuthentication>
+    ),
+  },
+  {
+    path: "/me/interview-tracks",
+    element: (
+      <CheckAuthentication>
+        <Suspense fallback={<SkeletonLoader isLoading={true} />}>
+          <MyInterviewTracks />
+        </Suspense>
+      </CheckAuthentication>
+    ),
+  },
+  {
+    path: "/:id/interview-tracks/:id",
+    element: (
+      <CheckAuthentication>
+        <MySinglePost />
+      </CheckAuthentication>
+    ),
+  },
+  {
+    path: "/:id/interview-tracks/:id/update",
+    element: (
+      <CheckAuthentication>
+        <Update />
+      </CheckAuthentication>
+    ),
+  },
+  {
+    path: "/:username/reading-lists",
+    element: (
+      <CheckAuthentication>
+        <UserReadingList />
+      </CheckAuthentication>
+    ),
+  },
+  {
+    path: "/:username/reading-lists/:id",
+    element: (
+      <CheckAuthentication>
+        <UserCustomLists />
+      </CheckAuthentication>
+    ),
+  },
+  {
+    path: "/me/saved-lists",
+    element: (
+      <CheckAuthentication>
+        <SavedLists />
+      </CheckAuthentication>
+    ),
+  },
+  {
+    path: "/me/reading-history",
+    element: (
+      <CheckAuthentication>
+        <ReadingHistory />
+      </CheckAuthentication>
+    ),
   },
   {
     path: "/register", //* This means that at register and Login page,we wont be seeing navbar and footer

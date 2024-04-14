@@ -4,6 +4,7 @@ import  { Toaster } from "react-hot-toast";
 import {url } from "../utils";
 import useFetchHook from "../hooks/useFetchHook";
 import SkeletonLoader from "../components/SkeletonLoader";
+import Navbar from "../components/Navbar";
 
 const SinglePost = () => {
   const { id } = useParams();
@@ -11,6 +12,7 @@ const SinglePost = () => {
 
   return (
     <>
+    <Navbar/>
       <Toaster />
     <h4 className="center" style={{marginTop : "2rem"}}>{error}</h4>
     {

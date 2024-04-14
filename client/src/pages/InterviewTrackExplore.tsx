@@ -7,6 +7,7 @@ import { url } from "../utils";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import PostsContainer from "../components/PostsContainer";
+import Navbar from "../components/Navbar";
 
 const InterviewTrackExplore = () => {
   const [posts, setPosts] = useState<FormData[]>([]);
@@ -44,15 +45,16 @@ const InterviewTrackExplore = () => {
 
   return (
     <Fragment>
-      <div className="search-bar">
+      <Navbar/>
+      <div className="w-full sm:w-1/2 mx-auto flex justify-center items-center">
         <InputTag
-          className="search-bar-input"
+          className="mt-4"
           type="search"
           placeholder="Search Topic or User"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <span className="search-icon">
+        <span>
           <i className="fa-solid fa-magnifying-glass"></i>
         </span>
       </div>

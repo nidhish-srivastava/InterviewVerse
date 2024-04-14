@@ -2,20 +2,25 @@ import { Link } from "react-router-dom";
 import LibraryCategories from "../components/MyLibraryCategories";
 import LibraryContainer from "../components/LibraryContainer";
 import CustomReadingLists from "../components/CustomReadingLists";
-
+import Navbar from "../components/Navbar";
+import { FaBook } from 'react-icons/fa'; 
 const MyLists = () => {
- 
-
   return (
-      <LibraryContainer>
-    <LibraryCategories/>
-    <div className="reading-list-container">
-      <Link to={`/me/lists/default`}>
-      <h3>Reading Lists</h3>
-      </Link>
-      <CustomReadingLists/>
+    <>
+    <Navbar/>
+    <LibraryContainer>
+      <LibraryCategories />
+      <div className="p-16 flex flex-col gap-16">
+      <div className="bg-white rounded-lg shadow-md p-4 flex items-center gap-4">
+        <FaBook className="text-blue-600 text-2xl" /> {/* Icon */}
+        <Link to={`/me/lists/default`} className="text-xl font-semibold text-gray-800 hover:text-blue-600 transition-colors">
+          Default Reading Lists
+        </Link>
       </div>
-      </LibraryContainer>
+      <CustomReadingLists />
+    </div>
+    </LibraryContainer>
+    </>
   );
 };
 

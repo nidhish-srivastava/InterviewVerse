@@ -1,7 +1,7 @@
 
 function LibraryContainer({children} : {children : React.ReactNode}) {
   return (
-    <main className="library-container">{children}</main>
+    <main className="w-4/5 mx-auto mt-8">{children}</main>
   )
 }
 

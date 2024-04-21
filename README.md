@@ -4,8 +4,9 @@
 
 ## Technologies Used
 
-  - [Reactjs](https://https://react.dev/) , [ExpressJs](https://expressjs.com/) 
-  - [Sass](https://sass-lang.com/) - Styling
+  - [Reactjs](https://https://react.dev/) - Frontend
+  - [ExpressJs](https://expressjs.com/) - Backend
+  - [TailwindCss](https://tailwindcss.com/) - Styling
   - [Typescipt](https://www.typescriptlang.org/)- Language
   - [MongoDB](https://www.mongodb.com/) - Database
   - [Vercel](https://vercel.com/) - Deployment
@@ -13,11 +14,11 @@
 
 ### Features
 
-* Custom authentication using JWT token
+* Create Interview Tracks, update it or delete it and read other's interview experiences
+  
+* User Authentication
 
-* Search a interview track based on Topic
-
-* Perform CRUD operations on your Interview Track
+* Search a interview track or user
 
 * Create Drafts and publish them accordingly
 

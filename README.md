@@ -20,7 +20,7 @@
 
 * Search a interview track or user
 
-* Create Drafts and publish them accordingly
+* Create Drafts and publish them accordingly and Real-time saving of draft while writing
 
 * Bookmark other's interview experience and create different types of reading lists based on our choice.
 

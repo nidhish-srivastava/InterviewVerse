@@ -9,6 +9,7 @@ function SavedLists() {
     <LibraryContainer>
       <LibraryCategories />
     </LibraryContainer>
+    <h4 className="mt-[2rem] text-center text-lg">Under development</h4>
     </>
   );
 }

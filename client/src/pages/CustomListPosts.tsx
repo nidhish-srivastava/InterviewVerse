@@ -24,7 +24,7 @@ function CustomListsPosts() {
       </h4>
       <SkeletonLoader isLoading={isLoading} />
       <div className="mt-8 flex justify-center items-center gap-4">  
-        <h3>{data?.name}</h3>
+        <h3 className="text-lg">{data?.name}</h3>
         <span>
           {data?.visibilty == "public" && (
             <span>

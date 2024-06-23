@@ -9,6 +9,7 @@ function ReadingHistory() {
     <LibraryContainer>
         <MyLibraryCategories/>
     </LibraryContainer>
+    <h4 className="mt-[2rem] text-center text-lg">Under development</h4>
     </>
   )
 }

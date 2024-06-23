@@ -14,7 +14,9 @@ function DefaultReadingList() {
     return (
     <>
     <Navbar/>
-      <h4 className="center" style={{marginTop:"2rem"}}>Default Reading List</h4>
+    <div>
+      <h4 className="mt-[2rem] text-center text-lg">Default Reading List</h4>
+    </div>
     <h4 className="center" style={{marginTop : "2rem"}}>{error}</h4>
        <SkeletonLoader isLoading={isLoading}/>
           <PostsContainer>

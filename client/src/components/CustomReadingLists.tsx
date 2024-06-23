@@ -15,21 +15,20 @@ function CustomReadingLists({ user, username }: props) {
 
   const userId = loggedInUser?.id;
 
+  const fetchMyCustomReadingLists = async () => {
+    const response = await fetch(`${url}/readingList/fetchAll/${userId}`);
+    const data = await response.json();
+    setReadingLists(data);
+  };
+  const fetchUserCustomReadingLists = async () => {
+    const response = await fetch(
+      `${url}/readingList/fetchPublicOnly/${username}`
+    );
+    const data = await response.json();
+    // console.log(data);
+    setReadingLists(data);
+  };
   useEffect(() => {
-    const fetchMyCustomReadingLists = async () => {
-      const response = await fetch(`${url}/readingList/fetchAll/${userId}`);
-      const data = await response.json();
-      setReadingLists(data);
-    };
-    const fetchUserCustomReadingLists = async () => {
-      const response = await fetch(
-        `${url}/readingList/fetchPublicOnly/${username}`
-      );
-      const data = await response.json();
-      console.log(data);
-      
-      setReadingLists(data);
-    };
     if (!user) {
       fetchMyCustomReadingLists();
     } else {
@@ -39,23 +38,36 @@ function CustomReadingLists({ user, username }: props) {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-    {readingLists?.map((list) => (
-      <Link
-        key={list._id}
-        to={!user ? `/me/lists/custom/${list.name}-${list._id}` : `${list.name}`}
-        className="bg-white rounded-lg shadow-md p-4 hover:shadow-xl transition duration-300"
-      >
-        <div className="mb-2">
-          <h3 className="text-xl font-semibold cursor-pointer">{list.name}</h3>
-          <p className="text-gray-500 text-sm">Last Updated: {dateFormatter(list.updatedAt)}</p>
-          <p className="text-gray-500 text-sm">Visibility: {list.visibilty}</p>
-        </div>
-        {/* You can add more fields here as needed */}
-      </Link>
-    ))}
-  </div>
+      {readingLists.length > 0 ? (
+        readingLists?.map((list) => (
+          <Link
+            key={list?._id}
+            to={
+              !user
+                ? `/me/lists/custom/${list?.name}-${list?._id}`
+                : `${list?.name}`
+            }
+            className="bg-white rounded-lg shadow-md p-4 hover:shadow-xl transition duration-300"
+          >
+            <div className="mb-2">
+              <h3 className="text-xl font-semibold cursor-pointer">
+                {list?.name}
+              </h3>
+              <p className="text-gray-500 text-sm">
+                Last Updated: {dateFormatter(list?.updatedAt)}
+              </p>
+              <p className="text-gray-500 text-sm">
+                Visibility: {list?.visibilty}
+              </p>
+            </div>
+            {/* You can add more fields here as needed */}
+          </Link>
+        ))
+      ) : (
+        <h3 className="text-center text-xl font-medium">No Reading Lists</h3>
+      )}
+    </div>
   );
 }
-
 
 export default CustomReadingLists;

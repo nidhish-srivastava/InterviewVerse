@@ -25,7 +25,7 @@ const MyInterviewTracks = () => {
       } catch (error) {
       }
       finally{
-      }
+      } 
       }
     getUserPosts()
   },[loggedInUser])

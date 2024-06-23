@@ -6,7 +6,6 @@ import Navbar from "../components/Navbar";
 
 function UserReadingList() {
   const { username } = useParams();
-
   return (
     <>
     <Navbar/>

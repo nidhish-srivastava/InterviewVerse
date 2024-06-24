@@ -5,7 +5,9 @@
   "author": "nidhish",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "build" : "tsc",
+    "start" : "node dist/index.js"
   },
   "dependencies": {
     "@types/bcrypt": "^5.0.0",

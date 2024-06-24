@@ -17,6 +17,10 @@ npm run dev
 
 ## Build and Run with Docker
 
+## Prerequisites
+
+- Docker: Make sure Docker is installed on your machine. You can download it from [here](https://www.docker.com/products/docker-desktop).
+
 ```sh
 docker build -t your-vite-app .
 ```

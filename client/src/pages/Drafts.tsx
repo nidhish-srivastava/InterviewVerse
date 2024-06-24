@@ -15,7 +15,7 @@ function Drafts() {
   return (
     <>
       <Navbar />
-      <h3 className="text-center mt-8">
+      <h3 className="text-center font-medium mt-8 text-xl">
         Drafts
       </h3>
       <SkeletonLoader isLoading={isLoading} />

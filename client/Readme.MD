@@ -9,14 +9,19 @@ This project is a frontend application built using Vite. Follow these instructio
 - [npm](https://www.npmjs.com/) (comes with Node.js)
 ```sh
 npm install
+```
 
+```sh
 npm run dev
-
 ```
 
 ## Build and Run with Docker
 
+```sh
 docker build -t your-vite-app .
+```
 
+```sh
 docker run -p 5173:5173 your-vite-app
+```
 

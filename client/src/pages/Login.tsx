@@ -4,7 +4,7 @@ import { useTrackerContext } from "../context/context";
 import InputTag from "../components/InputTag";
 import Button from "../components/Button";
 import { url } from "../utils";
-import { LoaderIcon } from "react-hot-toast";
+import toast, { LoaderIcon, Toaster } from "react-hot-toast";
 const Lottie = lazy(() => import("lottie-react"));
 import loginanimation from "../assets/loginainmation.json";
 
@@ -30,7 +30,7 @@ const Login = () => {
       });
 
       if (response.status != 200) {
-        alert("Check credentials");
+        toast.error("Check credentials");
         setIsLoading(false);
         return;
       }
@@ -40,12 +40,13 @@ const Login = () => {
       window.location.href = "/";
     } catch (error) {
       setIsLoading(false);
-      return alert("Error while creating account");
+      return toast.error("Error while creating account");
     } finally {
     }
   };
   return (
     <>
+    <Toaster/>
       <Link to={`/`}>
         <Button className="absolute top-4 left-2">Home</Button>
       </Link>

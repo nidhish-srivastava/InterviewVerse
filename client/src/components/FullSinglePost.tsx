@@ -219,7 +219,7 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
         <h1 className="text-2xl sm:text-3xl font-bold mb-2">
           {singlePostObj?.title}
         </h1>
-        <span className="text-base sm:text-lg text-gray-600 mb-4">
+        <span className=" text-gray-600 mb-4">
           {singlePostObj?.desc}
         </span>
         <br />
@@ -331,13 +331,13 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
           <hr className="my-4 border-gray-300" />
         </span>
         <br />
-        <p className="text-base sm:text-lg text-gray-800 mb-4">
+        <p className=" text-gray-800 mb-4">
           {singlePostObj?.details}
         </p>
         <div className="flex justify-center space-x-2 mb-4">
           {singlePostObj?.tags?.map((e) => (
             <button
-              className="bg-blue-500 text-white text-xs sm:text-sm md:text-base lg:text-lg rounded-md px-3 py-1"
+              className="bg-blue-500 text-white text-sm rounded-md px-3 py-1"
               key={e.id}
             >
               {e.name}

@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import PostCard from "../components/PostCard";
-import { url } from "../utils";
+import { titleParse, url } from "../utils";
 import PostsContainer from "../components/Layouts/PostsContainer";
 import UserProfileSections from "../components/UserProfileSections";
 import LibraryContainer from "../components/Layouts/LibraryContainer";
@@ -22,7 +22,7 @@ const SingleProfile = () => {
       <SkeletonLoader isLoading={isLoading} />
       <PostsContainer>
         {data?.map((e, i) => (
-          <Link to={`/${e.title}/${e._id}`} key={i}>
+          <Link to={`/${titleParse(e.title)}/${e._id}`} key={i}>
             <PostCard post={e} show={false} />
           </Link>
         ))}

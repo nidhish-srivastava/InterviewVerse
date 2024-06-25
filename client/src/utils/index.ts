@@ -36,3 +36,7 @@ export const dateFormatter = (date?: Date | string | number) => {
     });
     return formattedDate;
   };
+
+  export const titleParse = (title : string) =>{
+    return title.split(" ").join("-")
+  }

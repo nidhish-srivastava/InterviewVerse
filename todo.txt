@@ -1,16 +1,7 @@
-remove navbar when creating draft,show back to home page,
-
-dont show home page after login,fetch the interview tracks
-
-Dont show interview tracks if havent login,just keep the user on the landing page
-
 on the drafts page,show a side bar to the left like hashnode,where user can choose other drafts as well
-
-
 
 Big features
 
-new fields in the create interview track form
 Profile exploration
 Follow and unfollow users 
 Follow topics,so if who ever follow that topics,will get post from that topic

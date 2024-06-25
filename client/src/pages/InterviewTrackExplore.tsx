@@ -3,7 +3,7 @@ import { FormData } from "./DraftWrite";
 import { Link, useSearchParams } from "react-router-dom";
 import PostCard from "../components/PostCard";
 import InputTag from "../components/ui/InputTag";
-import { url } from "../utils";
+import { titleParse, url } from "../utils";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import PostsContainer from "../components/Layouts/PostsContainer";
@@ -68,7 +68,7 @@ const InterviewTrackExplore = () => {
       </div>
       <PostsContainer>
         {posts.map((e, i) => (
-          <Link to={`/${e.title}/${e._id}`} key={i}>
+          <Link to={`/${titleParse(e.title)}/${e._id}`} key={i}>
             <PostCard show={true} post={e} />
           </Link>
         ))}

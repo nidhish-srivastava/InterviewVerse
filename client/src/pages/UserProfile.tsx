@@ -1,12 +1,12 @@
 import { useParams, Link } from "react-router-dom";
 import PostCard from "../components/PostCard";
 import { url } from "../utils";
-import PostsContainer from "../components/PostsContainer";
+import PostsContainer from "../components/Layouts/PostsContainer";
 import UserProfileSections from "../components/UserProfileSections";
-import LibraryContainer from "../components/LibraryContainer";
+import LibraryContainer from "../components/Layouts/LibraryContainer";
 import useFetchHook from "../hooks/useFetchHook";
-import SkeletonLoader from "../components/SkeletonLoader";
-import Navbar from "../components/Navbar";
+import SkeletonLoader from "../components/ui/SkeletonLoader";
+import Navbar from "../components/Layouts/Navbar";
 
 const SingleProfile = () => {
   const { username } = useParams();
@@ -22,7 +22,7 @@ const SingleProfile = () => {
       <SkeletonLoader isLoading={isLoading} />
       <PostsContainer>
         {data?.map((e, i) => (
-          <Link to={`/${e.topic}/${e._id}`} key={i}>
+          <Link to={`/${e.title}/${e._id}`} key={i}>
             <PostCard post={e} show={false} />
           </Link>
         ))}

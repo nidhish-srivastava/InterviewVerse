@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { customReadingLists } from "./FullSinglePost";
-import { useTrackerContext } from "../context/context";
+import { customReadingLists } from "../FullSinglePost";
+import { useTrackerContext } from "../../context/context";
 import { Link } from "react-router-dom";
-import { dateFormatter, url } from "../utils";
+import { dateFormatter, url } from "../../utils";
 
 type props = {
   user?: boolean;

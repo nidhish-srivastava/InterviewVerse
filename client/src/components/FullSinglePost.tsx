@@ -212,9 +212,12 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
   return (
     <>
       <Toaster />
-      <main className="mx-auto p-5 max-w-screen-lg">
+      <main className="mx-auto max-w-screen-lg">
+      <div className="w-4/5 mx-auto mb-10">
+        <img src={singlePostObj?.image} className="w-2/5 mx-auto" alt="" />
+      </div>
         <h1 className="text-2xl sm:text-3xl font-bold mb-2">
-          {singlePostObj?.topic}
+          {singlePostObj?.title}
         </h1>
         <span className="text-base sm:text-lg text-gray-600 mb-4">
           {singlePostObj?.desc}

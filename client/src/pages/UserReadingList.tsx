@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
-import LibraryContainer from "../components/LibraryContainer";
+import LibraryContainer from "../components/Layouts/LibraryContainer";
 import UserProfileSections from "../components/UserProfileSections";
-import CustomReadingLists from "../components/CustomReadingLists";
-import Navbar from "../components/Navbar";
+import CustomReadingLists from "../components/Bookmarks/CustomReadingLists";
+import Navbar from "../components/Layouts/Navbar";
 
 function UserReadingList() {
   const { username } = useParams();

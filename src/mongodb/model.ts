@@ -11,9 +11,11 @@ interface iPost {
     name: string;
     id: string;
   }[];
-  topic: string;
+  title: string;
   username : string
   published : boolean
+  companyName : string
+  image : string
 }
 
 interface iAuth {
@@ -35,8 +37,10 @@ const postSchema = new Schema<iPost>(
         id: { type: String },
       },
     ],
-    topic: { type: String },
-    published : {type : Boolean,default : false}
+    title: { type: String },
+    published : {type : Boolean,default : false},
+    companyName : {type : String},
+    image : {type : String}
   },
   {
     timestamps: true,

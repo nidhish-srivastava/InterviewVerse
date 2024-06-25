@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import PostCard from "../components/PostCard";
-import PostsContainer from "../components/PostsContainer";
-import SkeletonLoader from "../components/SkeletonLoader";
+import PostsContainer from "../components/Layouts/PostsContainer";
+import SkeletonLoader from "../components/ui/SkeletonLoader";
 import { useTrackerContext } from "../context/context";
 import useFetchHook from "../hooks/useFetchHook";
 import { url } from "../utils";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Layouts/Navbar";
 
 function Drafts() {
   const { loggedInUser } = useTrackerContext();

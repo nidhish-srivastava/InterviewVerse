@@ -3,9 +3,9 @@ import { FormData } from "./DraftWrite";
 import { Link } from "react-router-dom";
 import PostCard from "../components/PostCard";
 import { url } from "../utils";
-import PostsContainer from "../components/PostsContainer";
+import PostsContainer from "../components/Layouts/PostsContainer";
 import { useTrackerContext } from "../context/context";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Layouts/Navbar";
 
 const MyInterviewTracks = () => {
   const {loggedInUser} = useTrackerContext()

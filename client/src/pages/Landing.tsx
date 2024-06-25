@@ -8,7 +8,7 @@ import { url } from "../utils";
 const InterviewTrackExplore = lazy(()=>import("./InterviewTrackExplore"))
 const Canvas = lazy(()=>import("../components/Landing/Canvas"))
 const LazyShow = lazy(()=> import("../components/Landing/LazyShow"))
-const Footer = lazy(()=> import("../components/Footer"))
+const Footer = lazy(()=> import("../components/Landing/Footer"))
 
 function Landing() {
   const { loggedInUser, setLoggedInUser, setIsAuthenticated,setIsLoading,isLoading } = useTrackerContext();

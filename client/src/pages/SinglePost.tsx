@@ -3,8 +3,8 @@ import FullSinglePost from "../components/FullSinglePost";
 import  { Toaster } from "react-hot-toast";
 import {url } from "../utils";
 import useFetchHook from "../hooks/useFetchHook";
-import SkeletonLoader from "../components/SkeletonLoader";
-import Navbar from "../components/Navbar";
+import SkeletonLoader from "../components/ui/SkeletonLoader";
+import Navbar from "../components/Layouts/Navbar";
 
 const SinglePost = () => {
   const { id } = useParams();

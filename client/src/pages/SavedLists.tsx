@@ -1,6 +1,6 @@
-import LibraryCategories from "../components/MyLibraryCategories";
-import LibraryContainer from "../components/LibraryContainer";
-import Navbar from "../components/Navbar";
+import LibraryCategories from "../components/Bookmarks/MyLibraryCategories";
+import LibraryContainer from "../components/Layouts/LibraryContainer";
+import Navbar from "../components/Layouts/Navbar";
 
 function SavedLists() {
   return (

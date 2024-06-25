@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import {  Auth } from "../mongodb/model";
+import { Auth } from "../mongodb/model";
 
 const findUserPromise = (userId: string | undefined): Promise<any> => {
   return Auth.findById(userId);
@@ -21,19 +21,17 @@ const fetchAllReadingLists = async (req: Request, res: Response) => {
   } catch (error) {}
 };
 
-const fetchPublicListsOfUser = async(req:Request,res:Response)=>{
-  const {username} = req.params
+const fetchPublicListsOfUser = async (req: Request, res: Response) => {
+  const { username } = req.params;
   try {
-    const user = await Auth.find({username : username})
-    const readingLists = user[0].readingLists
-    const filterPublicLists = readingLists.map((e:any)=>{
-      if(e.visibilty=='public') return e
-    })
-    res.json(filterPublicLists)
-  } catch (error) {
-    
-  }
-}
+    const user = await Auth.find({ username: username });
+    const readingLists = user[0].readingLists;
+    const filterPublicLists = readingLists.map((e: any) => {
+      if (e.visibilty == "public") return e;
+    });
+    res.json(filterPublicLists);
+  } catch (error) {}
+};
 
 // i need to fetch public reading lists only when i visit a specific user
 
@@ -58,12 +56,10 @@ const updateNameOfReadingList = async (req: Request, res: Response) => {
     const updatedUser = await findUserPromise(userId);
     const updatedReadingList = updatedUser.readingLists;
 
-    res
-      .status(200)
-      .json({
-        message: "Reading list name updated successfully",
-        updatedReadingList,
-      });
+    res.status(200).json({
+      message: "Reading list name updated successfully",
+      updatedReadingList,
+    });
   } catch (error) {}
 };
 
@@ -105,46 +101,54 @@ const insertInReadingList = async (req: Request, res: Response) => {
   res.status(201).json({ message: "Post added to reading list successfully" });
 };
 
-const fetchPostsFromDefaultList = async(req:Request,res:Response)=>{
-  const {userId} = req.params
-  const defaultList = await Auth.findOne({_id : userId}).populate({
-    path : 'savedPosts',
-    model : 'Post',
-    select : 'desc username details tags topic'
-  })
-  res.json(defaultList?.savedPosts)
-}
+const fetchPostsFromDefaultList = async (req: Request, res: Response) => {
+  const { userId } = req.params;
+  const defaultList = await Auth.findOne({ _id: userId }).populate({
+    path: "savedPosts",
+    model: "Post",
+    select: "desc username details tags title",
+  });
+  res.json(defaultList?.savedPosts);
+};
 
-const fetchPostsFromReadingList = async(req:Request,res:Response)=>{
-    const {userId,listId} = req.params
-    
-    const user = await Auth.findOne({ _id: userId, 'readingLists._id': listId })
-    .populate({
-        path: 'readingLists.posts',
-        model: 'Post',  // Specify the model to populate from
-        select : 'desc username details tags topic'
-    });
+const fetchPostsFromReadingList = async (req: Request, res: Response) => {
+  const { userId, listId } = req.params;
 
-    const readingLists = user?.readingLists.filter((e:any)=>e._id==listId)[0]
-    res.json(readingLists)
-}
+  const user = await Auth.findOne({
+    _id: userId,
+    "readingLists._id": listId,
+  }).populate({
+    path: "readingLists.posts",
+    model: "Post", // Specify the model to populate from
+    select: "desc username details tags title",
+  });
 
-export const removePostFromReadingList = async(req:Request,res:Response)=>{
-    const {listId,userId,postId} = req.body
-    try {
-        const update = await Auth.updateOne(
-            { _id: userId, 'readingLists._id': listId },
-            { $pull: { 'readingLists.$.posts': postId } }
-          )
-          if(update.modifiedCount==0){
-            return res.status(404).json({ message: 'User, reading list, or post not found' });
-          }
-          res.status(200).json({ message: 'Post removed from reading list successfully' });
-    } catch (error) {
-        
+  const readingLists = user?.readingLists.filter(
+    (e: any) => e._id == listId
+  )[0];
+  res.json(readingLists);
+};
+
+export const removePostFromReadingList = async (
+  req: Request,
+  res: Response
+) => {
+  const { listId, userId, postId } = req.body;
+  try {
+    const update = await Auth.updateOne(
+      { _id: userId, "readingLists._id": listId },
+      { $pull: { "readingLists.$.posts": postId } }
+    );
+    if (update.modifiedCount == 0) {
+      return res
+        .status(404)
+        .json({ message: "User, reading list, or post not found" });
     }
-}
-
+    res
+      .status(200)
+      .json({ message: "Post removed from reading list successfully" });
+  } catch (error) {}
+};
 
 export {
   createNewReadingList,
@@ -154,5 +158,5 @@ export {
   insertInReadingList,
   fetchPostsFromReadingList,
   fetchPostsFromDefaultList,
-  fetchPublicListsOfUser
+  fetchPublicListsOfUser,
 };

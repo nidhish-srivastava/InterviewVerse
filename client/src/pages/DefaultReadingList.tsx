@@ -1,11 +1,11 @@
 import { useTrackerContext } from "../context/context"
-import PostsContainer from "../components/PostsContainer";
+import PostsContainer from "../components/Layouts/PostsContainer";
 import { Link } from "react-router-dom";
 import PostCard from "../components/PostCard";
 import { url } from "../utils";
 import useFetchHook from "../hooks/useFetchHook";
-import SkeletonLoader from "../components/SkeletonLoader";
-import Navbar from "../components/Navbar";
+import SkeletonLoader from "../components/ui/SkeletonLoader";
+import Navbar from "../components/Layouts/Navbar";
 
 function DefaultReadingList() {
   const {loggedInUser} = useTrackerContext()

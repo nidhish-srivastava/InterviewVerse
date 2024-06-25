@@ -2,12 +2,12 @@ import { Fragment, useEffect, useState } from "react";
 import { FormData } from "./DraftWrite";
 import { Link, useSearchParams } from "react-router-dom";
 import PostCard from "../components/PostCard";
-import InputTag from "../components/InputTag";
+import InputTag from "../components/ui/InputTag";
 import { url } from "../utils";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import PostsContainer from "../components/PostsContainer";
-import Navbar from "../components/Navbar";
+import PostsContainer from "../components/Layouts/PostsContainer";
+import Navbar from "../components/Layouts/Navbar";
 
 const InterviewTrackExplore = () => {
   const [posts, setPosts] = useState<FormData[]>([]);
@@ -19,7 +19,7 @@ const InterviewTrackExplore = () => {
     setLoading(true);
     try {
       const res = await fetch(
-        `${url}/post?topic=${searchTerm}&username=${searchTerm}`
+        `${url}/post?title=${searchTerm}&username=${searchTerm}`
       );
       const data = await res.json();
       setPosts(data.getAllPost);
@@ -50,7 +50,7 @@ const InterviewTrackExplore = () => {
         <InputTag
           className="mt-4"
           type="search"
-          placeholder="Search Topic or User"
+          placeholder="Search"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
@@ -68,7 +68,7 @@ const InterviewTrackExplore = () => {
       </div>
       <PostsContainer>
         {posts.map((e, i) => (
-          <Link to={`/${e.topic}/${e._id}`} key={i}>
+          <Link to={`/${e.title}/${e._id}`} key={i}>
             <PostCard show={true} post={e} />
           </Link>
         ))}

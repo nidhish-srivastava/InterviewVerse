@@ -19,7 +19,7 @@ import UserCustomLists from "./pages/UserCustomLists";
 import Drafts from "./pages/Drafts";
 import DraftRedirect from "./pages/DraftRedirect";
 import DraftWrite from "./pages/DraftWrite";
-import SkeletonLoader from "./components/SkeletonLoader";
+import SkeletonLoader from "./components/ui/SkeletonLoader";
 import Landing from "./pages/Landing";
 import CheckAuthentication from "./components/CheckAuthentication";
 
@@ -156,7 +156,9 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+        <Login />
+    )
   },
 ]);
 

@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Auth, Post } from "../mongodb/model";
 import { cleanInput } from "../utils";
+import { generateUploadUrl } from "../utils/s3";
 
 export const getAll = async (req: Request, res: Response) => {
   const keyword = req.query
@@ -12,7 +13,7 @@ export const getAll = async (req: Request, res: Response) => {
           // { username: { $regex: req.query.username, $options: "i" } },
           // { topic: { $regex: req.query.topic, $options: "i" } },
           {username : cleanInput(req.query.username as string)},
-          {topic : cleanInput(req.query.topic as string)},
+          {title : cleanInput(req.query.title as string)},
           
         ],
       },
@@ -78,7 +79,7 @@ export const getSavedPosts = async (req: Request, res: Response) => {
     const response = await Auth.findById({ _id: userId }).populate({
       path: "savedPosts",
       model: "Post",
-      select: "desc username tags details topic",
+      select: "desc username tags details title",
     });
     res.json(response?.savedPosts)
   } catch (error) {}
@@ -114,15 +115,21 @@ export const checkIfSaved = async(req:Request,res:Response)=>{
   }
 }
 
+export const fetchS3url = async(req:Request,res:Response)=>{
+  const s3url = await generateUploadUrl()
+  res.send({s3url})
+}
+
 export const create = async (req: Request, res: Response) => {
-  const { desc, tags, details, topic, username,published } = req.body;
+  const { desc, tags, details, title, username,published ,image} = req.body;
   const newPost = new Post({
     desc,
     tags,
     details,
-    topic,
+    title : title,
     username,
-    published
+    published,
+    image
   });
   
   try {
@@ -147,10 +154,10 @@ export const deletePost = async (req: Request, res: Response) => {
 
 export const updatePost = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { desc, tags, details, topic } = req.body;
+  const { desc, tags, details, title,image } = req.body;
   const response = await Post.updateOne(
     { _id: id },
-    { desc: desc, tags: tags, details: details, topic: topic }
+    { desc: desc, tags: tags, details: details, title: title,image }
   );
   if(response.modifiedCount >= 1){
     res.status(201).json("Updated successfully")
@@ -161,7 +168,8 @@ export const publishPost = async(req:Request,res:Response) =>{
   const {id} = req.params
   const response = await Post.updateOne(
     {_id : id},
-    {published : true}
+    {published : true,
+    }
   )
   if(response.modifiedCount >= 1){
     res.status(201).json("Updated successfully")

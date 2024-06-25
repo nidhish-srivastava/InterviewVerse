@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 import FullSinglePost from "../components/FullSinglePost";
 import useFetchHook from "../hooks/useFetchHook";
 import { url } from "../utils";
-import SkeletonLoader from "../components/SkeletonLoader";
-import Navbar from "../components/Navbar";
+import SkeletonLoader from "../components/ui/SkeletonLoader";
+import Navbar from "../components/Layouts/Navbar";
 
 const MySinglePost = () => {
   const { id } = useParams();

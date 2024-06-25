@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import defaultDp from "../img/defauldp.jpg";
-import { Draft } from "./Icons/Draft";
-import { BookMarkIcon } from "./Icons/Bookmark";
-import { LogoutIcon } from "./Icons/Logout";
-import logo from "../assets/logo.png";
+import defaultDp from "../../assets/defauldp.jpg"
+import { Draft } from "../Icons/Draft";
+import { BookMarkIcon } from "../Icons/Bookmark";
+import { LogoutIcon } from "../Icons/Logout";
+import logo from "../../assets/logo.png";
 // import {  MdOutlineExplore } from "react-icons/md";
 import { IoCreateOutline } from "react-icons/io5";
 import { IoMdSave } from "react-icons/io";

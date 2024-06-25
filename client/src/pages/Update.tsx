@@ -2,7 +2,7 @@ import {   useState } from "react";
 import { useForm } from "react-hook-form";
 import { FormData,tagType } from "./DraftWrite";
 import { useNavigate, useParams } from "react-router-dom";
-import Button from "../components/Button";
+import Button from "../components/ui/Button";
 import { url } from "../utils";
 import  { LoaderIcon } from "react-hot-toast";
 
@@ -18,7 +18,7 @@ const Update = () => {
     defaultValues: {
       desc: JSON.parse(sessionStorage.getItem("update-form") || "").desc,
       details:  JSON.parse(sessionStorage.getItem("update-form") || "").details,
-      topic:  JSON.parse(sessionStorage.getItem("update-form") || "").topic,
+      title:  JSON.parse(sessionStorage.getItem("update-form") || "").title,
     },
   });
 
@@ -40,7 +40,7 @@ const Update = () => {
     const updateFormData = {
       desc: data.desc,
       tags: tagNames,
-      topic: data.topic,
+      title: data.title,
       details: data.details,
     };
     setUpdateLoader(true)
@@ -73,10 +73,10 @@ const Update = () => {
     <>
     <h3 className="text-center text-2xl font-medium">Update your track</h3>
     <form className="p-6 rounded-lg w-4/5 mx-auto" onSubmit={handleSubmit(submitHandler)}>
-      <label className="font-bold text-lg" htmlFor="Topic">Topic</label>
+      <label className="font-bold text-lg" htmlFor="title">Title</label>
       <input type="text"
           className="border border-gray-300 p-2 my-2 rounded-md w-full"
-      {...register("topic")} id="topic" />
+      {...register("title")} id="title" />
       <label className="font-bold text-lg" htmlFor="desc">Description</label>
       <input type="text" {...register("desc")}
           className="border border-gray-300 p-2 my-2 rounded-md w-full"

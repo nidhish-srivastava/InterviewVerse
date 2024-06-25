@@ -20,7 +20,7 @@ const Button = ({
   children
 } : Partial<ButtonProps>) => {
   const buttonClasses = `
-  bg-primary hover:bg-secondary disabled:bg-gray-400 disabled:cursor-not-allowed px-4 py-2 rounded-md text-white  cursor-pointer  transition-colors duration-300 ease-in-out whitespace-nowrap select-none sm:text-lg sm:px-6 sm:py-3 
+  bg-primary hover:bg-secondary disabled:bg-gray-400 disabled:cursor-not-allowed px-4 py-2 rounded-md text-white  cursor-pointer  transition-colors duration-300 ease-in-out whitespace-nowrap select-none sm:text-lg outline-none border-none
   ${className || ''}`;
 
   return (

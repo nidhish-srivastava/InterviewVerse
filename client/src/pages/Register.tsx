@@ -1,8 +1,8 @@
 import { Suspense, lazy, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTrackerContext } from "../context/context";
-import InputTag from "../components/InputTag";
-import Button from "../components/Button";
+import InputTag from "../components/ui/InputTag";
+import Button from "../components/ui/Button";
 import { url } from "../utils";
 import toast, { LoaderIcon, Toaster } from "react-hot-toast";
 import loginanimation from "../assets/loginainmation.json";

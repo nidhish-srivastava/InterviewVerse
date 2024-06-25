@@ -2,10 +2,10 @@ import { Link, useParams } from "react-router-dom";
 import { url } from "../utils";
 import { useTrackerContext } from "../context/context";
 import PostCard from "../components/PostCard";
-import PostsContainer from "../components/PostsContainer";
+import PostsContainer from "../components/Layouts/PostsContainer";
 import useFetchHook from "../hooks/useFetchHook";
-import SkeletonLoader from "../components/SkeletonLoader";
-import Navbar from "../components/Navbar";
+import SkeletonLoader from "../components/ui/SkeletonLoader";
+import Navbar from "../components/Layouts/Navbar";
 
 function CustomListsPosts() {
   const { loggedInUser } = useTrackerContext();

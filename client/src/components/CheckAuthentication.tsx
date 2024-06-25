@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { url } from "../utils";
 import { useTrackerContext } from "../context/context";
+import { useNavigate } from "react-router-dom";
 
 function CheckAuthentication({children} : {children : React.ReactNode}) {
     const { loggedInUser, setLoggedInUser, setIsAuthenticated,setIsLoading,isLoading } = useTrackerContext();
+    const navigate = useNavigate();
 
     useEffect(() => {
       const getProfile = async () => {
@@ -15,6 +17,9 @@ function CheckAuthentication({children} : {children : React.ReactNode}) {
               Authorization: "Bearer " + localStorage.getItem("token"),
             },
           });
+          if(response.status == 403){
+            navigate("/")
+          }
           if (response.ok) {
             const data = await response.json();
             setLoggedInUser({ username: data.username, id: data._id });

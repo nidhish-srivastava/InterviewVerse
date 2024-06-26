@@ -13,7 +13,7 @@ app.use(express.json())
 
 
 const start = async() =>{
-    connectmongodb()
+    await connectmongodb()
     app.listen(port,()=>{
         console.log(`Server is listening at port ${port}`);
     })

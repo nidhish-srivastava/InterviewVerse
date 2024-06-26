@@ -119,7 +119,7 @@ const fetchPostsFromReadingList = async (req: Request, res: Response) => {
     "readingLists._id": listId,
   }).populate({
     path: "readingLists.posts",
-    model: "Post", // Specify the model to populate from
+    model: "Post", // Specify the model w populate from
     select: "desc username details tags title",
   });
 

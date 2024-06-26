@@ -22,7 +22,7 @@ const InterviewTrackExplore = () => {
         `${url}/post?title=${searchTerm}&username=${searchTerm}`
       );
       const data = await res.json();
-      setPosts(data.getAllPost);
+      setPosts(data?.getAllPosts);
       if (data.getAllPost.length == 0 && searchTerm.length > 1)
         setSearchParams({ searchUserParam: `${searchTerm} not found` });
       setLoading(false);
@@ -67,7 +67,7 @@ const InterviewTrackExplore = () => {
         ) : null}
       </div>
       <PostsContainer>
-        {posts.map((e, i) => (
+        {posts?.map((e, i) => (
           <Link to={`/${titleParse(e.title)}/${e._id}`} key={i}>
             <PostCard show={true} post={e} />
           </Link>

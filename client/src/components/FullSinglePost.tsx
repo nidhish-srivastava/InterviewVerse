@@ -212,7 +212,7 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
   return (
     <>
       <Toaster />
-      <main className="mx-auto max-w-screen-lg">
+      <main className="mx-auto max-w-screen-lg p-4 sm:p-0">
       <div className="w-4/5 mx-auto mb-10">
         <img src={singlePostObj?.image} className="w-2/5 mx-auto" alt="" />
       </div>

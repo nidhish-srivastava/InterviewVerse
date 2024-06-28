@@ -23,7 +23,7 @@ const InterviewTrackExplore = () => {
       );
       const data = await res.json();
       setPosts(data?.getAllPosts);
-      if (data.getAllPost.length == 0 && searchTerm.length > 1)
+      if (data.getAllPosts.length == 0 && searchTerm.length > 1)
         setSearchParams({ searchUserParam: `${searchTerm} not found` });
       setLoading(false);
     } catch (error) {

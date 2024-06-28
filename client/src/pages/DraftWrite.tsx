@@ -6,8 +6,8 @@ import toast, { LoaderIcon, Toaster } from "react-hot-toast";
 import { Link, useParams } from "react-router-dom";
 import Button from "../components/ui/Button";
 import { IoArrowBack } from "react-icons/io5";
-import Lottie from "lottie-react";
 import uploadanimation from "../assets/uploadinganimation.json"
+import LottieAnimationLoader from "../components/ui/LottieAnimationLoader";
 
 export type tagType = {
   name: string;
@@ -298,7 +298,7 @@ const ImageUpload = ({ image, setImage }: any) => {
             {
               imageUploadLoader ?
               <div className="w-32">
-                <Lottie animationData={uploadanimation}/>
+                <LottieAnimationLoader animationData={uploadanimation}/>
               </div> : 
             <span className="text-gray-500">Upload your image here</span>
             }

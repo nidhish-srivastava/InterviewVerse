@@ -22,6 +22,7 @@ const InterviewTrackExplore = () => {
         `${url}/post?title=${searchTerm}&username=${searchTerm}`
       );
       const data = await res.json();
+      console.log(data);
       setPosts(data?.getAllPosts);
       if (data.getAllPosts.length == 0 && searchTerm.length > 1)
         setSearchParams({ searchUserParam: `${searchTerm} not found` });

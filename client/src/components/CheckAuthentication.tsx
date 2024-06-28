@@ -39,7 +39,7 @@ function CheckAuthentication({children} : {children : React.ReactNode}) {
   
     if (isLoading) {
       // While loading, show a loading indicator or skeleton UI
-      return null;
+      return <div></div>;
     }
   
     return loggedInUser ? (

@@ -68,7 +68,7 @@ const InterviewTrackExplore = () => {
       </div>
       <PostsContainer>
         {posts?.map((e, i) => (
-          <Link to={`/${titleParse(e.title)}/${e._id}`} key={i}>
+          <Link to={`/${titleParse(e?.title)}/${e?._id}`} key={i}>
             <PostCard show={true} post={e} />
           </Link>
         ))}

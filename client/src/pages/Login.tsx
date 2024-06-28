@@ -1,12 +1,12 @@
-import React, { Suspense, lazy, useState } from "react";
+import React, {  useState } from "react";
 import { Link } from "react-router-dom";
 import { useTrackerContext } from "../context/context";
 import InputTag from "../components/ui/InputTag";
 import Button from "../components/ui/Button";
 import { url } from "../utils";
 import toast, { LoaderIcon, Toaster } from "react-hot-toast";
-const Lottie = lazy(() => import("lottie-react"));
 import loginanimation from "../assets/loginainmation.json";
+import LottieAnimationLoader from "../components/ui/LottieAnimationLoader";
 
 const Login = () => {
   const { setLoggedInUser } = useTrackerContext();
@@ -52,9 +52,7 @@ const Login = () => {
       </Link>
       <div className="auth-form-container">
         <div className="hidden sm:block">
-          <Suspense>
-          <Lottie animationData={loginanimation} />
-          </Suspense>
+          <LottieAnimationLoader animationData={loginanimation}/>
         </div>
         <form onSubmit={handleSubmit} className="auth-form-group">
           <InputTag

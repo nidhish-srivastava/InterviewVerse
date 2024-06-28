@@ -1,7 +1,7 @@
 {
-  "name": "interview-tracker",
+  "name": "interviewverse-backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/app.js",
   "author": "nidhish",
   "license": "MIT",
   "scripts": {

@@ -5,8 +5,8 @@ import InputTag from "../components/ui/InputTag";
 import Button from "../components/ui/Button";
 import { url } from "../utils";
 import toast, { LoaderIcon, Toaster } from "react-hot-toast";
-import loginanimation from "../assets/loginainmation.json";
-import LottieAnimationLoader from "../components/ui/LottieAnimationLoader";
+// import loginanimation from "../assets/loginainmation.json";
+// import LottieAnimationLoader from "../components/ui/LottieAnimationLoader";
 
 const Login = () => {
   const { setLoggedInUser } = useTrackerContext();
@@ -51,9 +51,9 @@ const Login = () => {
         <Button className="absolute top-4 left-2">Home</Button>
       </Link>
       <div className="auth-form-container">
-        <div className="hidden sm:block">
+        {/* <div className="hidden sm:block">
           <LottieAnimationLoader animationData={loginanimation}/>
-        </div>
+        </div> */}
         <form onSubmit={handleSubmit} className="auth-form-group">
           <InputTag
             type="text"

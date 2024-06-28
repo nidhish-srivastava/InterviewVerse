@@ -21,7 +21,7 @@ const InterviewTrackExplore = () => {
       const res = await fetch(
         `${url}/post?title=${searchTerm}&username=${searchTerm}`
       );
-      if(!res.ok) throw new Error("Error fetching")
+      if (!res.ok) throw new Error("Error fetching");
       const data = await res.json();
       // console.log(data);
       setPosts(data?.getAllPosts);
@@ -47,7 +47,7 @@ const InterviewTrackExplore = () => {
 
   return (
     <Fragment>
-      <Navbar/>
+      <Navbar />
       <div className="w-full sm:w-1/2 mx-auto flex justify-center items-center">
         <InputTag
           className="mt-4"
@@ -66,15 +66,16 @@ const InterviewTrackExplore = () => {
           <div className="skeleton-loading">
             <Skeleton count={5} />
           </div>
-        ) : null}
-      </div>
+        ) : 
       <PostsContainer>
-        {posts?.map((e, i) => (
-          <Link to={`/${titleParse(e?.title)}/${e?._id}`} key={i}>
+        {posts?.map((e) => (
+          <Link to={`/${titleParse(e?.title)}/${e?._id}`} key={e?._id}>
             <PostCard show={true} post={e} />
           </Link>
         ))}
       </PostsContainer>
+        }
+      </div>
     </Fragment>
   );
 };

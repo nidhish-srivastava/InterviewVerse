@@ -21,16 +21,10 @@ const InterviewTrackExplore = () => {
       const res = await fetch(
         `${url}/post?title=${searchTerm}&username=${searchTerm}`
       );
-      if (!res.ok) throw new Error("Error fetching");
       const data = await res.json();
-      if (data?.getAllPosts) {
-        setPosts(data.getAllPosts);
-        if (data.getAllPosts.length === 0 && searchTerm.length > 1) {
-          setSearchParams({ searchUserParam: `${searchTerm} not found` });
-        }
-      } else {
-        setPosts([]); // Set empty array if data.getAllPosts is undefined or null
-      }
+      setPosts(data?.getAllPosts);
+      if (data.getAllPosts.length == 0 && searchTerm.length > 1)
+        setSearchParams({ searchUserParam: `${searchTerm} not found` });
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -51,7 +45,7 @@ const InterviewTrackExplore = () => {
 
   return (
     <Fragment>
-      <Navbar />
+      <Navbar/>
       <div className="w-full sm:w-1/2 mx-auto flex justify-center items-center">
         <InputTag
           className="mt-4"
@@ -70,20 +64,15 @@ const InterviewTrackExplore = () => {
           <div className="skeleton-loading">
             <Skeleton count={5} />
           </div>
-        ) : (
-          <PostsContainer>
-            {posts.length > 0 ? (
-              posts.map((e) => (
-                <Link to={`/${titleParse(e?.title)}/${e?._id}`} key={e?._id}>
-                  <PostCard show={true} post={e} />
-                </Link>
-              ))
-            ) : (
-              null
-            )}
-          </PostsContainer>
-        )}
+        ) : null}
       </div>
+      <PostsContainer>
+        {posts?.map((e, i) => (
+          <Link to={`/${titleParse(e.title)}/${e._id}`} key={i}>
+            <PostCard show={true} post={e} />
+          </Link>
+        ))}
+      </PostsContainer>
     </Fragment>
   );
 };

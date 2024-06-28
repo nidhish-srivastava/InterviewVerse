@@ -21,9 +21,11 @@ const InterviewTrackExplore = () => {
       const res = await fetch(
         `${url}/post?title=${searchTerm}&username=${searchTerm}`
       );
+      if(!res.ok) throw new Error("Error fetching")
       const data = await res.json();
+      // console.log(data);
       setPosts(data?.getAllPosts);
-      if (data.getAllPost.length == 0 && searchTerm.length > 1)
+      if (data.getAllPosts.length == 0 && searchTerm.length > 1)
         setSearchParams({ searchUserParam: `${searchTerm} not found` });
       setLoading(false);
     } catch (error) {

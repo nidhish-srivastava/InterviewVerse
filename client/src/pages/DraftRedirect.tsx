@@ -17,12 +17,13 @@ function DraftRedirect() {
             },
             body: JSON.stringify({desc : "",title : "",details : "",tags : [],username : loggedInUser?.username,published : false}),
           });
+          if(!response.ok) throw new Error("Error fetching")
           if(response.status==201){
             const data = await response.json()
             navigate(`/draft/${data?.postId}`,{replace : true})
           }
         } catch (error) {
-          
+          console.log(error);
         }
         finally{
         }

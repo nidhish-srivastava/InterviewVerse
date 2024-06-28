@@ -1,28 +1,27 @@
 import { Suspense, lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-const Register = lazy(() => import("./pages/Register"));
-const Login = lazy(() => import("./pages/Login"));
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 const MyInterviewTracks = lazy(() => import("./pages/MyInterviewTracks"));
-const MySinglePost = lazy(() => import("./pages/MySinglePost"));
-const Update = lazy(() => import("./pages/Update"));
-const SinglePost = lazy(() => import("./pages/SinglePost"));
-const UserProfile = lazy(() => import("./pages/UserProfile"));
-const MyLists = lazy(() => import("./pages/MyLists"));
-const InterviewTrackExplore = lazy(() => import("./pages/InterviewTrackExplore"));
-const DefaultReadingList = lazy(() => import("./pages/DefaultReadingList"));
-const CustomListsPosts = lazy(() => import("./pages/CustomListPosts"));
-const SavedLists = lazy(() => import("./pages/SavedLists"));
-const ReadingHistory = lazy(() => import("./pages/ReadingHistory"));
-const UserReadingList = lazy(() => import("./pages/UserReadingList"));
-const UserCustomLists = lazy(() => import("./pages/UserCustomLists"));
-const Drafts = lazy(() => import("./pages/Drafts"));
-const DraftRedirect = lazy(() => import("./pages/DraftRedirect"));
-const DraftWrite = lazy(() => import("./pages/DraftWrite"));
-const SkeletonLoader = lazy(() => import("./components/ui/SkeletonLoader"));
-const Landing = lazy(() => import("./pages/Landing"));
-const CheckAuthentication = lazy(() => import("./components/CheckAuthentication"));
-
+import MySinglePost from "./pages/MySinglePost";
+import Update from "./pages/Update";
+import SinglePost from "./pages/SinglePost";
+import UserProfile from "./pages/UserProfile";
+import MyLists from "./pages/MyLists";
+import InterviewTrackExplore from "./pages/InterviewTrackExplore";
+import DefaultReadingList from "./pages/DefaultReadingList";
+import CustomListsPosts from "./pages/CustomListPosts";
+import SavedLists from "./pages/SavedLists";
+import ReadingHistory from "./pages/ReadingHistory";
+import UserReadingList from "./pages/UserReadingList";
+import UserCustomLists from "./pages/UserCustomLists";
+import Drafts from "./pages/Drafts";
+import DraftRedirect from "./pages/DraftRedirect";
+import DraftWrite from "./pages/DraftWrite";
+import SkeletonLoader from "./components/ui/SkeletonLoader";
+import Landing from "./pages/Landing";
+import CheckAuthentication from "./components/CheckAuthentication";
 
 const router = createBrowserRouter([
   {

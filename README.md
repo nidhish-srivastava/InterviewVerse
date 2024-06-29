@@ -1,6 +1,5 @@
 ## InterviewVerse
- A solution to all the techies and non-techies giving countless interviews and unable to keep a track of them.
- Search and learn from other interview experiences, create your own tracks and have a list of what all you created.
+InterviewVerse is a comprehensive platform for job seekers to explore shared interview experiences, track their preparation progress, and contribute their own insights. Users can search for valuable insights, create organized interview tracks, and visit profiles to discover community contributions. Join InterviewVerse to share knowledge and gain from the experiences of fellow interviewees.
 
 ## Technologies Used
 

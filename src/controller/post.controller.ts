@@ -4,15 +4,60 @@ import { cleanInput } from "../utils";
 import { generateUploadUrl } from "../utils/s3";
 import { redis } from "../utils/getRedisUrl";
 
+// export const getAll = async (req: Request, res: Response) => {
+//   const keyword = req.query
+//     ? {
+//         $and: [
+//           {
+//             $or: [
+//               // If any one of the query is true,we get our result
+//               // { username: { $regex: req.query.username, $options: "i" } },
+//               // { topic: { $regex: req.query.topic, $options: "i" } },
+//               { username: cleanInput(req.query.username as string) },
+//               { title: cleanInput(req.query.title as string) },
+//             ],
+//           },
+//           {
+//             published: true,
+//           },
+//         ],
+//       }
+//     : {};
+
+//     try {
+//       const getAllPosts = await Post.find(keyword);
+//       res.status(200).json({ msg: "All posts read", getAllPosts });
+//     } catch (error) {
+//       res.status(500).json({ msg: "Error is coming", error });
+//     }
+
+//   // const cacheKey = `getAllPosts : ${JSON.stringify(req.query)}`;
+//   //   redis.get(cacheKey, async (err, cachedData) => {
+//   //     if (err) throw err;
+
+//   //     if (cachedData) {
+//   //       const getAllPosts = JSON.parse(cachedData);
+//   //       console.log("cached");
+//   //       res.status(200).json({ msg: "All posts read from cache", getAllPosts });
+//   //     } else {
+//   //       const getAllPosts = await Post.find(keyword);
+//   //       redis.set(cacheKey, JSON.stringify(getAllPosts), "EX", 3600); // Cache for 1 hour
+//   //       console.log("not cached");
+//   //       res.status(200).json({ msg: "All posts read", getAllPosts });
+//   //     }
+//   //   });
+// };
+
 export const getAll = async (req: Request, res: Response) => {
+  const page = parseInt(req.query.page as string) || 1;
+  const limit = parseInt(req.query.limit as string) || 9;
+  const skip = (page - 1) * limit;
+
   const keyword = req.query
     ? {
         $and: [
           {
             $or: [
-              // If any one of the query is true,we get our result
-              // { username: { $regex: req.query.username, $options: "i" } },
-              // { topic: { $regex: req.query.topic, $options: "i" } },
               { username: cleanInput(req.query.username as string) },
               { title: cleanInput(req.query.title as string) },
             ],
@@ -24,24 +69,10 @@ export const getAll = async (req: Request, res: Response) => {
       }
     : {};
 
-  const cacheKey = `getAllPosts : ${JSON.stringify(req.query)}`;
   try {
-    redis.get(cacheKey, async (err, cachedData) => {
-      if (err) throw err;
-
-      if (cachedData) {
-        const getAllPosts = JSON.parse(cachedData);
-        console.log("cached");
-        res.status(200).json({ msg: "All posts read from cache", getAllPosts });
-      } else {
-        const getAllPosts = await Post.find(keyword);
-        redis.set(cacheKey, JSON.stringify(getAllPosts), "EX", 3600); // Cache for 1 hour
-        console.log("not cached");
-        res.status(200).json({ msg: "All posts read", getAllPosts });
-      }
-    });
-    // const getAllPosts = await Post.find(keyword);
-    // res.status(200).json({ msg: "All posts read", getAllPosts });
+    const getAllPosts = await Post.find(keyword).skip(skip).limit(limit);
+    const total = await Post.countDocuments(keyword);
+    res.status(200).json({ msg: "All posts read", getAllPosts, total });
   } catch (error) {
     res.status(500).json({ msg: "Error is coming", error });
   }
@@ -142,7 +173,7 @@ export const create = async (req: Request, res: Response) => {
     desc,
     tags,
     details,
-    title: title,
+    title,
     username,
     published,
     image,
@@ -151,6 +182,35 @@ export const create = async (req: Request, res: Response) => {
   try {
     const response = await newPost.save();
     res.status(201).json({ postId: response._id });
+  } catch (error) {
+    res.status(500).json({ msg: "Error is coming", error });
+  }
+};
+
+export const createMultiple = async (req: Request, res: Response) => {
+  const posts = req.body;
+
+  if (!Array.isArray(posts)) {
+    return res.status(400).json({ msg: "Input should be an array of objects" });
+  }
+
+  try {
+    const savedPosts = [];
+    for (const post of posts) {
+      const { desc, tags, details, title, username, published, image } = post;
+      const newPost = new Post({
+        desc,
+        tags,
+        details,
+        title,
+        username,
+        published,
+        image,
+      });
+      const response = await newPost.save();
+      savedPosts.push({ postId: response._id });
+    }
+    res.status(201).json(savedPosts);
   } catch (error) {
     res.status(500).json({ msg: "Error is coming", error });
   }

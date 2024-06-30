@@ -9,10 +9,11 @@ type InputTagProp = {
     id : string
     name : string
     className : string
+    onKeyDown?:(e : React.KeyboardEvent<HTMLInputElement>) => void
 }
 
 
-const InputTag = ({id,placeholder,name,type,onChange,label,value,className} : Partial<InputTagProp>) => {
+const InputTag = ({id,placeholder,name,type,onChange,label,value,className,onKeyDown} : Partial<InputTagProp>) => {
   const inputClasses = `w-full px-4 py-2 border border-gray-300 rounded-md mb-4 text-base placeholder-gray-500 focus:outline-none focus:border-blue-500 md:w-[300px] md:p-[12px] lg:w-[350px] lg:p-[14px] ${className || ''}`;
   return (
     <div>
@@ -26,6 +27,7 @@ const InputTag = ({id,placeholder,name,type,onChange,label,value,className} : Pa
         onChange={onChange}
         placeholder={placeholder}
         id={id}
+        onKeyDown={onKeyDown}
         />
     </div>
   )

@@ -1,9 +1,8 @@
-import { Suspense, lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-const MyInterviewTracks = lazy(() => import("./pages/MyInterviewTracks"));
+import MyInterviewTracks from "./pages/MyInterviewTracks";
 import MySinglePost from "./pages/MySinglePost";
 import Update from "./pages/Update";
 import SinglePost from "./pages/SinglePost";
@@ -19,9 +18,9 @@ import UserCustomLists from "./pages/UserCustomLists";
 import Drafts from "./pages/Drafts";
 import DraftRedirect from "./pages/DraftRedirect";
 import DraftWrite from "./pages/DraftWrite";
-import SkeletonLoader from "./components/ui/SkeletonLoader";
 import Landing from "./pages/Landing";
 import CheckAuthentication from "./components/CheckAuthentication";
+import VerifyToken from "./pages/VerifyToken";
 
 const router = createBrowserRouter([
   {
@@ -38,11 +37,16 @@ const router = createBrowserRouter([
   },
   {
     path: "/:id/:id",
-    element: <SinglePost />,
+    element: <CheckAuthentication>
+    <SinglePost />
+    </CheckAuthentication>
   },
   {
     path: "/:username",
-    element: <UserProfile />,
+    element: 
+    <CheckAuthentication>
+    <UserProfile />
+    </CheckAuthentication>
   },
   {
     path: "/drafts",
@@ -96,9 +100,7 @@ const router = createBrowserRouter([
     path: "/me/interview-tracks",
     element: (
       <CheckAuthentication>
-        <Suspense fallback={<SkeletonLoader isLoading={true} />}>
           <MyInterviewTracks />
-        </Suspense>
       </CheckAuthentication>
     ),
   },
@@ -160,6 +162,10 @@ const router = createBrowserRouter([
         <Login />
     )
   },
+  {
+    path : "/verify/:token",
+    element : <VerifyToken/>
+  }
 ]);
 
 function App() {

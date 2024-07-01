@@ -25,7 +25,7 @@ function Landing() {
         });
         if (response.ok) {
           const data = await response.json();
-          setLoggedInUser({ username: data.username, id: data._id });
+          setLoggedInUser({ username: data.username, id: data._id,dp : data?.dp });
           setIsAuthenticated(true);
         } else {
           setIsAuthenticated(false);

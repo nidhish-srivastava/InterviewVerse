@@ -7,6 +7,7 @@ type TrackerContextProviderProps = {
 type userCre = {
     username :  string
     id ?: string
+    dp ?:string
   }
 
 type TrackerContextTypes = {

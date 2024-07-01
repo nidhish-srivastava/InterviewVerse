@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import defaultDp from "../../assets/defauldp.jpg"
 import { Draft } from "../Icons/Draft";
 import { BookMarkIcon } from "../Icons/Bookmark";
 import { LogoutIcon } from "../Icons/Logout";
 import logo from "../../assets/logo.png";
-// import {  MdOutlineExplore } from "react-icons/md";
 import { IoCreateOutline } from "react-icons/io5";
+import {  MdOutlineAccountBox } from "react-icons/md"
 import { IoMdSave } from "react-icons/io";
+import { useTrackerContext } from "../../context/context";
 
 type NavbarProps = {
   loading?: boolean;
@@ -16,6 +16,7 @@ type NavbarProps = {
 
 const Navbar = ({}: NavbarProps) => {
   const [showModal, setShowModal] = useState(false);
+  const {loggedInUser} = useTrackerContext()
   const modalRef = useRef(null);
 
   const logouthandler = () => {
@@ -61,27 +62,31 @@ const Navbar = ({}: NavbarProps) => {
             onClick={() => setShowModal((prev) => !prev)}
             ref={modalRef}
           >
-            <img src={defaultDp} alt="profile" className="w-full h-full object-cover" loading="lazy" />
+            <img src={loggedInUser?.dp} alt="profile" className="w-full h-full object-cover" loading="lazy" />
           </div>
 
           {/* Dropdown modal */}
           {showModal && (
             <div className="absolute right-0 mt-2 w-40 sm:w-48 bg-white rounded-lg shadow-lg z-50">
               <div className="p-4 flex flex-col gap-4">
-                <Link to="/me/lists" className="flex items-center gap-2 text-sm">
+                <Link to={`#`} className="nav-item">
+                <MdOutlineAccountBox className="text-black text-xl mr-1" />
+                <span>My Account</span>
+                </Link>
+                <Link to="/me/lists" className="nav-item">
                   <BookMarkIcon className="text-gray-600" />
                   <span className="ml-[2.8px]">Bookmarks</span>
                 </Link>
-                <Link to="/drafts" className="flex items-center gap-2 text-sm">
+                <Link to="/drafts" className="nav-item">
                   <Draft className="text-gray-600" />
                   <span>Drafts</span>
                 </Link>
-                <Link to="/me/interview-tracks" className="flex items-center gap-2 text-sm">
+                <Link to="/me/interview-tracks" className="nav-item">
                   {/* <Draft className="text-gray-600" /> */}
                   <IoMdSave className="text-xl mr-1"/>
                   <span>My Interviews</span>
                 </Link>
-                <button onClick={logouthandler} className="flex items-center gap-2 text-sm hover:text-red-500">
+                <button onClick={logouthandler} className="nav-item hover:text-red-500">
                   <LogoutIcon className="text-gray-600" />
                   <span>Logout</span>
                 </button>

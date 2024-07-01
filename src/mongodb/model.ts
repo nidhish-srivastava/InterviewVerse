@@ -1,35 +1,10 @@
 import  { Schema, model } from "mongoose";
 
-interface iPost {
-  authRef: {
-    username: string;
-    userId: string;
-  };
-  details: string;
-  desc: string;
-  tags: {
-    name: string;
-    id: string;
-  }[];
-  title: string;
-  username : string
-  published : boolean
-  companyName : string
-  image : string
-}
-
-interface iAuth {
-  username: string;
-  password: string;
-  savedPosts : string[] | null
-  readingLists : any
-}
-
-const postSchema = new Schema<iPost>(
+const postSchema = new Schema(
   {
     authRef: { type: Schema.Types.ObjectId, ref: "Auth" },
     username : {type : String},
-    details: { type: String,},
+    details: { type: String},
     desc: { type: String,},
     tags: [
       {
@@ -58,17 +33,21 @@ const readingListSchema = new Schema({
 }
 )
 
-const authSchema = new Schema<iAuth>({
+const authSchema = new Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },
+  dp : {type : String,default : "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"},
   savedPosts : [{type : Schema.Types.ObjectId,ref : "Post"}],
-  readingLists : [readingListSchema]
+  readingLists : [readingListSchema],
+  verificationToken : {type : String},
+  tokenExpires : {type : Date},
+  isVerified : {type : Boolean,default : false}
 },{
   timestamps : true
 });
 
 const ReadingList = model("ReadingList",readingListSchema)
-const Post = model<iPost>("Post", postSchema);
-const Auth = model<iAuth>("Auth", authSchema);
+const Post = model("Post", postSchema);
+const Auth = model("Auth", authSchema);
 
 export { Post, Auth,ReadingList};

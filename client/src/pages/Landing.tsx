@@ -6,8 +6,8 @@ import MainHeroImage from "../components/Landing/MainHeroImage";
 import { useTrackerContext } from "../context/context";
 import { url } from "../utils";
 const InterviewTrackExplore = lazy(()=>import("./InterviewTrackExplore"))
-const Canvas = lazy(()=>import("../components/Landing/Canvas"))
-const LazyShow = lazy(()=> import("../components/Landing/LazyShow"))
+// const Canvas = lazy(()=>import("../components/Landing/Canvas"))
+// const LazyShow = lazy(()=> import("../components/Landing/LazyShow"))
 const Footer = lazy(()=> import("../components/Landing/Footer"))
 
 function Landing() {
@@ -67,16 +67,16 @@ function Landing() {
             </div>
             <MainHeroImage />
           </div>
+          {/* <Suspense> */}
+          {/* <Canvas /> */}
+          {/* </Suspense> */}
           <Suspense>
-          <Canvas />
-          </Suspense>
-          <Suspense>
-          <LazyShow>
+          {/* <LazyShow> */}
             <>
               <Features />
               {/* <Canvas /> */}
             </>
-          </LazyShow>
+          {/* </LazyShow> */}
           </Suspense>
           <Footer/>
         </div>

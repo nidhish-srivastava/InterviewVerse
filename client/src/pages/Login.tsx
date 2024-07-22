@@ -82,9 +82,17 @@ const Login = () => {
               Log In
             </Button>
           )}
-          <span>
-            Don't you have an account? <Link to="/register">Register</Link>
-          </span>
+          <div className="space-y-2 mt-4 flex flex-col">
+            {/* <Link to="/forgot-password" className="text-sm text-blue-500 hover:underline">
+              Forgot Password?
+            </Link> */}
+            <span className="text-sm">
+              Don't have an account?{" "}
+              <Link to="/register" className="text-blue-500 hover:underline">
+                Register
+              </Link>
+            </span>
+          </div>
         </form>
       </div>
     </>

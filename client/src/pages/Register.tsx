@@ -105,9 +105,12 @@ const Register = () => {
               ) : (
                 <Button btnType="submit">Sign Up</Button>
               )}
-              <span>
-                Do you have an account? <Link to="/login">Login</Link>
-              </span>
+                <span className="text-sm">
+              Do you have an account?{" "}
+              <Link to="/login" className="text-blue-500 hover:underline">
+                Login
+              </Link>
+            </span>
             </form>
           </>
         )}

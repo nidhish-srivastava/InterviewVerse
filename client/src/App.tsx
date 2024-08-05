@@ -21,6 +21,7 @@ import DraftWrite from "./pages/DraftWrite";
 import Landing from "./pages/Landing";
 import CheckAuthentication from "./components/CheckAuthentication";
 import VerifyToken from "./pages/VerifyToken";
+import ForgotPassword from "./pages/ForgotPassword";
 
 const router = createBrowserRouter([
   {
@@ -165,6 +166,10 @@ const router = createBrowserRouter([
   {
     path : "/verify/:token",
     element : <VerifyToken/>
+  },
+  {
+    path : "/forgot-password",
+    element : <ForgotPassword/>
   }
 ]);
 

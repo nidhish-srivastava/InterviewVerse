@@ -164,6 +164,7 @@ export const checkIfSaved = async (req: Request, res: Response) => {
 
 export const fetchS3url = async (req: Request, res: Response) => {
   const s3url = await generateUploadUrl();
+  console.log(s3url);
   res.send({ s3url });
 };
 

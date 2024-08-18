@@ -15,15 +15,11 @@ InterviewVerse is a comprehensive platform for job seekers to explore shared int
 
 ### Features
 
-* Create Interview Tracks, update it or delete it and read other's interview experiences
-  
-* User Authentication
+* Create Interview Tracks, update it or delete it and read other's interview experiences, search interview experiences.
 
-* Search a interview track or user
-
-* Create Drafts and publish them accordingly and Real-time saving of draft while writing
+* Create Drafts and publish them accordingly with Real-time saving of draft while writing.
 
 * Bookmark other's interview experience and create different types of reading lists based on your choice.
 
-* Visit a user's profile while reading his post and explore all of his interview tracks and public reading lists
+* Visit a user's profile while reading his post and explore all of his interview tracks and reading lists.
 

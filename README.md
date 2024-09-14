@@ -1,5 +1,9 @@
 ## InterviewVerse
-InterviewVerse is a comprehensive platform for job seekers to explore shared interview experiences, track their preparation progress, and contribute their own insights. Users can search for valuable insights, create organized interview tracks, and visit profiles to discover community contributions. Join InterviewVerse to share knowledge and gain from the experiences of fellow interviewees.
+InterviewVerse is a comprehensive platform for job seekers to explore interview experiences shared by others, gain valuable insights, and contribute their own stories. Users can search for specific interview experiences, visit detailed profiles, and create organized bookmarks of their favorite posts.
+
+## Problem Statement
+Numerous websites host interview experiences, such as GeeksforGeeks (GFG) and Glassdoor, but these are not their primary features. GFG primarily focuses on problem-solving and study materials, while Glassdoor is centered around company salaries, reviews, and job listings. Consequently, there is no dedicated platform solely for interview experiences. To address this gap, I created a one-stop platform exclusively for sharing and discovering interview experiences. While blogging websites like Medium and Hashnode do exist, they cater to a wide variety of topics across different domains. This platform is specialized and dedicated entirely to interview experiences.
+
 
 ## Technologies Used
 
@@ -15,11 +19,16 @@ InterviewVerse is a comprehensive platform for job seekers to explore shared int
 
 ### Features
 
-* Create Interview Tracks, update it or delete it and read other's interview experiences, search interview experiences.
+* User authentication(custom implementation, not using any provider as of now)
 
-* Create Drafts and publish them accordingly with Real-time saving of draft while writing.
+* Read interview experiences, search for interview experiences.
 
-* Bookmark other's interview experience and create different types of reading lists based on your choice.
+* Create interview experience posts, creating drafts ,then publishing it
 
-* Visit a user's profile while reading his post and explore all of his interview tracks and reading lists.
+* Save someone's post into different bookmarks of choice
+
+* Sections like Drafts, Published Posts, Bookmarks(different bookmarks for different set of posts)
+ 
+* Real time saving of data while writing your draft so that u don't loose what u have written.
+Deleting or updating published posts as well.
 

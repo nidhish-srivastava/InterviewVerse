@@ -5,22 +5,16 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
 const router: Router = express.Router();
-import { redis } from "../utils/getRedisUrl";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
 
 export const getProfile = async (req: Request, res: Response) => {
   const username = req.user.username;
-  const cachedProfile = await redis.get(`profile:${username}`);
-  if (cachedProfile) {
-    return res.json(JSON.parse(cachedProfile));
-  }
   const admin = await Auth.findOne({ username: username }).select("-password");
   if (!admin) {
     res.status(403).json({ msg: "User doesnt exist" });
     return;
   }
-  await redis.set(`profile:${username}`, JSON.stringify(admin), "EX", 3600);
   res.json(admin);
 };
 

@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { Auth, Post } from "../mongodb/model";
 import { cleanInput } from "../utils";
 import { generateUploadUrl } from "../utils/s3";
-// import { redis } from "../utils/getRedisUrl";
 
 // export const getAll = async (req: Request, res: Response) => {
 //   const keyword = req.query

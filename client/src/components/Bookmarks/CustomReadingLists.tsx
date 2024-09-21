@@ -57,7 +57,7 @@ function CustomReadingLists({ user, username }: props) {
                 Last Updated: {dateFormatter(list?.updatedAt)}
               </p>
               <p className="text-gray-500 text-sm">
-                Visibility: {list?.visibilty}
+                Visibility: {list?.visibility}
               </p>
             </div>
           </Link>

@@ -26,7 +26,7 @@ function CustomListsPosts() {
       <div className="mt-8 flex justify-center items-center gap-4">  
         <h3 className="text-lg">{data?.name}</h3>
         <span>
-          {data?.visibilty == "private" && (
+          {data?.visibility == "private" && (
             <span>
               <i className="fa-solid fa-lock"></i>
             </span>

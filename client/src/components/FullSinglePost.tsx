@@ -109,9 +109,9 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
     if (!showModal) {
       setShowModal(true);
       fetchReadingLists();
-      if (!present) {
-        savePostHandler();
-      }
+      // if (!present) {
+      //   savePostHandler();
+      // }
     }
     if (showModal) {
       setShowModal(false);

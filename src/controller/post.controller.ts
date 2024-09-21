@@ -157,6 +157,7 @@ export const checkIfSaved = async (req: Request, res: Response) => {
     // const savedPosts = response?.savedPosts?.map(e=>e.toString()),THen we write the find method on this array to find this post
     //* Using below,we save 3 lines
     const response = await Auth.findOne({ _id: userId, savedPosts: postId });
+    // const response = await Auth.findOne({ $or : [{_id: userId, savedPosts: postId},{_id : userId,"readingLists.id" : postId}] });
     if (response?.savedPosts?.length ?? 0 > 0) res.status(200).send(true);
   } catch (error) {}
 };

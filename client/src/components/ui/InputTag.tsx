@@ -1,4 +1,5 @@
 import React from 'react'
+import { cn } from '../../utils'
 
 type InputTagProp = {
     label : string
@@ -14,7 +15,10 @@ type InputTagProp = {
 
 
 const InputTag = ({id,placeholder,name,type,onChange,label,value,className,onKeyDown} : Partial<InputTagProp>) => {
-  const inputClasses = `w-full px-4 py-2 border border-gray-300 rounded-md mb-4 text-base placeholder-gray-500 focus:outline-none focus:border-blue-500 md:w-[300px] md:p-[12px] lg:w-[350px] lg:p-[14px] ${className || ''}`;
+  const defaultClasses = `
+  w-full px-4 py-2 border border-gray-300 rounded-md mb-4 text-base placeholder-gray-500 focus:outline-none focus:border-blue-500 md:w-[300px] md:p-[12px] lg:w-[350px] lg:p-[14px] 
+  `
+  const inputClasses = cn(defaultClasses, className);
   return (
     <div>
         <label htmlFor={id} className='block font-bold mb-1 text-lg text-gray-700'>{label}</label>

@@ -41,12 +41,12 @@ function CustomReadingLists({ user, username }: props) {
       {readingLists.length > 0 ? (
         readingLists?.map((list) => (
           <Link
+          to={
+            !user
+              ? `/me/lists/custom/${list?.name}-${list?._id}`
+              : `${list?.name}`
+          }
             key={list?._id}
-            to={
-              !user
-                ? `/me/lists/custom/${list?.name}-${list?._id}`
-                : `${list?.name}`
-            }
             className="bg-white rounded-lg shadow-md p-4 hover:shadow-xl transition duration-300"
           >
             <div className="mb-2">
@@ -60,7 +60,6 @@ function CustomReadingLists({ user, username }: props) {
                 Visibility: {list?.visibilty}
               </p>
             </div>
-            {/* You can add more fields here as needed */}
           </Link>
         ))
       ) : (

@@ -6,10 +6,21 @@ const findUserPromise = (userId: string | undefined): Promise<any> => {
 };
 
 const createNewReadingList = async (req: Request, res: Response) => {
-  const { name, userId } = req.body;
-  const user = await findUserPromise(userId);
-  user?.readingLists.push({ name, posts: [] });
-  await user?.save();
+  const { name, userId, visibilty,postId } = req.body;
+  try {
+    const user = await Auth.findByIdAndUpdate(
+      userId,
+      { $push: { readingLists: { name, posts: [postId],visibilty } } }
+    );
+
+    if (user) {
+      res.status(201).json({ message: "Reading list created successfully", readingLists: user.readingLists });
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
 };
 
 const fetchAllReadingLists = async (req: Request, res: Response) => {
@@ -24,14 +35,21 @@ const fetchAllReadingLists = async (req: Request, res: Response) => {
 const fetchPublicListsOfUser = async (req: Request, res: Response) => {
   const { username } = req.params;
   try {
-    const user = await Auth.find({ username: username });
-    const readingLists = user[0].readingLists;
-    const filterPublicLists = readingLists.map((e: any) => {
-      if (e.visibilty == "public") return e;
-    });
-    res.json(filterPublicLists);
-  } catch (error) {}
+    const user = await Auth.findOne(
+      { username: username },
+      { readingLists: { $elemMatch: { visibilty: "public" } } }
+    );
+    if (user) {
+      const publicLists = user.readingLists;
+      res.json(publicLists);
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
 };
+
 
 // i need to fetch public reading lists only when i visit a specific user
 

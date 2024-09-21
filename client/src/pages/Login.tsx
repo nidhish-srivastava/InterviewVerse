@@ -27,8 +27,7 @@ const Login = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(inputs),
-      });
-
+      })
       if (response.status != 200) {
         toast.error("Check credentials");
         setIsLoading(false);
@@ -40,7 +39,7 @@ const Login = () => {
       window.location.href = "/";
     } catch (error) {
       setIsLoading(false);
-      return toast.error("Error while creating account");
+      return toast.error("Error during login");
     } finally {
     }
   };

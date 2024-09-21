@@ -6,11 +6,11 @@ const findUserPromise = (userId: string | undefined): Promise<any> => {
 };
 
 const createNewReadingList = async (req: Request, res: Response) => {
-  const { name, userId, visibilty,postId } = req.body;
+  const { name, userId, visibility,postId } = req.body;
   try {
     const user = await Auth.findByIdAndUpdate(
       userId,
-      { $push: { readingLists: { name, posts: [postId],visibilty } } }
+      { $push: { readingLists: { name, posts: [postId],visibility } } }
     );
 
     if (user) {

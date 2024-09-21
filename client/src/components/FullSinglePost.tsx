@@ -14,7 +14,7 @@ type FullSinglePost = {
 };
 
 export type customReadingLists = {
-  visibilty: "public" | "private";
+  visibility: "public" | "private";
   _id: string;
   name: string;
   description: string;
@@ -300,7 +300,7 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
                           />
                           <label htmlFor={e?.name}>{e?.name}</label>
                           <span>
-                            {e?.visibilty != "public" && (
+                            {e?.visibility != "public" && (
                               <i className="fa-solid fa-lock"></i>
                             )}
                           </span>

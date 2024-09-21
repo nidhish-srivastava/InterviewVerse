@@ -6,6 +6,7 @@ import toast, { LoaderIcon, Toaster } from "react-hot-toast";
 import { useEffect, useRef, useState } from "react";
 import savedIcon from "../assets/saved-icon.png";
 import saveIcon from "../assets/save-icon.png";
+import CreateNewList from "./CreateNewList";
 
 type FullSinglePost = {
   singlePostObj?: FormData;
@@ -33,6 +34,7 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
     customReadingLists[]
   >([]);
   const [modal, setModal] = useState(false);
+  const [showNewListModal,setShowNewListModal] = useState(false)
 
   const postId = singlePostObj?._id;
   const userId = loggedInUser?.id;
@@ -76,6 +78,7 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
     } else toast.error("Please Login to save");
   };
 
+  //* This only checks if post is in default reading list,we dont check in reading list since there can multiple reading lists with multiple posts so that operation will be highly unoptimised plus it will run every time user opens a post so more expensive,even this feature is also costly
   useEffect(() => {
     const checkIfSaved = async () => {
       const response = await fetch(
@@ -170,7 +173,7 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
         body: JSON.stringify({ listId, postId, userId }),
       });
       if (response.status == 201) {
-        toast.success(`Interview Track added to ${listName}`);
+        toast.success(`Post added to ${listName}`);
       }
     } catch (error) {
       console.log(error);
@@ -207,7 +210,11 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
       removeList(listId, listName);
       toggleModal();
     }
-  };
+  }
+
+  const openCreateNewListModalHandler = () =>{
+    setShowNewListModal(true)
+  }
 
   return (
     <>
@@ -304,7 +311,7 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
                         style={{ marginTop: "1.3rem", marginBottom: ".7rem" }}
                       ></div>
                       <hr style={{ opacity: ".5" }} />
-                      <span>Create new list</span>
+                      <span className="block text-center my-2 cursor-pointer" onClick={openCreateNewListModalHandler}>Create new list</span>
                     </div>
                   )}
                   {present ? (
@@ -346,6 +353,7 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
         </div>
       </main>
       {modal && <DeleteModal setModal={setModal} />}
+      {showNewListModal && <CreateNewList postId={postId} setShowNewListModal = {setShowNewListModal}/>}
     </>
   );
 };
@@ -406,6 +414,5 @@ function DeleteModal({ setModal }: DeleteModalType) {
       </div>
     </div>
   </div>
-  
   );
 }

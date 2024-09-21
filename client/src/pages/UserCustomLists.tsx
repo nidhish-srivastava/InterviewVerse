@@ -1,7 +1,7 @@
 
 function UserCustomLists() {
   return (
-    <div>Work In Progress</div>
+    <div className="text-center my-2">Work In Progress</div>
   )
 }
 

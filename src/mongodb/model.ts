@@ -26,7 +26,7 @@ const readingListSchema = new Schema(
   {
     name: { type: String, required: true },
     description: { type: String, default: "", trim: true },
-    visibilty: { type: String, enum: ["public", "private"], default: "public" },
+    visibility: { type: String, enum: ["public", "private"] },
     posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
   },
   {

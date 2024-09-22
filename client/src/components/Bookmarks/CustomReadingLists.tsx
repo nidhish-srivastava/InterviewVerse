@@ -25,7 +25,6 @@ function CustomReadingLists({ user, username }: props) {
       `${url}/readingList/fetchPublicOnly/${username}`
     );
     const data = await response.json();
-    // console.log(data);
     setReadingLists(data);
   };
   useEffect(() => {
@@ -57,7 +56,7 @@ function CustomReadingLists({ user, username }: props) {
                 Last Updated: {dateFormatter(list?.updatedAt)}
               </p>
               <p className="text-gray-500 text-sm">
-                Visibility: {list?.visibilty}
+                Visibility: {list?.visibility}
               </p>
             </div>
           </Link>

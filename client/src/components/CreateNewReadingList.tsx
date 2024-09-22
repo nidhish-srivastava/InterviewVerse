@@ -1,51 +1,52 @@
 import { useState } from "react";
 import Button from "./ui/Button";
-import Close from "./Icons/Close";
 import { useTrackerContext } from "../context/context";
 import { url } from "../utils";
 import toast, { Toaster } from "react-hot-toast";
+import { MdClose } from "react-icons/md";
 
 type Props = {
   setShowNewListModal: React.Dispatch<React.SetStateAction<boolean>>;
-  postId : string
+  postId?: string;
 };
 
-function CreateNewList({ setShowNewListModal,postId }: Props) {
+function CreateNewList({ setShowNewListModal, postId }: Props) {
   const { loggedInUser } = useTrackerContext();
   const [listName, setListName] = useState("");
   const [visibility, setVisibility] = useState("private");
   const createNewReadingListHandler = async () => {
-    try {
-      const response = await fetch(`${url}/readingList`, {
-        method: "POST",
-        body: JSON.stringify({
-          visibility,
-          name: listName,
-          userId: loggedInUser?.id,
-          postId
-        }),
-        headers : {
-          "Content-Type" : "application/json"
+      try {
+        const response = await fetch(`${url}/readingList`, {
+          method: "POST",
+          body: JSON.stringify({
+            visibility,
+            name: listName,
+            userId: loggedInUser?.id,
+            postId,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        setShowNewListModal(false); 
+        if (response.status == 201) {
+          if(postId != undefined) return toast.success(`Post added to ${listName}`);
+          else window.location.href = "/me/lists"
         }
-      });
-      setShowNewListModal(false);
-      if (response.status == 201) {
-        toast.success(`Post added to ${listName}`);
+        if (!response.ok) throw new Error("Error creating new list");
+      } catch (error) {
+        console.log(error);
       }
-      if (!response.ok) throw new Error("Error creating new list");
-    } catch (error) {
-      console.log(error);
-    }
   };
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <Toaster/>
+      <Toaster />
       <div className="bg-white relative p-8 rounded-lg shadow-md max-w-md">
         <span
-          className="absolute right-1 top-2 text-xl cursor-pointer"
+          className="absolute right-1 top-2 cursor-pointer"
           onClick={() => setShowNewListModal(false)}
         >
-          <Close />
+          <MdClose className="text-xl" />
         </span>
         <h2 className="text-xl text-center font-bold mb-8">Create New List</h2>
         <div className="space-y-4">
@@ -67,7 +68,13 @@ function CreateNewList({ setShowNewListModal,postId }: Props) {
             <option value="public">Public</option>
           </select>
           <div className="text-center">
-            <Button isDisabled={listName == ""} onClick={createNewReadingListHandler} className="px-2 py-1">Create</Button>
+            <Button
+              isDisabled={listName == ""}
+              onClick={createNewReadingListHandler}
+              className="px-2 py-1"
+            >
+              Create
+            </Button>
           </div>
         </div>
       </div>

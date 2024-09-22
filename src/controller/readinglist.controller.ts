@@ -6,22 +6,24 @@ const findUserPromise = (userId: string | undefined): Promise<any> => {
 };
 
 const createNewReadingList = async (req: Request, res: Response) => {
-  const { name, userId, visibilty,postId } = req.body;
+  const { name, userId, visibility, postId } = req.body;
   try {
-    const user = await Auth.findByIdAndUpdate(
-      userId,
-      { $push: { readingLists: { name, posts: [postId],visibilty } } }
-    );
-
+    const user = await Auth.findByIdAndUpdate(userId, {
+      $push: { readingLists: { name, posts: postId ?  [postId] : [], visibility } },
+    });
     if (user) {
-      res.status(201).json({ message: "Reading list created successfully", readingLists: user.readingLists });
+      res
+        .status(201)
+        .json({
+          message: "Reading list created successfully",
+        });
     } else {
       res.status(404).json({ message: "User not found" });
     }
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }
-};
+}
 
 const fetchAllReadingLists = async (req: Request, res: Response) => {
   const { userId } = req.params;
@@ -37,7 +39,7 @@ const fetchPublicListsOfUser = async (req: Request, res: Response) => {
   try {
     const user = await Auth.findOne(
       { username: username },
-      { readingLists: { $elemMatch: { visibilty: "public" } } }
+      { readingLists: { $elemMatch: { visibility: "public" } } }
     );
     if (user) {
       const publicLists = user.readingLists;
@@ -50,11 +52,10 @@ const fetchPublicListsOfUser = async (req: Request, res: Response) => {
   }
 };
 
-
 // i need to fetch public reading lists only when i visit a specific user
 
-const updateNameOfReadingList = async (req: Request, res: Response) => {
-  const { userId, listId, newName } = req.body;
+const updateReadingList = async (req: Request, res: Response) => {
+  const { userId, listId, newName, visibility } = req.body;
   try {
     /*
         The first argument is the filter that specifies which document to update
@@ -63,7 +64,12 @@ const updateNameOfReadingList = async (req: Request, res: Response) => {
         */
     const update = await Auth.updateOne(
       { _id: userId, "readingLists._id": listId },
-      { $set: { "readingLists.$.name": newName } }
+      {
+        $set: {
+          "readingLists.$.name": newName,
+          "readingLists.$.visibility": visibility,
+        },
+      }
     );
 
     if (!update) {
@@ -71,14 +77,13 @@ const updateNameOfReadingList = async (req: Request, res: Response) => {
         .status(404)
         .json({ message: "User or reading list not found" });
     }
-    const updatedUser = await findUserPromise(userId);
-    const updatedReadingList = updatedUser.readingLists;
-
+    await findUserPromise(userId);
     res.status(200).json({
       message: "Reading list name updated successfully",
-      updatedReadingList,
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const deleteReadingList = async (req: Request, res: Response) => {
@@ -171,7 +176,7 @@ export const removePostFromReadingList = async (
 export {
   createNewReadingList,
   fetchAllReadingLists,
-  updateNameOfReadingList,
+  updateReadingList,
   deleteReadingList,
   insertInReadingList,
   fetchPostsFromReadingList,

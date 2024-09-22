@@ -6,7 +6,7 @@ import toast, { LoaderIcon, Toaster } from "react-hot-toast";
 import { useEffect, useRef, useState } from "react";
 import savedIcon from "../assets/saved-icon.png";
 import saveIcon from "../assets/save-icon.png";
-import CreateNewList from "./CreateNewList";
+import CreateNewList from "./CreateNewReadingList";
 
 type FullSinglePost = {
   singlePostObj?: FormData;
@@ -14,7 +14,7 @@ type FullSinglePost = {
 };
 
 export type customReadingLists = {
-  visibilty: "public" | "private";
+  visibility: "public" | "private";
   _id: string;
   name: string;
   description: string;
@@ -300,7 +300,7 @@ const FullSinglePost = ({ singlePostObj, show }: FullSinglePost) => {
                           />
                           <label htmlFor={e?.name}>{e?.name}</label>
                           <span>
-                            {e?.visibilty != "public" && (
+                            {e?.visibility != "public" && (
                               <i className="fa-solid fa-lock"></i>
                             )}
                           </span>

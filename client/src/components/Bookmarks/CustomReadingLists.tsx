@@ -25,7 +25,6 @@ function CustomReadingLists({ user, username }: props) {
       `${url}/readingList/fetchPublicOnly/${username}`
     );
     const data = await response.json();
-    // console.log(data);
     setReadingLists(data);
   };
   useEffect(() => {

@@ -16,7 +16,6 @@ function MyLibraryCategories() {
         </NavLink>
       </div>
       <div className="mx-auto opacity-20 mt-4">
-        <hr />
       </div>
     </>
   );

@@ -2,7 +2,7 @@
 InterviewVerse is a comprehensive platform for job seekers to explore interview experiences shared by others, gain valuable insights, and contribute their own stories. Users can search for specific interview experiences, visit detailed profiles, and create organized bookmarks of their favorite posts.
 
 ## Problem Statement
-Numerous websites host interview experiences, such as GeeksforGeeks (GFG) and Glassdoor, but these are not their primary features. GFG primarily focuses on problem-solving and study materials, while Glassdoor is centered around company salaries, reviews, and job listings. Consequently, there is no dedicated platform solely for interview experiences. To address this gap, I created a one-stop platform exclusively for sharing and discovering interview experiences. While blogging websites like Medium and Hashnode do exist, they cater to a wide variety of topics across different domains. This platform is specialized and dedicated entirely to interview experiences.
+Numerous websites host interview experiences, such as GeeksforGeeks and Glassdoor, but these are not their primary features. GFG primarily focuses on problem-solving and study materials, while Glassdoor is centered around company salaries, reviews, and job listings. Consequently, there is no dedicated platform solely for interview experiences. To address this gap, I created a one-stop platform exclusively for sharing and discovering interview experiences. While blogging websites like Medium and Hashnode do exist, they cater to a wide variety of topics across different domains. This platform is specialized and dedicated entirely to interview experiences.
 
 
 ## Technologies Used

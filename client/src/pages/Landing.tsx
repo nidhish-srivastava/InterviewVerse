@@ -5,7 +5,9 @@ import MainHero from "../components/Landing/MainHero";
 import MainHeroImage from "../components/Landing/MainHeroImage";
 import { useTrackerContext } from "../context/context";
 import { url } from "../utils";
+import LottieAnimationLoader from "../components/ui/LottieAnimationLoader";
 const InterviewTrackExplore = lazy(()=>import("./InterviewTrackExplore"))
+import loadinganimation from "../assets/landingpageloader.json"
 // const Canvas = lazy(()=>import("../components/Landing/Canvas"))
 // const LazyShow = lazy(()=> import("../components/Landing/LazyShow"))
 const Footer = lazy(()=> import("../components/Landing/Footer"))
@@ -42,8 +44,15 @@ function Landing() {
 
   if (isLoading) {
     // While loading, show a loading indicator or skeleton UI
-    return <div></div>;
+    return (
+      <div className="grid place-items-center h-screen">
+        <div className="w-96">
+          <LottieAnimationLoader animationData={loadinganimation} />
+        </div>
+      </div>
+    );
   }
+  
 
   return (
     <>

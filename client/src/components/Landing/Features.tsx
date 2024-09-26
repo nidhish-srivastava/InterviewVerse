@@ -6,7 +6,7 @@ const features = [
   },
   {
     name : "Track your Progress",
-    description : "Create organized tracks for each interview process and stay on top of your preparations.",
+    description : "Learn from your mistakes and get to know your progress from your own interview experiences",
     icon : "https://illustrations.popsy.co/red/home-office.svg"
   },
   {

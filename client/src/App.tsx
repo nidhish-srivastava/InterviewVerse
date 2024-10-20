@@ -8,7 +8,6 @@ import Update from "./pages/Update";
 import SinglePost from "./pages/SinglePost";
 import UserProfile from "./pages/UserProfile";
 import MyLists from "./pages/MyLists";
-import InterviewTrackExplore from "./pages/InterviewTrackExplore";
 import DefaultReadingList from "./pages/DefaultReadingList";
 import CustomListsPosts from "./pages/CustomListPosts";
 import SavedLists from "./pages/SavedLists";
@@ -28,13 +27,6 @@ const router = createBrowserRouter([
     path: "/",
     element: 
     <Landing />
-  },
-  {
-    path: "/interview-tracks",
-    element:
-    <CheckAuthentication>
-      <InterviewTrackExplore />
-    </CheckAuthentication>
   },
   {
     path: "/:id/:id",

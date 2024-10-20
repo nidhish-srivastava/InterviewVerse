@@ -1,7 +1,9 @@
 
 function MyAccount() {
   return (
-    <div>MyAccount</div>
+    <div>
+      
+    </div>
   )
 }
 

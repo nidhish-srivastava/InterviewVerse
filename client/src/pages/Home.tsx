@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { FormData } from "./DraftWrite";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PostCard from "../components/PostCard";
-import InputTag from "../components/ui/InputTag";
 import { titleParse, url } from "../utils";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -11,17 +10,17 @@ import Navbar from "../components/Layouts/Navbar";
 
 const InterviewTrackExplore = () => {
   const [posts, setPosts] = useState<FormData[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchParam, setSearchParams] = useSearchParams();
+  // const [searchTerm, setSearchTerm] = useState("");
+  // const [searchParam, setSearchParams] = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const searchParamValue = searchParam.get("searchUserParam")
+  // const searchParamValue = searchParam.get("searchUserParam")
   const fetchData = async (page = 1) => {
     setLoading(true);
     try {
       const res = await fetch(
-        `${url}/post?title=${searchTerm}&username=${searchParamValue}&page=${page}&limit=9`
+        `${url}/post?page=${page}&limit=9`
       );
       const data = await res.json();
       if (page === 1) {
@@ -40,18 +39,18 @@ const InterviewTrackExplore = () => {
     fetchData(page);
   }, [page]);
 
-  const searchKeyHandler = (e) => {
-    if (e.key === "Enter") {
-      setPage(1);  // Reset to first page on new search
-      setPosts([]); // Clear previous posts
-      fetchData(1); // Fetch new posts
-      if (searchTerm.length > 1) {
-        setSearchParams({ searchUserParam: searchTerm });
-      } else {
-        setSearchParams("");
-      }
-    }
-  };
+  // const searchKeyHandler = (e) => {
+  //   if (e.key === "Enter") {
+  //     setPage(1);  // Reset to first page on new search
+  //     setPosts([]); // Clear previous posts
+  //     fetchData(1); // Fetch new posts
+  //     if (searchTerm.length > 1) {
+  //       setSearchParams({ searchUserParam: searchTerm });
+  //     } else {
+  //       setSearchParams("");
+  //     }
+  //   }
+  // };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,7 +71,7 @@ const InterviewTrackExplore = () => {
   return (
     <>
       <Navbar />
-      <div className="w-full sm:w-1/2 mx-auto flex justify-center items-center">
+      {/* <div className="w-full sm:w-1/2 mx-auto flex justify-center items-center">
         <InputTag
           className="mt-4"
           type="search"
@@ -84,11 +83,11 @@ const InterviewTrackExplore = () => {
         <span>
           <i className="fa-solid fa-magnifying-glass"></i>
         </span>
-      </div>
-      {
+      </div> */}
+      {/* {
         searchParamValue  &&
       <h4 className="ml-8">Results for {searchParamValue}</h4>
-      }
+      } */}
       <div style={{ width: "80%", margin: "0 auto" }}>
         {loading && page === 1 ? (
           <div className="skeleton-loading">

@@ -6,7 +6,7 @@ import MainHeroImage from "../components/Landing/MainHeroImage";
 import { useTrackerContext } from "../context/context";
 import { url } from "../utils";
 import LottieAnimationLoader from "../components/ui/LottieAnimationLoader";
-const InterviewTrackExplore = lazy(()=>import("./InterviewTrackExplore"))
+const Home = lazy(()=>import("./Home"))
 import loadinganimation from "../assets/landingpageloader.json"
 // const Canvas = lazy(()=>import("../components/Landing/Canvas"))
 // const LazyShow = lazy(()=> import("../components/Landing/LazyShow"))
@@ -60,7 +60,7 @@ function Landing() {
       loggedInUser ? (
         // If logged in, show the dashboard
         <Suspense>
-          <InterviewTrackExplore/>
+          <Home/>
         </Suspense>
       ) : (
         // If not logged in, show the landing page

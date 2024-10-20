@@ -21,12 +21,17 @@ import Landing from "./pages/Landing";
 import CheckAuthentication from "./components/CheckAuthentication";
 import VerifyToken from "./pages/VerifyToken";
 import ForgotPassword from "./pages/ForgotPassword";
+import Search from "./pages/Search";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: 
     <Landing />
+  },
+  {
+    path : "/search",
+    element : <Search/>
   },
   {
     path: "/:id/:id",

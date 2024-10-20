@@ -3,6 +3,7 @@ import { MdClose } from "react-icons/md";
 import { url } from "../utils";
 import { Link } from "react-router-dom";
 import {  IoSearch } from "react-icons/io5";
+import { FormData } from "../utils/types";
 
 type Props = {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -10,7 +11,7 @@ type Props = {
 
 function SearchUser({ setShowModal }: Props) {
   const [searchInput, setSearchInput] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState<FormData[]>([]);
   const [isSearched, setIsSearched] = useState(false);
 
   // Debouncing the search handler
@@ -33,7 +34,7 @@ function SearchUser({ setShowModal }: Props) {
   const searchHandler = async () => {
     try {
       const res = await fetch(
-        `${url}/post?title=${searchInput}&username=${searchInput}&limit=${2}`
+        `${url}/post?title=${searchInput}&username=${searchInput}&limit=${6}`
       );
       if (!res.ok) throw new Error("Error fetching search results");
       const data = await res.json();
@@ -44,6 +45,11 @@ function SearchUser({ setShowModal }: Props) {
     }
   };
 
+  const enterKeyHandler = async(e)=>{
+    if(e.key == "Enter"){
+      window.location.href = `/search?query=${searchInput}`
+    }
+  }
   return (
     <div className="fixed inset-0 flex items-start justify-center pt-12 bg-black bg-opacity-50 z-50">
       <div className="bg-white relative p-8 rounded-lg shadow-md w-full max-w-3xl max-h-[80vh] flex flex-col">
@@ -62,13 +68,14 @@ function SearchUser({ setShowModal }: Props) {
           placeholder="Start Typing to Search"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
+          onKeyDown={enterKeyHandler}
           />
           {/* <h2 className="absolute right-0 w-1/3 text-gray-400">Press <span className="inline-block"><IoEnterOutline/></span> to search all results</h2> */}
         </div>
         <div className="overflow-y-auto flex-grow">
           {searchResults.length > 0 ? (
             searchResults.map((post) => (
-              <SearchResultCard key={post.id} post={post} />
+              <SearchResultCard key={post._id} post={post} />
             ))
           ) : (
             <div className="my-2">

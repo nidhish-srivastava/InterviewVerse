@@ -1,5 +1,5 @@
 import { useTrackerContext } from "../context/context";
-import { FormData } from "../pages/DraftWrite";
+import { FormData } from "../utils/types";
 import { dateFormatter, defaultDp, timeToReadPost, url } from "../utils";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import toast, { LoaderIcon, Toaster } from "react-hot-toast";

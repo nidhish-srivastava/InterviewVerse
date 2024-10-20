@@ -1,6 +1,6 @@
 import {   useState } from "react";
 import { useForm } from "react-hook-form";
-import { FormData,tagType } from "./DraftWrite";
+import { FormData, tagType } from "../utils/types";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/ui/Button";
 import { url } from "../utils";

@@ -1,4 +1,4 @@
-import { FormData } from "../pages/DraftWrite";
+import { FormData } from "../utils/types";
 import { dateFormatter, timeToReadPost } from "../utils";
 
 type PostCardProps = {

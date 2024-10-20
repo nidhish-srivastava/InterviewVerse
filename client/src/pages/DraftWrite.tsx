@@ -8,27 +8,7 @@ import Button from "../components/ui/Button";
 import { IoArrowBack } from "react-icons/io5";
 import uploadanimation from "../assets/uploadinganimation.json"
 import LottieAnimationLoader from "../components/ui/LottieAnimationLoader";
-
-export type tagType = {
-  name: string;
-  id: string;
-};
-
-export type FormData = {
-  details?: string;
-  desc?: string;
-  tags?: tagType[];
-  title?: string;
-  authRef?: {
-    _id: string;
-    username: string;
-  };
-  username?: string;
-  _id?: string;
-  updatedAt?: string;
-  createdAt?: string;
-  image ?: string
-};
+import { FormData, tagType } from "../utils/types";
 
 const DraftWrite = () => {
   const { id } = useParams();

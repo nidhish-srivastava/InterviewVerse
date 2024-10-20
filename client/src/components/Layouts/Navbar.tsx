@@ -11,11 +11,10 @@ import { useTrackerContext } from "../../context/context";
 import SearchUser from "../SearchUser";
 
 type NavbarProps = {
-  loading?: boolean;
-  setLoading?: React.SetStateAction<boolean>;
-};
+  dontShow?: boolean;
+}
 
-const Navbar = ({}: NavbarProps) => {
+const Navbar = ({ dontShow }: NavbarProps) => {
   const [showModal, setShowModal] = useState(false);
   const { loggedInUser } = useTrackerContext();
   const modalRef = useRef(null);
@@ -38,30 +37,32 @@ const Navbar = ({}: NavbarProps) => {
   }, [modalRef]);
 
   return (
-    <nav className="flex justify-between items-center flex-wrap px-6 sm:px-12 py-4 font-montserrat">
+    <nav className="flex justify-between items-center flex-wrap px-6 md:px-12 py-4 font-montserrat">
       {/* Left section of the navbar */}
-      <div className="flex items-center gap-8 w-full sm:w-auto">
+      <div className="flex items-center justify-center gap-8 w-full md:w-auto">
         <Link
           to="/"
-          className="flex items-center justify-center sm:justify-normal w-full sm:w-auto"
+          className="flex items-center justify-center md:justify-normal w-full md:w-auto"
         >
           <img alt="logo" className="w-auto h-8" src={logo} />
         </Link>
       </div>
 
       {/* Right section of the navbar */}
-      <div className="flex w-full sm:w-auto justify-center sm:justify-normal items-center gap-8 mt-12 sm:mt-0">
-        <div className="border rounded-2xl relative pr-8 pl-10 py-2">
-          <span className="text-xl  absolute left-2 font-bold">
-            <IoSearch />
-          </span>
-          <input
-            onClick={() => setShowSearchModal(true)}
-            className="border-none outline-none disabled:bg-inherit"
-            type="search"
-            placeholder="Search"
-          />
-        </div>
+      <div className="mt-12 md:mt-0 flex w-full md:w-auto justify-center md:justify-normal items-center gap-8">
+        {!dontShow && (
+          <div className="border rounded-2xl relative pr-8 pl-10 py-2">
+            <span className="text-xl  absolute left-2 font-bold">
+              <IoSearch />
+            </span>
+            <input
+              onClick={() => setShowSearchModal(true)}
+              className="border-none outline-none disabled:bg-inherit"
+              type="search"
+              placeholder="Search"
+            />
+          </div>
+        )}
 
         {showSearchModal && <SearchUser setShowModal={setShowSearchModal} />}
 

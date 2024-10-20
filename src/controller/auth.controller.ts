@@ -49,7 +49,7 @@ const sendVerificationEmail = async (
 };
 
 export const signup = async (req: Request, res: Response) => {
-  const { username, password } = req.body;
+  const { username, password,email } = req.body;
   try {
     const check = await Auth.findOne({ username });
     if (check) {
@@ -60,14 +60,15 @@ export const signup = async (req: Request, res: Response) => {
     const tokenExpires = Date.now() + 3600000;
     
     const newUser = new Auth({
-      username: username,
+      username,
+      email,
       password: hashSync(password),
       verificationToken,
       tokenExpires,
     });
   
     await newUser.save();
-    await sendVerificationEmail(newUser.username,newUser.verificationToken)
+    await sendVerificationEmail(newUser.email,newUser.verificationToken)
     res.json('Account created successfully')
   } catch (error) {
     console.log("Error registering the user");

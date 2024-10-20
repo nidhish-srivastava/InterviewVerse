@@ -8,11 +8,11 @@ html{
 }
 
 .auth-form-container {
-  @apply flex flex-col justify-center sm:flex-row items-center sm:w-4/5 sm:mx-auto mt-24 gap-12 sm:gap-8;
+  @apply flex flex-col justify-center h-screen sm:flex-row items-center sm:w-4/5 sm:mx-auto gap-12 sm:gap-8;
 }
 
 .auth-form-group {
-  @apply flex flex-col items-center gap-4 text-center mx-auto px-4 py-16 border-gray-300 shadow-md  sm:w-full md:w-[50%] rounded-xl;
+  @apply flex flex-col items-center gap-4 text-center mx-auto px-4 py-8 shadow-lg sm:w-full md:w-[50%] rounded-xl;
 }
 
 .loading-btn {

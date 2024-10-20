@@ -11,7 +11,40 @@ const Register = () => {
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
+    email : ""
   });
+  const [errors, setErrors] = useState({
+    email : "",
+    password: "",
+    confirmPassword : ""
+  });
+  const isValidEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validInputCheckHandler = () => {
+    const newErrors = {password: "",confirmPassword : "",email : "" };
+    let isValid = true;
+
+    if (inputs.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters long.";
+      isValid = false;
+    }
+
+    if (!isValidEmail(inputs.email)) {
+      newErrors.email = "Please enter a valid email address.";
+      isValid = false;
+    }
+
+    if(confirmPassword != inputs.password){
+      newErrors.confirmPassword = "Password Not Matching"
+      isValid = false
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
   const [isLoading, setIsLoading] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isEmailSent, setIsEmailSent] = useState(false);
@@ -22,7 +55,9 @@ const Register = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (confirmPassword != inputs.password) return toast.error("Password not matching");
+    if (!validInputCheckHandler()) {
+      return;
+    }
     setIsLoading(true);
     try {
       const response = await fetch(`${url}/auth/signup`, {
@@ -32,7 +67,7 @@ const Register = () => {
       });
       if (response.status == 403) {
         setIsLoading(false);
-        return toast.error("User already exists");
+        return toast.error("Username already taken");
       }
       if (response.ok) {
         toast.success("Verification email sent. Please check your inbox.");
@@ -72,13 +107,22 @@ const Register = () => {
             </div>
             <form onSubmit={handleSubmit} className="auth-form-group">
               <InputTag
+              type="text"
+              placeholder="Enter username"
+              label="Username"
+              id="username"
+              name="username"
+              value={inputs.username}
+              onChange={handleChange}
+              />
+              <InputTag
                 type="text"
                 placeholder="Enter email"
-                value={inputs.username}
+                label="Email"
+                id="email"
+                name="email"
+                value={inputs.email}
                 onChange={handleChange}
-                label="Username"
-                id="username"
-                name="username"
               />
               <InputTag
                 type="password"
@@ -88,6 +132,7 @@ const Register = () => {
                 label="Password"
                 id="password"
                 name="password"
+                error={errors.password}
               />
               <InputTag
                 label="Confirm Password"
@@ -97,6 +142,7 @@ const Register = () => {
                 value={confirmPassword}
                 placeholder="re-enter password"
                 onChange={(e) => setConfirmPassword(e.target.value)}
+                error={errors.confirmPassword}
               />
               {isLoading ? (
                 <Button className="loading-btn">
@@ -105,12 +151,12 @@ const Register = () => {
               ) : (
                 <Button btnType="submit">Sign Up</Button>
               )}
-                <span className="text-sm">
-              Do you have an account?{" "}
-              <Link to="/login" className="text-blue-500 hover:underline">
-                Login
-              </Link>
-            </span>
+              <span className="text-sm">
+                Do you have an account?{" "}
+                <Link to="/login" className="text-blue-500 hover:underline">
+                  Login
+                </Link>
+              </span>
             </form>
           </>
         )}

@@ -21,6 +21,7 @@ const Login = () => {
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+  
     setIsLoading(true);
     try {
       const response = await fetch(`${url}/auth/login`, {
@@ -43,6 +44,7 @@ const Login = () => {
     } finally {
     }
   };
+
   return (
     <>
     <Toaster/>

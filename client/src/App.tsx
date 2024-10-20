@@ -31,7 +31,7 @@ const router = createBrowserRouter([
   },
   {
     path : "/search",
-    element : <Search/>
+    element : <CheckAuthentication><Search/></CheckAuthentication>
   },
   {
     path: "/:id/:id",

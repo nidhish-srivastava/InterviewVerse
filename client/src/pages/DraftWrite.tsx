@@ -8,7 +8,7 @@ import Button from "../components/ui/Button";
 import { IoArrowBack } from "react-icons/io5";
 import uploadanimation from "../assets/uploadinganimation.json"
 import LottieAnimationLoader from "../components/ui/LottieAnimationLoader";
-import { FormData, tagType } from "../utils/types";
+import type { FormData, tagType } from "../utils/types";
 
 const DraftWrite = () => {
   const { id } = useParams();
@@ -220,44 +220,64 @@ export default DraftWrite;
 
 const ImageUpload = ({ image, setImage }: any) => {
   const [imageUploadLoader,setImageUploadLoader] = useState(false)
-  const uploadImageToBucket = async (image: string) => {
-    try {
-      const response = await fetch(`${url}/post/s3-url`);
-      if (!response.ok) {
-        return toast.error("Error uploading , Try again later ");
+  // const uploadImageToBucket = async (image: string) => {
+  //   try {
+  //     const response = await fetch(`${url}/post/s3-url`);
+  //     if (!response.ok) {
+  //       return toast.error("Error uploading , Try again later ");
+  //     }
+  //     const { s3url } = await response.json();
+  //     // Now using this url we will save the image in the s3 bucket
+  //     try {
+  //       const response2 = await fetch(s3url, {
+  //         method: "PUT",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: image,
+  //       });
+  //       if (!response2.ok) {
+  //         setImageUploadLoader(false)
+  //         return toast.error("Error uploading , Try again later ");
+  //       }
+  //         const imageUrl = s3url.split("?")[0];
+  //         setImage(imageUrl)
+  //     } catch (error) {
+  //       setImageUploadLoader(false)
+  //       toast.error("Error uploading")
+  //     }
+  //   } catch (error) {
+  //     setImageUploadLoader(false)
+  //     toast.error("Error uploading")
+  //   }
+  // };
+
+  async function uploadImagetoCloudinary(file){
+    const formData = new FormData();
+    const upload_preset_name = "chat-app";
+    formData.append("file", file);
+    formData.append("upload_preset", upload_preset_name);
+    const cloud_name = "dvlz73wcr";
+    setImageUploadLoader(true)
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
+      {
+        method: "POST",
+        body: formData,
       }
-      const { s3url } = await response.json();
-      // Now using this url we will save the image in the s3 bucket
-      try {
-        const response2 = await fetch(s3url, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: image,
-        });
-        if (!response2.ok) {
-          setImageUploadLoader(false)
-          return toast.error("Error uploading , Try again later ");
-        }
-          const imageUrl = s3url.split("?")[0];
-          setImage(imageUrl)
-      } catch (error) {
-        setImageUploadLoader(false)
-        toast.error("Error uploading")
-      }
-    } catch (error) {
-      setImageUploadLoader(false)
-      toast.error("Error uploading")
-    }
-  };
+    );
+    const data = await response.json();
+    setImageUploadLoader(false)
+    setImage(data.url)
+  }
 
   // Function to handle file upload
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     setImageUploadLoader(true)
     setTimeout(async()=>{
-      await uploadImageToBucket(file);
+      // await uploadImageToBucket(file);
+      await uploadImagetoCloudinary(file);
     },2000)
   };
 

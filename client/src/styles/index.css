@@ -12,7 +12,7 @@ html{
 }
 
 .auth-form-group {
-  @apply flex flex-col items-center gap-4 text-center mx-auto px-4 py-8 shadow-lg sm:w-full md:w-[50%] rounded-xl;
+  @apply flex flex-col items-center gap-4 text-center mx-auto px-10 py-16 sm:px-4 sm:pb-8 border border-t-2 sm:border-none sm:shadow-md sm:w-full md:w-[50%] rounded-xl;
 }
 
 .loading-btn {

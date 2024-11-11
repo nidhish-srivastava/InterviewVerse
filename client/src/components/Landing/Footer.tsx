@@ -1,3 +1,5 @@
+import { IoLogoGithub, IoLogoLinkedin, IoLogoTwitter } from "react-icons/io5";
+
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-gray-300 py-4 md:py-6">
@@ -6,9 +8,9 @@ const Footer = () => {
           &copy; 2024 Interview Tracker | Developed by Nidhish
         </p>
         <div className="flex justify-center md:justify-end space-x-4">
-          <SocialIcon href="https://www.linkedin.com/in/nidhish-srivastava/" icon="linkedin" />
-          <SocialIcon href="https://twitter.com/Nidhish_30" icon="twitter" />
-          <SocialIcon href="https://github.com/nidhish-srivastava" icon="github" />
+          <SocialIcon icon={<IoLogoLinkedin/>} href="https://www.linkedin.com/in/nidhish-srivastava/"/>
+          <SocialIcon icon={<IoLogoTwitter/>} href="https://twitter.com/Nidhish_30"/>
+          <SocialIcon icon={<IoLogoGithub/>} href="https://github.com/nidhish-srivastava"/>
         </div>
       </div>
     </footer>
@@ -23,7 +25,7 @@ const SocialIcon = ({ href, icon }) => {
       rel="noopener noreferrer"
       className="text-gray-300 hover:text-gray-400 transition-colors duration-300"
     >
-      <i className={`fab fa-${icon} text-lg`} />
+      {icon}
     </a>
   );
 };

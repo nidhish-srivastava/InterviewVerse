@@ -40,6 +40,8 @@ const sendVerificationEmail = async (
     subject: "Verify your email",
     text: `Please verify your email by clicking on the following link : ${process.env.FRONT_END_URL}/verify/${verificationToken}`,
   };
+  console.log('Email User:', process.env.EMAIL_USER);
+  console.log('Email Pass:', process.env.EMAIL_PASS ? 'Exists' : 'Not Found');
   try {
     await transporter.sendMail(mailOptions);
     console.log("Verification email sent to", useremail);
